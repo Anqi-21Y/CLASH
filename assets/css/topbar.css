@@ -1,0 +1,354 @@
+/* barra superior — texto animado a la izquierda, hamburguesa a la derecha */
+.top-bar {
+    font-family: monospace;
+    background: #0e0e0e;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 300;
+    transition: background .3s;
+    cursor: pointer;
+}
+
+.top-bar:hover {
+    background: #f4871a; 
+}
+
+/* zona izquierda con el texto animado */
+.top-bar-izquierda {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/* track que contiene los mensajes y se desplaza */
+.top-bar-track {
+    display: flex;
+    gap: 60px;
+    animation: desplazar 25s linear infinite;
+    white-space: nowrap;
+}
+
+/* cada mensaje individual de la barra */
+.top-bar-item {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #FDF8F2;
+    flex-shrink: 0;
+}
+
+/* la barra frena al pasar el raton por encima */
+.top-bar:hover .top-bar-track {
+    animation-play-state: paused;
+}
+
+/* animacion de desplazamiento */
+@keyframes desplazar {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* hamburguesa dentro de la topbar — lado derecho */
+.top-bar-hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px 16px;
+    flex-shrink: 0;
+    z-index: 301;
+}
+
+.top-bar-hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+}
+
+/* cada linea tiene un color distinto */
+.top-bar-hamburger span:nth-child(1) { background: #9FA0FF; }
+.top-bar-hamburger span:nth-child(2) { background: #DAFFEF; }
+.top-bar-hamburger span:nth-child(3) { background: #FFAAEA; }
+
+
+
+/* menu overlay — ocupa toda la pantalla al abrir */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #FFAAEA;
+    z-index: 400;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-16px);
+    transition: opacity .3s, transform .3s, visibility .3s;
+}
+
+.menu-overlay.abierto {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* boton de cerrar el menu overlay */
+.menu-cerrar {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    transition: color .2s;
+}
+
+.menu-cerrar:hover {
+    color: #FFAAEA;
+}
+
+/* lado izquierdo del overlay con los links */
+.menu-izquierda {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px;
+    gap: 16px;
+}
+
+/* links del menu overlay */
+.menu-link {
+    font-family: monospace;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    transition: color .2s;
+    cursor: pointer;
+}
+
+.menu-link:hover {
+    color:#f4871a;
+}
+
+/* boton jugar ahora — igual que el del hero */
+.btn-menu {
+    display: inline-block;
+    background: #ffffff;
+    color: #1A1A1A;
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border: 2px solid #1A1A1A;
+    font-family: monospace;
+    margin-top: 28px;
+    width: fit-content;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    text-decoration: none;
+}
+
+.btn-menu:hover {
+    background: #1A1A1A;
+    color: #ffffff;
+}
+
+/* nombre clash en el overlay */
+.menu-marca {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 76px;
+    font-weight: 900;
+    color: rgba(26, 26, 26, 0.15);
+    text-transform: uppercase;
+    margin-top: 32px;
+}
+
+/* lado derecho — imagen de fondo */
+.menu-derecha {
+    background: url('/inner-work/clash/assets/img/mh.png') center center / cover no-repeat;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+    .menu-derecha { display: none; }
+    .menu-overlay { grid-template-columns: 1fr; }
+    .menu-izquierda { padding: 80px 32px; }
+}
+
+/* ══════════════════════════════
+   OVERLAY QR CENTRADO
+══════════════════════════════ */
+
+.qr-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.75);
+    z-index: 5000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.qr-overlay.abierto {
+    display: flex;
+}
+
+.qr-overlay-contenido {
+    background: #FFD6FF;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    max-width: 360px;
+    width: 90%;
+}
+
+.qr-overlay-cerrar {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1A1A1A;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.5;
+    transition: opacity .2s;
+}
+
+.qr-overlay-cerrar:hover { opacity: 1; }
+
+.qr-overlay-msg {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    text-align: center;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.qr-overlay-codigo {
+    width: 240px;
+    height: 240px;
+    background: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-overlay-codigo canvas,
+.qr-overlay-codigo img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ══════════════════════════════
+   WIDGET ESQUINA — contenedor único
+══════════════════════════════ */
+
+.qr-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 32px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.qr-widget-inner {
+    background: #75b9d5;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #1A1A1A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform .25s ease;
+    width: 180px;
+}
+
+.qr-widget:hover .qr-widget-inner {
+    transform: translateY(-6px);
+}
+
+.qr-widget-burbuja {
+    background: #ddffaa;
+    border: 2px solid #1A1A1A;
+    border-radius: 12px;
+    margin: 12px 10px 10px;
+    padding: 10px 12px;
+    font-family:monospace;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    text-align: center;
+    line-height: 1.5;
+    position: relative;
+}
+
+.qr-widget-burbuja::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid #1A1A1A;
+}
+
+.qr-widget-burbuja::before {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid#ddffaa;
+    z-index: 1;
+}
+
+.qr-widget-img {
+    width: 100%;
+    max-height: 110px;
+    object-fit: contain;
+    object-position: bottom;
+    display: block;
+    margin-top: 6px;
+}
+
+@media (max-width: 768px) {
+    .qr-widget { right: 16px; bottom: 16px; }
+    .qr-widget-inner { width: 140px; }
+    .qr-widget-img { max-height: 100px; }
+}

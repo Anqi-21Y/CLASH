@@ -1,0 +1,237 @@
+.sobre-main {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── HERO ── */
+.sobre-hero {
+    background: #9FA0FF;
+    padding: 100px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+}
+
+.sobre-titulo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(60px, 10vw, 140px);
+    line-height: 1;
+    color: #eafa71;
+    margin: 0;
+    transition: color 1s ease;
+}
+
+.sobre-sub {
+    font-family:monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.763);
+    max-width: 640px;
+    margin: 0;
+}
+
+/* ── PERSONA ── */
+.sobre-persona {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 650px;
+}
+
+.sobre-persona-anqi {
+    background: #FFAAEA;
+}
+
+.sobre-persona-ana {
+    background: #ff9022;
+}
+
+.sobre-persona-anqi .sobre-persona-foto { order: 2; }
+.sobre-persona-anqi .sobre-persona-info { order: 1; }
+.sobre-persona-ana  .sobre-persona-foto { order: 1; }
+.sobre-persona-ana  .sobre-persona-info { order: 2; }
+
+/* ── Foto genérica ── */
+.sobre-persona-foto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.sobre-persona-foto img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 34px;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+}
+
+/* ── Info genérica ── */
+.sobre-persona-info {
+    padding: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+/* ── Anqi — centrado ── */
+.sobre-persona-anqi .sobre-persona-foto {
+    align-items: center;
+}
+
+.sobre-persona-anqi .sobre-persona-info {
+    justify-content: center;
+}
+
+/* ── Ana — alineado desde arriba con padding propio ── */
+.sobre-persona-ana .sobre-persona-foto {
+    align-items: center;
+}
+
+.sobre-persona-ana .sobre-persona-info {
+    justify-content: center;
+}
+
+.sobre-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(26, 26, 26, 0.45);
+}
+
+.sobre-rol {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(26, 26, 26, 0.6);
+}
+
+.sobre-nombre {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 900;
+    font-size: clamp(20px, 2.5vw, 32px);
+    color: #1A1A1A;
+    margin: 0;
+}
+
+.sobre-persona-info p {
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: rgba(26, 26, 26, 0.8);
+    margin: 0;
+}
+
+/* ── ONDA ── */
+.sobre-onda {
+    display: block;
+    line-height: 0;
+    background: #FFAAEA;
+}
+
+.sobre-onda svg {
+    display: block;
+    width: 100%;
+    height: 230px;
+}
+
+/* ── LA IDEA ── */
+.sobre-idea {
+    background: #DAFFEF;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.sobre-h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 48px);
+    color: #1A1A1A;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.sobre-idea p {
+    font-family:monospace;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: rgba(26, 26, 26, 0.7);
+    max-width: 720px;
+    margin: 0;
+}
+
+.sobre-btn {
+    display: inline-block;
+    background: #fff;
+    color: #1A1A1A;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border: 2px solid #1A1A1A;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background .2s, color .2s;
+    text-decoration: none;
+}
+
+.sobre-btn:hover {
+    background: #1A1A1A;
+    color: #fff;
+}
+
+/* ── BOTÓN CONÓCEME MÁS — Ana ── */
+.sobre-btn-perfil {
+    display: inline-block;
+    background: #ffffff;
+    color: #000000;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border: 2px solid #1A1A1A;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background .2s, color .2s;
+    text-decoration: none;
+    align-self: flex-start;
+}
+
+.sobre-btn-perfil:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .sobre-hero   { padding: 60px 24px; }
+    .sobre-idea   { padding: 60px 24px; }
+    .sobre-persona { grid-template-columns: 1fr; }
+    .sobre-persona-anqi .sobre-persona-foto,
+    .sobre-persona-ana  .sobre-persona-foto { order: 1; }
+    .sobre-persona-anqi .sobre-persona-info,
+    .sobre-persona-ana  .sobre-persona-info { order: 2; }
+    .sobre-persona-info { padding: 40px 24px; }
+}

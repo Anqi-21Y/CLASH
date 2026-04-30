@@ -1,0 +1,269 @@
+/*
+ * pantalla.css — Pantalla de proyección del profe (pantalla/pantalla.php)
+ * Tipografía: monospace global, Unbounded solo para CLASH
+ */
+
+.pantalla-body {
+    font-family: monospace;
+    background: #1A1A1A;
+    color: #FDF8F2;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+.pantalla-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    border-bottom: 2px solid rgba(253,248,242,0.08);
+    flex-shrink: 0;
+}
+
+/* CLASH = Unbounded */
+.pantalla-header .logo {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #FDF8F2;
+}
+
+.pin-info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(253,248,242,0.4);
+}
+
+.pin-code {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #ff91d5;
+    letter-spacing: 6px;
+}
+
+/* MAIN */
+#pantalla-main {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+}
+
+#pantalla-lobby,
+#pantalla-reto,
+#pantalla-intermedia {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.oculto { display: none !important; }
+
+/* LOBBY */
+.lobby-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.qr-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FDF8F2;
+    padding: 48px;
+}
+
+#qr-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.players-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    gap: 24px;
+    background: #1A1A1A;
+}
+
+.players-zone h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: #eafa71;
+    text-align: center;
+    line-height: 1.1;
+    margin: 0;
+}
+
+#contador-jugadores {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(253,248,242,0.45);
+}
+
+#lista-jugadores-nombres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 480px;
+}
+
+#lista-jugadores-nombres .jugador-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.07);
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.jugador-item-nombre {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #FDF8F2;
+}
+
+.jugador-item-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* RETO */
+#pantalla-reto {
+    flex-direction: column;
+    gap: 32px;
+    padding: 48px;
+    text-align: center;
+}
+
+#pantalla-temporizador {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+#pantalla-temporizador svg {
+    width: 120px;
+    height: 120px;
+    transform: rotate(-90deg);
+}
+
+#pantalla-temporizador svg circle {
+    fill: none;
+    stroke: #9FA0FF;
+    stroke-width: 6;
+    stroke-dasharray: 314;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+}
+
+#segundos {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Unbounded', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: #eafa71;
+}
+
+#pantalla-pregunta-texto {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FDF8F2;
+    max-width: 800px;
+    line-height: 1.4;
+}
+
+#pantalla-contenido-multimedia {
+    font-size: 80px;
+    line-height: 1;
+}
+
+.pantalla-img,
+.pantalla-video {
+    max-width: 600px;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.pantalla-code {
+    font-family: monospace;
+    font-size: 20px;
+    color: #FFAAEA;
+    background: rgba(255,255,255,0.05);
+    padding: 24px;
+    border-radius: 8px;
+    text-align: left;
+    max-width: 700px;
+}
+
+#pantalla-contador-respuestas {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(253,248,242,0.4);
+}
+
+/* INTERMEDIA */
+#pantalla-intermedia {
+    flex-direction: column;
+    gap: 16px;
+}
+
+#pantalla-intermedia h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: #eafa71;
+}
+
+#pantalla-intermedia p {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(253,248,242,0.5);
+}
+
+/* RESPONSIVE — pantalla proyector, principalmente desktop */
+@media (max-width: 1024px) {
+    .pantalla-header { padding: 16px 32px; }
+    .players-zone h1 { font-size: 36px; }
+    #pantalla-pregunta-texto { font-size: 22px; }
+}
+
+@media (max-width: 768px) {
+    .lobby-layout { grid-template-columns: 1fr; }
+    .qr-zone { display: none; }
+    .players-zone { padding: 32px 24px; }
+}

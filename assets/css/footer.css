@@ -1,0 +1,66 @@
+/*
+ * footer.css
+ * Soy el footer de todas las páginas del landing y sobre-nosotras.
+ * Muestro el título grande "CLASH" semitransparente (Unbounded),
+ * y debajo la línea de copyright con © Clash 2026, Ana & Anqi
+ * y el texto del proyecto final.
+ * Se carga en index.php y en sobre-nosotras.php.
+ */
+
+/* footer — fondo rosa */
+footer {
+    background: #F9B4ED;
+    padding: 48px 48px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 420;
+}
+
+/* titulo grande CLASH */
+.footer-big {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(80px, 16vw, 220px);
+    color: rgba(26, 26, 26, 0.08);
+    line-height: 1;
+    letter-spacing: -4px;
+    user-select: none;
+    margin-bottom: -16px;
+}
+
+/* linea inferior con copyright */
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(26, 26, 26, 0.12);
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.footer-bottom span {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(26, 26, 26, 0.45);
+}
+
+.footer-sep {
+    color: rgba(26, 26, 26, 0.2) !important;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+    footer {
+        padding: 40px 24px 28px;
+    }
+
+    .footer-bottom {
+        gap: 10px;
+    }
+}

@@ -1,0 +1,159 @@
+/* panel categorias — fondo rosa */
+#categorias .panel-fill {
+    padding: 60px 0 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* ── CABECERA — reutiliza tipografia de como se juega ── */
+.cat-header {
+    padding: 0 48px;
+    text-align: center;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+/* ── SLIDER: ventana visible — ocupa el espacio restante del panel ── */
+.categorias-slider {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 32px;
+    flex: 1;          /* estira para llenar lo que queda entre header y flechas */
+    min-height: 0;    /* permite que flex reduzca por debajo del contenido     */
+}
+
+/* ── TRACK deslizable ── */
+.categorias-grid {
+    display: flex;
+    height: 100%;     /* hereda la altura del slider                          */
+    gap: 20px;
+    padding: 20px 48px;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+}
+
+/* ── TARJETA ── */
+.categoria-card {
+    flex: 0 0 calc(33.333% - 14px);
+    /* sin aspect-ratio: la tarjeta llena la altura del track */
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #FDF8F2;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.10);
+    cursor: pointer;
+    transform: rotate(0deg);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.35s ease;
+}
+
+/* tilt al lado contrario en hover */
+.categoria-card:hover {
+    transform: rotate(-1deg) translateY(-8px) scale(1.02);
+    box-shadow: 0 24px 56px rgba(0,0,0,0.16);
+    z-index: 2;
+    border-radius: 22px;
+    border: 3px solid #1A1A1A;
+        overflow: visible;
+
+}
+
+/* imagen de fondo */
+.categoria-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.categoria-card:hover .categoria-img {
+    transform: scale(1.05);
+}
+
+/* overlay de texto dentro de la tarjeta */
+.categoria-overlay {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background:white;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 14px;
+    padding: 18px 20px;
+}
+
+.categoria-overlay h2 {
+    font-family:monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    margin-bottom: 5px;
+}
+
+.categoria-overlay p {
+    font-family:monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.7;
+    color: rgba(26,26,26,0.5);
+    margin: 0;
+}
+
+/* ── FLECHAS — identicas a como se juega ── */
+.cat-flechas {
+    display: flex;
+    gap: 14px;
+}
+
+.cat-flecha {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: none;
+    color: #1A1A1A;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.18s ease, transform 0.18s ease;
+    line-height: 1;
+}
+
+.cat-flecha:hover:not(:disabled) {
+    background: rgba(255,255,255,0.88);
+    transform: scale(1.08);
+}
+
+.cat-flecha:active:not(:disabled) {
+    transform: scale(0.94);
+}
+
+.cat-flecha:disabled {
+    opacity: 0.18;
+    cursor: default;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+    .categoria-card { flex: 0 0 calc(50% - 10px); }
+}
+
+@media (max-width: 640px) {
+    #categorias .panel-fill  { padding: 48px 0 36px; }
+    .cat-header              { padding: 0 24px; }
+    .categorias-grid         { padding: 16px 20px; }
+    .categoria-card          { flex: 0 0 calc(80% - 10px); border-radius: 16px; }
+    .cat-flecha              { width: 38px; height: 38px; font-size: 16px; }
+}

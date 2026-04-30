@@ -1,0 +1,132 @@
+/* nav.css — Barra de navegación principal de Clash */
+
+nav {
+    font-family: monospace;
+    position: sticky;
+    top: 44px;
+    z-index: 200;
+    background: #ffffff;
+    padding: 0 32px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* links izquierda — Inicio, Como jugar, Categorias */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links li a {
+    color: #1A1A1A;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    padding: 4px 0;
+    border-bottom: 2.5px solid transparent;
+    transition: border-color .2s;
+    cursor: pointer;
+}
+
+/* hover: subrayado grueso negro — sin cambio de color */
+.nav-links li a:hover {
+    color: #1A1A1A;
+    border-bottom-color: #1A1A1A;
+}
+
+/* logo CLASH centrado — Unbounded */
+.nav-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #1A1A1A;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: color .2s;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-logo:hover { color: #ff70f3; }
+
+/* derecha */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-iconos {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-icono {
+    width: 24px;
+    height: 24px;
+    color: #1A1A1A;
+    transition: color .2s;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.nav-icono:hover { color: #ff70f3; }
+
+/* botones idioma */
+.nav-idiomas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-lang-btn {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    background: #fff;
+    border: 1.5px solid #1A1A1A;
+    border-radius: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+.nav-lang-btn:hover { background: #1A1A1A; color: #fff; }
+
+.nav-lang-btn.activo {
+    background: #FFAAEA;
+    color: #1A1A1A;
+    border-color: #1A1A1A;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    nav { padding: 0 24px; }
+    .nav-links { gap: 20px; }
+    .nav-lang-btn { padding: 5px 8px; font-size: 10px; }
+}
+
+@media (max-width: 768px) {
+    nav { padding: 0 20px; height: 60px; }
+    .nav-links  { display: none; }
+    .nav-logo   { position: static; transform: none; font-size: 22px; }
+    .nav-iconos { display: none; }
+    .nav-right  { gap: 10px; }
+}
+
+@media (max-width: 480px) {
+    nav { padding: 0 16px; height: 56px; }
+    .nav-logo   { font-size: 18px; }
+    .nav-lang-btn { padding: 4px 7px; font-size: 9px; letter-spacing: 1px; }
+    .nav-idiomas  { gap: 4px; }
+}

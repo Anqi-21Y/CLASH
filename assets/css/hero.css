@@ -1,0 +1,95 @@
+/*
+ * hero.css
+ * Soy el panel de inicio del landing — el primero que ve el usuario.
+ * Controlo el fondo azul (#277adf), el badge pequeño de arriba,
+ * el título gigante "CLASH" en amarillo (#eafa71) con Unbounded 900,
+ * la descripción, el botón "Jugar ahora" y el punto verde animado
+ * de "jugadores registrados". Solo se carga en index.php.
+ */
+
+/* panel hero */
+.hero-panel {
+    background: #9FA0FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+    overflow: hidden;
+}
+
+.hero-contenido {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hero-badge {
+    font-family: monospace;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color:black;
+}
+
+.hero-titulo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 920;
+    font-size: 280px;
+    line-height: 1.05;
+    color: #eafa71;
+    margin-bottom: 0;
+}
+
+.hero-sub {
+    font-family: monospace;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.9;
+    color:black;
+    max-width: 640px;
+    margin-bottom: 0;
+}
+.hero-botones {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.hero-live {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(26, 26, 26, .6);
+}
+
+.dot-live {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff0000;
+    animation: pulsar 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pulsar {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: .3; }
+}
+
+
+@media (max-width: 768px) {
+    .hero-panel {
+        flex-direction: column;
+        padding: 0 24px;
+        gap: 40px;
+    }
+    .hero-titulo { font-size: 100px; }
+}

@@ -1,0 +1,27 @@
+# Dependencias de Python del proyecto Clash
+
+# Método de instalación: pip install -r requirements.txt
+
+
+
+# Toda la funcionalidad de este proyecto (llamadas a la API de Groq, operaciones de base de datos, argumentos de línea de comandos)
+
+# está implementada completamente con la biblioteca estándar de Python, sin necesidad de dependencias de terceros.
+
+# 
+
+# Lista de bibliotecas estándar (integradas, no requieren instalación):
+
+# sqlite3 — Conexión a la base de datos SQLite
+
+# json — Analiza el JSON devuelto por la IA
+
+# urllib — Envía solicitudes HTTP a la API de Groq
+
+# os — Lee las variables de entorno y la ruta de compilación
+
+# argparse — Analiza los argumentos de línea de comandos
+
+# time — Retraso entre solicitudes para evitar la limitación de velocidad de la API
+
+#

@@ -1,0 +1,885 @@
+/* admin.css — Panel de administración de Clash */
+@import url('/inner-work/clash/assets/css/main.css');
+
+/* GLOBAL */
+body {
+    background: #ebebeb;
+}
+
+/* TIPOGRAFÍA GLOBAL */
+.admin-page-sub, .admin-section-sub,
+.admin-pin-display, .pin-box-label, .pin-box-hint,
+.dashboard-label, .dashboard-pin-label, .dashboard-cat,
+.dashboard-vacia p, .vista-jugadores-label, .vista-jugador-nombre,
+.admin-puesto-nombre, .admin-puesto-puntos,
+.badge, .admin-table th, .admin-table td,
+.crear-cat-label, .crear-cat-nombre, .crear-cat-count,
+.cat-card-count, .cat-empty, .crear-cat-hint {
+    font-family: monospace;
+}
+
+/* TÍTULOS CLASH */
+.admin-sidebar-logo,
+.admin-login-logo,
+.vista-cat,
+.admin-barra-num {
+    font-family: 'Unbounded', sans-serif;
+}
+
+.admin-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+
+/* SIDEBAR — header_admin.php */
+.admin-sidebar {
+    background: #9FA0FF;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+.admin-sidebar-head {
+    padding: 36px 28px 24px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.admin-sidebar-logo {
+    font-weight: 900;
+    font-size: 28px;
+    color: #1A1A1A;
+    margin-bottom: 4px;
+    text-decoration: none;
+    display: block;
+}
+.admin-sidebar-badge {
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.5);
+}
+.admin-sidebar-nav {
+    padding: 20px 0;
+    flex: 1;
+}
+.admin-nav-link {
+    font-family: monospace;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.65);
+    border-left: 3px solid transparent;
+    transition: color .2s, background .2s, border-color .2s;
+}
+.admin-nav-link:hover, .admin-nav-link.activo {
+    color: #1A1A1A;
+    background: rgba(255,255,255,0.2);
+    border-left-color: #1A1A1A;
+}
+.admin-sidebar-foot {
+    padding: 20px 28px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+.admin-sidebar, .admin-sidebar-logo, .admin-sidebar-badge,
+.admin-nav-link, .admin-nav-link:hover, .admin-nav-link.activo {
+    color: #1A1A1A !important;
+}
+
+/* CONTENIDO PRINCIPAL — header_admin.php */
+.admin-main {
+    background: #DAFFEF;
+    padding: 48px;
+    overflow-y: auto;
+}
+.admin-topbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    font-family: monospace;
+    gap: 24px;
+}
+.admin-page-sub {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+}
+.admin-actions-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.admin-section-sub {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    margin-bottom: 16px;
+}
+
+/* LOGIN — login.php */
+.admin-login-body {
+    font-family: monospace;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #d6a7ffc1;
+}
+.admin-login-box {
+    font-family: monospace;
+    background: #FDF8F2;
+    padding: 56px 48px;
+    width: 100%;
+    max-width: 400px;
+}
+.admin-login-logo {
+    font-weight: 900;
+    font-size: 36px;
+    color: #1A1A1A;
+    margin-bottom: 4px;
+}
+.admin-login-sub {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.4);
+    margin-bottom: 40px;
+}
+.admin-error {
+    background: #ff0000;
+    color: #f2f9fd;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+}
+
+/* FORMULARIOS — login.php, crearReto.php */
+.admin-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+.admin-form-group label {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #000000;
+}
+.admin-form-group input, .admin-form-group select, .admin-form-group textarea {
+    border: 2px solid #1A1A1A;
+    background: #FBFEFB;
+    padding: 12px 16px;
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #1A1A1A;
+    outline: none;
+    transition: border-color .2s;
+    width: 100%;
+    appearance: none;
+}
+.admin-form-group input:focus, .admin-form-group select:focus, .admin-form-group textarea:focus {
+    border-color: #9FA0FF;
+}
+.admin-form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    letter-spacing: 1px;
+}
+.admin-form-container {
+    background: #ffffff;
+    padding: 32px;
+    border: 2px solid #1A1A1A;
+    margin-bottom: 32px;
+}
+.admin-input-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+/* BOTONES — todas las páginas */
+.btn-admin {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background .18s, color .18s, border-color .18s;
+    text-align: center;
+}
+.btn-admin-full {
+    width: 100%;
+    text-align: center;
+}
+.btn-admin-dark {
+    background: #1A1A1A;
+    color: hsl(33, 73%, 97%);
+    border-color: #1A1A1A;
+}
+.btn-admin-dark:hover {
+    background: #FDF8F2;
+    color: #1A1A1A;
+    border-color: #1A1A1A;
+}
+.btn-admin-pink {
+    background: #fff07a; /* boton sesiones "crear partida" */
+    color: #1A1A1A;
+    border: 2px solid #1A1A1A;
+}
+.btn-admin-pink:hover {
+    background: #FFAAEA;
+    color: #1A1A1A;
+    border-color: #1A1A1A;
+}
+.btn-admin-orange { /* sesiones: boton de terminar partida */
+    background: #ff0000;
+    color: #0a0a0a;
+    border-color: #0a0a0a;
+}
+.btn-admin-orange:hover {
+    background: #9FA0FF;
+    color: #1A1A1A;
+    border-color: #1A1A1A;
+}
+.btn-admin-green { /* boton verde de INICIAR PARTIDA - sesiones */
+    background: #09ea89c6;
+    color: #0a0a0a;
+    border-color: #000000;
+}
+.btn-admin-green:hover { /* boton hover amarillo de INICIAR PARTIDA - sesiones */
+    background: #fff07a;
+    color: #1A1A1A;
+    border-color: #1A1A1A;
+}
+.btn-admin-ghost {   /* boton fr ver en sesiones */
+    background: #1A1A1A;
+    color: #FDF8F2;
+    border: 2px solid #1A1A1A;
+    padding: 6px 16px;
+}
+.btn-admin-ghost:hover {
+    background: #ffffff;
+    color: #1A1A1A;
+    border-color: #1A1A1A;
+}
+.btn-admin-danger {
+    background: #ff0000; /* boton eliminar sesiones */
+    color: #FDF8F2;
+    padding: 6px 16px;
+}
+.btn-admin-danger:hover {
+    background: #f3fdf2;
+    color: #0a0a0a;
+    border-color: #0a0a0a;
+}
+
+.btn-admin-reto {
+    background: #fffbe6; /* ← el color que tú quieras */
+    color: #1A1A1A;
+    border: 2px solid #1A1A1A;
+}
+.btn-admin-reto:hover {
+    background: #FFAAEA;
+    color: #1A1A1A;
+    border-color: #1A1A1A;
+}
+
+/* BADGES — gestion.php, vista.php, gestionRetos.php */
+.badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+}
+.badge-esperando {
+    background: #09ea89;
+    color: #000000;
+}
+.badge-en_juego {
+    background: #09ea89;
+    color: #0e0d0d;
+}
+.badge-terminada {
+    background: #000000;
+    color: #ffffff;
+}
+
+
+/* TABLAS — gestion.php, gestionJugadores.php, vista.php */
+.admin-table-wrap {
+    border: 2px solid #1A1A1A;
+    overflow: hidden;
+    margin-bottom: 32px;
+}
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.admin-table thead { /* cabecera de la tabla sesiones */
+    font-family: monospace;
+    background: #FFAAEA;
+}
+.admin-table th {
+    padding: 14px 20px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #000000;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 2px solid #1A1A1A;
+}
+.admin-table td {
+    background-color: #FBFEFB;
+    padding: 14px 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    border-bottom: 1px solid #1A1A1A;
+    vertical-align: middle;
+}
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+.admin-table tr:hover td {
+    background: #ffe0f7;
+}
+.admin-table-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+
+/* AVATARES — vista.php, gestionJugadores.php */
+.jugador-avatar-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.tabla-avatar-img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+
+/* PIN GRANDE — usar en todas las páginas que lo necesiten */
+.admin-pin-display {
+    font-size: 80px;
+    color: #000000;
+    letter-spacing: 8px;
+    line-height: 1;
+}
+
+
+/* CUADRO PIN — crear.php, vista.php */
+.pin-box {
+    border: 2px solid #1A1A1A;
+    background: #F9B4ED; /* sesiones boton PIN */
+    padding: 32px;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.pin-box-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.4);
+    margin-bottom: 12px;
+}
+.pin-box-hint {
+    font-size: 11px;
+    color: rgba(26,26,26,0.4);
+    margin-top: 12px;
+}
+
+/* DASHBOARD — dashboard.php */
+.dashboard-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.45);
+    margin-bottom: 12px;
+}
+.dashboard-activa {
+    border: 2px solid #1A1A1A;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background:#F9B4ED;
+}
+
+.dashboard-activa-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.dashboard-pin-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.4);
+}
+.dashboard-cat {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(26,26,26,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.dashboard-vacia {
+    border: 2px dashed rgba(26, 26, 26, 0.577);
+    padding: 48px 32px;
+    display: flex;
+    background: #F9B4ED; /* cuadro de dashboard */
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+}
+.dashboard-vacia p {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(26, 26, 26, 0.577);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* CREAR PARTIDA — crear.php */
+.crear-cat-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.45);
+    margin-bottom: 12px;
+}
+.crear-cat-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+}
+.crear-cat-option { /* tarjetas en sesiones elegir las categorias */
+    font-family: monospace;
+    padding: 16px;
+    border: 2px solid #1A1A1A;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #9FA0FF;
+    transition: background .15s;
+}
+.crear-cat-option:hover {
+    background: #ffef76;
+}
+.crear-cat-option.seleccionada {
+    background: #09ea89c6;
+}
+.crear-cat-nombre {
+    font-size: 13px;
+    font-weight: 800;
+    color: #1A1A1A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.crear-cat-count {
+    font-size: 11px;
+    color: rgba(26,26,26,0.45);
+    font-weight: 700;
+}
+.crear-btn {
+    margin-top: 8px;
+}
+
+
+/* SESIONES — gestion.php */
+.sesion-activa td {
+    background: #ffd3f4e7 !important;
+}
+
+/* JUGADORES — gestionJugadores.php */
+.jugadores-table th:nth-child(1), .jugadores-table td:nth-child(1) { width: 8%; }
+.jugadores-table th:nth-child(2), .jugadores-table td:nth-child(2) { width: 27%; }
+.jugadores-table th:nth-child(3), .jugadores-table td:nth-child(3) { width: 20%; }
+.jugadores-table th:nth-child(4), .jugadores-table td:nth-child(4) { width: 30%; }
+.jugadores-table th:nth-child(5), .jugadores-table td:nth-child(5) { width: 15%; }
+.gestion-table th:nth-child(1), .gestion-table td:nth-child(1) { width: 15%; }
+.gestion-table th:nth-child(2), .gestion-table td:nth-child(2) { width: 35%; }
+.gestion-table th:nth-child(3), .gestion-table td:nth-child(3) { width: 25%; }
+.gestion-table th:nth-child(4), .gestion-table td:nth-child(4) { width: 25%; }
+
+/* VISTA PARTIDA — vista.php */
+.vista-cat {
+    font-weight: 900;
+    font-size: 20px;
+    color: #1A1A1A;
+    text-transform: uppercase;
+}
+.vista-badge-jug {
+    background: #d6a7ffc1;
+    color: #1A1A1A;
+}
+.vista-estado-row {
+    margin-top: 6px;
+}
+.vista-jugadores-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+.vista-jugadores-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.45);
+}
+.vista-avatares-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.vista-jugador-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+.vista-jugador-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1A1A1A;
+    background: #FDF8F2;
+}
+.vista-jugador-nombre {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    text-align: center;
+    max-width: 64px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.vista-accion {
+    margin-top: 8px;
+}
+
+/* PODIO — vista.php */
+.admin-podio {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+.admin-puesto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    max-width: 160px;
+}
+.admin-puesto-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1A1A1A;
+    background: #FDF8F2;
+}
+.admin-puesto-nombre {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    text-align: center;
+}
+.admin-puesto-puntos {
+    font-size: 13px;
+    font-weight: 800;
+    color: #ff0000; /* puntos del podio de los jugadores */
+}
+.admin-barra {
+    width: 100%;
+    border: 2px solid #1A1A1A;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10px;
+}
+.admin-barra.primero {
+    height: 100px;
+    background: #FFAAEA; /* primer puesto en el podio */
+}
+.admin-barra.segundo {
+    height: 68px;
+    background: #9FA0FF;
+}
+.admin-barra.tercero {
+    height: 50px;
+    background: #fff07a;
+}
+.admin-barra-num {
+    font-weight: 900;
+    font-size: 24px;
+    color: #1A1A1A;
+    line-height: 1;
+}
+
+/* CREAR RETO — crearReto.php */
+.reto-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* CATEGORÍAS — gestionRetos.php */
+.cat-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 16px;
+}
+.cat-card {
+    background: #09ea89c6; /* categorias tarjetas */
+    border: 2px solid #1A1A1A;
+    overflow: hidden;
+}
+.cat-card-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #09ea89c6;  /* categorias tarjetas */
+}
+.cat-card-nombre {
+    font-family: monospace;
+    font-weight: 900;
+    font-size: 14px;
+    color: #1A1A1A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.cat-card-count {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.4);
+    margin-top: 4px;
+}
+.cat-card-eliminar {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.5);
+    text-decoration: none;
+    padding: 3px 8px;
+    transition: color .2s;
+}
+.cat-card-eliminar:hover {
+    color: #ff0000;
+}
+.cat-card-body {
+    border-top: 2px solid #1a1a1a;
+    padding: 8px 20px;
+}
+.cat-reto-tipo {
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    background: #FFAAEA;
+    color: #1A1A1A;
+    min-width: 52px;
+    text-align: center;
+}
+.cat-reto-respuesta {
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1A1A1A;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cat-reto-row {
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(26,26,26,0.07);
+}
+.cat-reto-row:last-child {
+    border-bottom: none;
+}
+.cat-reto-top {
+    font-family: monospace;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+.cat-reto-acciones {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.cat-btn-editar {
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(14, 13, 13, 0.784);
+    background: #9FA0FF;
+    border: 1px solid rgba(26,26,26,0.2);
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: all .15s;
+}
+.cat-btn-editar:hover, .cat-btn-editar.activo {
+    background: #1A1A1A;
+    color: #FDF8F2;
+    border-color: #1A1A1A;
+}
+.cat-reto-eliminar {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.5);
+    text-decoration: none;
+    padding: 3px 8px;
+    transition: color .2s;
+}
+.cat-reto-eliminar:hover {
+    color: #ff0000;
+}
+.cat-reto-edit-panel {
+    background: #9FA0FF;
+    padding: 16px;
+    margin-bottom: 10px;
+}
+.cat-edit-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+.cat-empty {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.3);
+    padding: 16px 0;
+    text-align: center;
+}
+
+/* CREAR CATEGORÍA — crearCategoria.php */
+.crear-steps {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+}
+.crear-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(26,26,26,0.35);
+}
+.crear-step.activo {
+    color: #1A1A1A;
+}
+.crear-step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid rgba(26,26,26,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+}
+.crear-step.activo .crear-step-num {
+    background: #1A1A1A;
+    color: #FDF8F2;
+    border-color: #1A1A1A;
+}
+.crear-step-line {
+    width: 32px;
+    height: 1px;
+    background: rgba(26,26,26,0.15);
+    margin: 0 8px;
+}
+.crear-cat-hint {
+    font-size: 11px;
+    color: rgba(26,26,26,0.4);
+    margin-top: 4px;
+}
