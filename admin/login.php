@@ -12,6 +12,7 @@ if (isset($_SESSION['admin_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin — Clash</title>
     <link rel="stylesheet" href="/inner-work/clash/admin/assets/css/admin.css">
+    <link rel="icon" href="/inner-work/clash/assets/img/favicon.png" type="image/png">
 </head>
 <body class="admin-login-body">
     <div class="admin-login-box">

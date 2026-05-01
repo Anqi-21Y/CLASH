@@ -29,7 +29,7 @@ $qr_url = $pin
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">
-    <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+    <link rel="icon" href="/inner-work/clash/assets/img/favicon.png" type="image/png">
     <link rel="stylesheet" href="/inner-work/clash/assets/css/main.css">
     <link rel="stylesheet" href="/inner-work/clash/assets/css/topbar.css">
     <link rel="stylesheet" href="/inner-work/clash/assets/css/nav.css">

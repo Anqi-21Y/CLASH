@@ -12,6 +12,7 @@ $pagina_actual = basename($_SERVER['PHP_SELF']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($titulo_admin) ? htmlspecialchars($titulo_admin) . ' — Admin Clash' : 'Admin — Clash' ?></title>
     <link rel="stylesheet" href="/inner-work/clash/admin/assets/css/admin.css">
+    <link rel="icon" href="/inner-work/clash/assets/img/favicon.png" type="image/png"> 
 </head>
 <body>
 <div class="admin-layout">
