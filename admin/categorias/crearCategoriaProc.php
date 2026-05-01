@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /inner-work/clash/admin/login.php');
+    header('Location: /CLASH/admin/login.php');
     exit;
 }
 require_once __DIR__ . '/../config/conexion_admin.php';
@@ -26,11 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->close();
 
         // redirige a crear reto con la nueva categoría preseleccionada
-        header("Location: /inner-work/clash/admin/retos/crearReto.php?cat=$nueva_id");
+        header("Location: /CLASH/admin/retos/crearReto.php?cat=$nueva_id");
         exit;
     }
 }
 
 $db->close();
-header('Location: /inner-work/clash/admin/retos/gestionRetos.php');
+header('Location: /CLASH/admin/retos/gestionRetos.php');
 exit;

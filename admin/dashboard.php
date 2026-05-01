@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /inner-work/clash/admin/login.php');
+    header('Location: /CLASH/admin/login.php');
     exit;
 }
 require_once __DIR__ . '/config/conexion_admin.php';
@@ -34,7 +34,7 @@ $sesionActiva = $db->query("
             <span class="dashboard-cat"><?= htmlspecialchars($sesionActiva['categoria']) ?></span>
         </div>
     </div>
-    <a href="/inner-work/clash/admin/sesiones/vista.php?id=<?= $sesionActiva['id'] ?>"
+    <a href="/CLASH/admin/sesiones/vista.php?id=<?= $sesionActiva['id'] ?>"
        class="btn-admin btn-admin-pink">
         Ver partida en vivo →
     </a>
@@ -43,7 +43,7 @@ $sesionActiva = $db->query("
 <?php else: ?>
 <div class="dashboard-vacia">
     <p>No hay ninguna partida en curso</p>
-    <a href="/inner-work/clash/admin/sesiones/crear.php" class="btn-admin btn-admin-dark">
+    <a href="/CLASH/admin/sesiones/crear.php" class="btn-admin btn-admin-dark">
         + Nueva partida
     </a>
 </div>

@@ -83,6 +83,6 @@ if ($row['total'] == 0) {
 // Control de acceso: Si el usuario no ha iniciado sesión y no se encuentra en la página de inicio de sesión, rediríjalo directamente (intercepción de seguridad).
 $paginaActual = basename($_SERVER['PHP_SELF']);
 if (!isset($_SESSION['admin_id']) && $paginaActual != 'login.php' && $paginaActual != 'loginProc.php') {
-    header('Location: /inner-work/clash/admin/login.php');
+    header('Location: /CLASH/admin/login.php');
     exit();
 }

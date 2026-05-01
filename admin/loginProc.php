@@ -13,10 +13,10 @@ if ($admin && password_verify($password, $admin['password_hash'])) {
     $_SESSION['admin_id']      = $admin['id'];
     $_SESSION['admin_usuario'] = $admin['usuario'];
     $db->close();
-    header('Location: /inner-work/clash/admin/dashboard.php');
+    header('Location: /CLASH/admin/dashboard.php');
     exit;
 } else {
     $db->close();
-    header('Location: /inner-work/clash/admin/login.php?error=1');
+    header('Location: /CLASH/admin/login.php?error=1');
     exit;
 }

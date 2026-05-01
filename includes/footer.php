@@ -12,11 +12,11 @@
 </footer>
 
 <!-- js principal — siempre se carga -->
-<script src="/inner-work/clash/assets/js/main.js"></script>
+<script src="/CLASH/assets/js/main.js"></script>
 
 <?php if (isset($js_pagina)): ?>
     <?php foreach ((array)$js_pagina as $js): ?>
-        <script src="/inner-work/clash/assets/js/<?= htmlspecialchars($js) ?>"></script>
+        <script src="/CLASH/assets/js/<?= htmlspecialchars($js) ?>"></script>
     <?php endforeach; ?>
 <?php endif; ?>
 

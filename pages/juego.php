@@ -18,7 +18,7 @@ $categoria_nombre = $categoria_nombres[$categoria_id] ?? 'Clash';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/inner-work/clash/assets/img/favicon.png" type="image/png">
+    <link rel="icon" href="/CLASH/assets/img/favicon.png" type="image/png">
     <title>Clash - Juego</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">

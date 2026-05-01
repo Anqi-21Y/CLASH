@@ -7,7 +7,7 @@ require '../config/conexion.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/inner-work/clash/assets/img/favicon.png" type="image/png">
+    <link rel="icon" href="/CLASH/assets/img/favicon.png" type="image/png">
     <title>Clash — Unirse</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:wght@400;500;700;800&family=Unbounded:wght@900&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@ require '../config/conexion.php';
 <body class="juego-body">
 
     <header class="juego-header">
-        <a href="/inner-work/clash/index.php" class="header-logo">CLASH</a>
+        <a href="/CLASH/index.php" class="header-logo">CLASH</a>
         <span class="header-sub">Elige tu perfil</span>
     </header>
 

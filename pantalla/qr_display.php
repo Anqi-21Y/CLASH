@@ -36,7 +36,7 @@ if ($sesion_id === 0) {
 $PUBLIC_URL = "https://knelt-ramrod-clapped.ngrok-free.dev";
 
 // base URL
-$base_url = $PUBLIC_URL . "/inner-work/clash";
+$base_url = $PUBLIC_URL . "/CLASH";
 
 // final URL
 $url_registro = $base_url . "/pages/inicio.php?pin=" . urlencode($pin);

@@ -2,5 +2,5 @@
 session_start();
 session_unset();
 session_destroy();
-header('Location: /inner-work/clash/admin/login.php');
+header('Location: /CLASH/admin/login.php');
 exit;

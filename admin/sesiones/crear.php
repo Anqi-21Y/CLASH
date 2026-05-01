@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /inner-work/clash/admin/login.php');
+    header('Location: /CLASH/admin/login.php');
     exit;
 }
 require_once __DIR__ . '/../config/conexion_admin.php';
@@ -29,7 +29,7 @@ require_once __DIR__ . '/../includes/header_admin.php';
 
 <div class="admin-topbar">
     <span class="admin-page-sub">Nueva partida</span>
-    <a href="/inner-work/clash/admin/sesiones/gestion.php" class="btn-admin btn-admin-ghost">← Cancelar</a>
+    <a href="/CLASH/admin/sesiones/gestion.php" class="btn-admin btn-admin-ghost">← Cancelar</a>
 </div>
 
 <div class="pin-box">
@@ -38,7 +38,7 @@ require_once __DIR__ . '/../includes/header_admin.php';
     <p class="pin-box-hint">Compártelo cuando todos estén listos</p>
 </div>
 
-<form action="/inner-work/clash/admin/sesiones/crearProc.php" method="POST">
+<form action="/CLASH/admin/sesiones/crearProc.php" method="POST">
     <input type="hidden" name="pin" value="<?= $pin ?>">
     <input type="hidden" name="categoria_id" id="categoria_id_input" value="<?= $categorias[0]['id'] ?>">
 

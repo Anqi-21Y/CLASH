@@ -12,7 +12,7 @@ $db->close();
 $PUBLIC_URL = "https://knelt-ramrod-clapped.ngrok-free.dev";
 
 // base URL
-$base_url = $PUBLIC_URL . "/inner-work/clash";
+$base_url = $PUBLIC_URL . "/CLASH";
 
 // Si hay sesión activa, el QR lleva directo a inicio.php?pin=XXXX
 // Si no hay ninguna, el QR lleva a inicio.php sin pin (comportamiento anterior)
@@ -29,14 +29,14 @@ $qr_url = $pin
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">
-    <link rel="icon" href="/inner-work/clash/assets/img/favicon.png" type="image/png">
-    <link rel="stylesheet" href="/inner-work/clash/assets/css/main.css">
-    <link rel="stylesheet" href="/inner-work/clash/assets/css/topbar.css">
-    <link rel="stylesheet" href="/inner-work/clash/assets/css/nav.css">
+    <link rel="icon" href="/CLASH/assets/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/CLASH/assets/css/main.css">
+    <link rel="stylesheet" href="/CLASH/assets/css/topbar.css">
+    <link rel="stylesheet" href="/CLASH/assets/css/nav.css">
 
     <?php if (isset($css_pagina)): ?>
         <?php foreach ((array)$css_pagina as $css): ?>
-            <link rel="stylesheet" href="/inner-work/clash/assets/css/<?= htmlspecialchars($css) ?>">
+            <link rel="stylesheet" href="/CLASH/assets/css/<?= htmlspecialchars($css) ?>">
         <?php endforeach; ?>
     <?php endif; ?>
 
@@ -58,12 +58,12 @@ $qr_url = $pin
 
 <nav id="nav-principal">
     <ul class="nav-links">
-        <li><a href="/inner-work/clash/index.php#inicio">Inicio</a></li>
-        <li><a href="/inner-work/clash/index.php#como-jugar">Como jugar</a></li>
-        <li><a href="/inner-work/clash/index.php#categorias">Categorias</a></li>
+        <li><a href="/CLASH/index.php#inicio">Inicio</a></li>
+        <li><a href="/CLASH/index.php#como-jugar">Como jugar</a></li>
+        <li><a href="/CLASH/index.php#categorias">Categorias</a></li>
     </ul>
 
-    <a href="/inner-work/clash/index.php" class="nav-logo">CLASH</a>
+    <a href="/CLASH/index.php" class="nav-logo">CLASH</a>
 
     <div class="nav-right">
         <div class="nav-iconos">
@@ -100,11 +100,11 @@ $qr_url = $pin
 <div class="menu-overlay" id="menuOverlay">
     <button class="menu-cerrar" onclick="toggleMenu()">✕</button>
     <div class="menu-izquierda">
-        <a href="/inner-work/clash/index.php#inicio"     class="menu-link" onclick="toggleMenu()">Inicio</a>
-        <a href="/inner-work/clash/index.php#como-jugar" class="menu-link" onclick="toggleMenu()">Como jugar</a>
-        <a href="/inner-work/clash/index.php#categorias" class="menu-link" onclick="toggleMenu()">Categorias</a>
-        <a href="/inner-work/clash/pages/sobre-nosotras.php" class="menu-link" onclick="toggleMenu()">Sobre nosotras</a>
-        <a href="/inner-work/clash/pages/inicio.php" class="btn-menu" onclick="toggleMenu()">Jugar ahora →</a>
+        <a href="/CLASH/index.php#inicio"     class="menu-link" onclick="toggleMenu()">Inicio</a>
+        <a href="/CLASH/index.php#como-jugar" class="menu-link" onclick="toggleMenu()">Como jugar</a>
+        <a href="/CLASH/index.php#categorias" class="menu-link" onclick="toggleMenu()">Categorias</a>
+        <a href="/CLASH/pages/sobre-nosotras.php" class="menu-link" onclick="toggleMenu()">Sobre nosotras</a>
+        <a href="/CLASH/pages/inicio.php" class="btn-menu" onclick="toggleMenu()">Jugar ahora →</a>
         <div class="menu-marca">CLASH</div>
     </div>
     <div class="menu-derecha"></div>
@@ -127,7 +127,7 @@ $qr_url = $pin
 <div class="qr-widget" id="qr-widget-btn">
     <div class="qr-widget-inner">
         <div class="qr-widget-burbuja">¿Te unes al juego?<br>¡Haz click!</div>
-        <img class="qr-widget-img" src="/inner-work/clash/assets/img/qr2.png" alt="Únete al juego">
+        <img class="qr-widget-img" src="/CLASH/assets/img/qr2.png" alt="Únete al juego">
     </div>
 </div>
 <?php endif; ?>

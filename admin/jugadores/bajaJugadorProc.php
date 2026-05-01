@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /inner-work/clash/admin/login.php');
+    header('Location: /CLASH/admin/login.php');
     exit;
 }
 require_once __DIR__ . '/../config/conexion_admin.php';
@@ -13,5 +13,5 @@ $db->exec("DELETE FROM resultados WHERE jugador_id = $id");
 $db->exec("DELETE FROM jugadores WHERE id = $id");
 $db->close();
 
-header('Location: /inner-work/clash/admin/jugadores/gestionJugadores.php');
+header('Location: /CLASH/admin/jugadores/gestionJugadores.php');
 exit;

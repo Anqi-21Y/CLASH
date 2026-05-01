@@ -31,7 +31,7 @@ if ($sesion_id === 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/inner-work/clash/assets/img/favicon.png" type="image/png">
+    <link rel="icon" href="/CLASH/assets/img/favicon.png" type="image/png">
     <title>Clash - Pantalla Principal</title>
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/pantalla.css"> </head>

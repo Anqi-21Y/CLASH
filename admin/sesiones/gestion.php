@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /inner-work/clash/admin/login.php');
+    header('Location: /CLASH/admin/login.php');
     exit;
 }
 require_once __DIR__ . '/../config/conexion_admin.php';
@@ -19,7 +19,7 @@ require_once __DIR__ . '/../includes/header_admin.php';
 
 <div class="admin-topbar">
     <span class="admin-page-sub">Historial de todas las partidas</span>
-    <a href="/inner-work/clash/admin/sesiones/crear.php" class="btn-admin btn-admin-pink">+ Nueva partida</a>
+    <a href="/CLASH/admin/sesiones/crear.php" class="btn-admin btn-admin-pink">+ Nueva partida</a>
 </div>
 
 <div class="admin-table-wrap">
@@ -40,9 +40,9 @@ require_once __DIR__ . '/../includes/header_admin.php';
                 <td><span class="badge badge-<?= $s['estado'] ?>"><?= $s['estado'] ?></span></td>
                 <td>
                     <div class="admin-table-actions">
-                        <a href="/inner-work/clash/admin/sesiones/vista.php?id=<?= $s['id'] ?>"
+                        <a href="/CLASH/admin/sesiones/vista.php?id=<?= $s['id'] ?>"
                            class="btn-admin btn-admin-ghost">Ver →</a>
-                        <a href="/inner-work/clash/admin/sesiones/eliminarProc.php?id=<?= $s['id'] ?>"
+                        <a href="/CLASH/admin/sesiones/eliminarProc.php?id=<?= $s['id'] ?>"
                            class="btn-admin btn-admin-danger"
                            onclick="return confirm('¿Eliminar esta sesión y todos sus datos?')">Eliminar</a>
                     </div>

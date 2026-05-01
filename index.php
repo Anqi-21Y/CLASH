@@ -14,7 +14,7 @@ include 'includes/header.php';
         <h1 class="hero-titulo">CLASH</h1>
         <h2 class="hero-sub">Reconoce películas, canciones y famosos. Compite en tiempo real. Que gane el mejor.</h2>
         <div class="hero-botones">
-            <a href="/inner-work/clash/pages/inicio.php" class="btn-principal">Jugar ahora</a>
+            <a href="/CLASH/pages/inicio.php" class="btn-principal">Jugar ahora</a>
         </div>
         <div class="hero-live">
             <span class="dot-live"></span>
@@ -74,28 +74,28 @@ include 'includes/header.php';
         <div class="categorias-slider">
             <div class="categorias-grid" id="cat-track">
                 <div class="categoria-card">
-                    <img class="categoria-img" src="/inner-work/clash/assets/img/cat1.png" alt="Peliculas">
+                    <img class="categoria-img" src="/CLASH/assets/img/cat1.png" alt="Peliculas">
                     <div class="categoria-overlay">
                         <h2>Películas</h2>
                         <p>Adivina la peli sin una sola letra.</p>
                     </div>
                 </div>
                 <div class="categoria-card">
-                    <img class="categoria-img" src="/inner-work/clash/assets/img/cat2.png" alt="Canciones">
+                    <img class="categoria-img" src="/CLASH/assets/img/cat2.png" alt="Canciones">
                     <div class="categoria-overlay">
                         <h2>Canciones</h2>
                         <p>Adivina la canción sin escucharla.</p>
                     </div>
                 </div>
                 <div class="categoria-card">
-                    <img class="categoria-img" src="/inner-work/clash/assets/img/cat3.png" alt="Famosos">
+                    <img class="categoria-img" src="/CLASH/assets/img/cat3.png" alt="Famosos">
                     <div class="categoria-overlay">
                         <h2>Famosos</h2>
                         <p>Adivina quién es sin que te digan su nombre.</p>
                     </div>
                 </div>
                 <div class="categoria-card">
-                    <img class="categoria-img" src="/inner-work/clash/assets/img/cat4.png" alt="Modo sorpresa">
+                    <img class="categoria-img" src="/CLASH/assets/img/cat4.png" alt="Modo sorpresa">
                     <div class="categoria-overlay">
                         <h2>Modo sorpresa</h2>
                         <p>Audio, vídeo, imágenes y más. Sin saber qué viene.</p>

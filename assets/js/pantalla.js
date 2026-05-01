@@ -31,7 +31,7 @@ async function radarPantalla() {
 
         if (estadoJuego === 'terminada') {
             setTimeout(() => {
-                window.location.href = `/inner-work/clash/pages/ranking.php?sesion_id=${SESION_ID}`;
+                window.location.href = `/CLASH/pages/ranking.php?sesion_id=${SESION_ID}`;
             }, 3000);
         }
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['admin_id'])) {
-    header('Location: /inner-work/clash/admin/dashboard.php');
+    header('Location: /CLASH/admin/dashboard.php');
     exit;
 }
 ?>
@@ -11,8 +11,8 @@ if (isset($_SESSION['admin_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin — Clash</title>
-    <link rel="stylesheet" href="/inner-work/clash/admin/assets/css/admin.css">
-    <link rel="icon" href="/inner-work/clash/assets/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/CLASH/admin/assets/css/admin.css">
+    <link rel="icon" href="/CLASH/assets/img/favicon.png" type="image/png">
 </head>
 <body class="admin-login-body">
     <div class="admin-login-box">
@@ -21,7 +21,7 @@ if (isset($_SESSION['admin_id'])) {
         <?php if (isset($_GET['error'])): ?>
             <div class="admin-error">Usuario o contraseña incorrectos</div>
         <?php endif; ?>
-        <form action="/inner-work/clash/admin/loginProc.php" method="POST">
+        <form action="/CLASH/admin/loginProc.php" method="POST">
             <div class="admin-form-group">
                 <label for="usuario">Usuario</label>
                 <input type="text" id="usuario" name="usuario" placeholder="admin" required autofocus>

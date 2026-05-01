@@ -25,8 +25,8 @@ include '../includes/header.php';
         </div>
         <div class="sobre-persona-foto">
             <img class="sobre-img-rotativa" id="img-anqi"
-                 src="/inner-work/clash/assets/img/anqi1.png"
-                 data-imgs='["/inner-work/clash/assets/img/anqi1.png","/inner-work/clash/assets/img/anqi2.png","/inner-work/clash/assets/img/anqi3.png"]'
+                 src="/CLASH/assets/img/anqi1.png"
+                 data-imgs='["/CLASH/assets/img/anqi1.png","/CLASH/assets/img/anqi2.png","/CLASH/assets/img/anqi3.png"]'
                  alt="Anqi Yang">
         </div>
     </div>
@@ -42,8 +42,8 @@ include '../includes/header.php';
     <div class="sobre-persona sobre-persona-ana">
         <div class="sobre-persona-foto">
             <img class="sobre-img-rotativa" id="img-ana"
-                 src="/inner-work/clash/assets/img/ana1.png"
-                 data-imgs='["/inner-work/clash/assets/img/ana1.png","/inner-work/clash/assets/img/ana2.png","/inner-work/clash/assets/img/ana3.png"]'
+                 src="/CLASH/assets/img/ana1.png"
+                 data-imgs='["/CLASH/assets/img/ana1.png","/CLASH/assets/img/ana2.png","/CLASH/assets/img/ana3.png"]'
                  alt="Jhoana Martínez">
         </div>
         <div class="sobre-persona-info">
@@ -69,7 +69,7 @@ include '../includes/header.php';
             Nunca habíamos construido nada así, pero lo afrontamos con muchas ganas y mucho trabajo en equipo.</p>
         <p>Ha sido un proceso de aprendizaje real, de los que te cambian. Backend, Frontend, Diseño, Lógica de juego... todo desde cero. 
             Y ahora que está terminado, solo nos queda una cosa por decir: esperamos que lo disfruten tanto como nosotras disfrutamos haciéndolo.</p>
-        <a href="/inner-work/clash/index.php" class="sobre-btn">Ver el proyecto →</a>
+        <a href="/CLASH/index.php" class="sobre-btn">Ver el proyecto →</a>
     </section>
 
 </main>

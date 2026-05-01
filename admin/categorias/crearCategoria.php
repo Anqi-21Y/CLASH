@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /inner-work/clash/admin/login.php');
+    header('Location: /CLASH/admin/login.php');
     exit;
 }
 require_once __DIR__ . '/../config/conexion_admin.php';
@@ -11,7 +11,7 @@ require_once __DIR__ . '/../includes/header_admin.php';
 
 <div class="admin-topbar">
     <span class="admin-page-sub">Nueva categoría</span>
-    <a href="/inner-work/clash/admin/retos/gestionRetos.php" class="btn-admin btn-admin-ghost">← Cancelar</a>
+    <a href="/CLASH/admin/retos/gestionRetos.php" class="btn-admin btn-admin-ghost">← Cancelar</a>
 </div>
 
 <div class="crear-steps">
@@ -27,7 +27,7 @@ require_once __DIR__ . '/../includes/header_admin.php';
 </div>
 
 <div class="admin-form-container">
-    <form action="/inner-work/clash/admin/categorias/crearCategoriaProc.php" method="POST">
+    <form action="/CLASH/admin/categorias/crearCategoriaProc.php" method="POST">
         <div class="admin-form-group">
             <label>Nombre de la categoría</label>
             <input type="text" name="nombre_es" placeholder="Ej: Deportes" required>

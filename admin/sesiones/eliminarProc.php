@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /inner-work/clash/admin/login.php');
+    header('Location: /CLASH/admin/login.php');
     exit;
 }
 require_once __DIR__ . '/../config/conexion_admin.php';
@@ -21,5 +21,5 @@ if ($id > 0) {
 
 $db->close();
 
-header('Location: /inner-work/clash/admin/sesiones/gestion.php');
+header('Location: /CLASH/admin/sesiones/gestion.php');
 exit;

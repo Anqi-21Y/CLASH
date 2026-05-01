@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /inner-work/clash/admin/login.php');
+    header('Location: /CLASH/admin/login.php');
     exit;
 }
 require_once __DIR__ . '/../config/conexion_admin.php';
@@ -19,7 +19,7 @@ while ($r = $retos->fetchArray(SQLITE3_ASSOC)) {
 
 <div class="admin-topbar">
     <span class="admin-page-sub">Gestiona las categorías y sus retos</span>
-    <a href="/inner-work/clash/admin/categorias/crearCategoria.php" class="btn-admin btn-admin-pink">+ Nueva categoría</a>
+    <a href="/CLASH/admin/categorias/crearCategoria.php" class="btn-admin btn-admin-pink">+ Nueva categoría</a>
 </div>
 
 <div class="cat-cards-grid">
@@ -32,9 +32,9 @@ while ($r = $retos->fetchArray(SQLITE3_ASSOC)) {
                 <div class="cat-card-count"><?= count($retos_cat) ?> retos</div>
             </div>
             <div class="admin-actions-row">
-                <a href="/inner-work/clash/admin/retos/crearReto.php?cat=<?= $cat['id'] ?>"
+                <a href="/CLASH/admin/retos/crearReto.php?cat=<?= $cat['id'] ?>"
                    class="btn-admin btn-admin-reto">+ Reto</a>
-                <a href="/inner-work/clash/admin/categorias/eliminarCategoriaProc.php?id=<?= $cat['id'] ?>"
+                <a href="/CLASH/admin/categorias/eliminarCategoriaProc.php?id=<?= $cat['id'] ?>"
                    class="cat-card-eliminar"
                    onclick="return confirm('¿Eliminar esta categoría y todos sus retos?')">eliminar</a>
             </div>
@@ -56,7 +56,7 @@ while ($r = $retos->fetchArray(SQLITE3_ASSOC)) {
                         </span>
                         <div class="cat-reto-acciones">
                             <button class="cat-btn-editar" onclick="toggleEditar(<?= $r['id'] ?>)">editar</button>
-                            <a href="/inner-work/clash/admin/retos/bajaRetoProc.php?id=<?= $r['id'] ?>"
+                            <a href="/CLASH/admin/retos/bajaRetoProc.php?id=<?= $r['id'] ?>"
                                class="cat-reto-eliminar"
                                onclick="return confirm('¿Eliminar este reto?')">eliminar</a>
                         </div>
@@ -118,7 +118,7 @@ function guardarReto(id) {
         opcion_correcta: document.getElementById('correcta-' + id).value,
     };
 
-    fetch('/inner-work/clash/admin/retos/editarRetoProc.php', {
+    fetch('/CLASH/admin/retos/editarRetoProc.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datos)
