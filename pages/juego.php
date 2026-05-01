@@ -82,7 +82,7 @@ $categoria_nombre = $categoria_nombres[$categoria_id] ?? 'Clash';
                 <!-- tipo video -->
                 <div id="bloque-video" class="oculto">
                     <div id="contenedor-video">
-                        <video id="video-reto" controls autoplay muted>
+                        <video id="video-reto" controls autoplay muted loop>
                             <source id="video-source" src="" type="video/mp4">
                         </video>
                     </div>
