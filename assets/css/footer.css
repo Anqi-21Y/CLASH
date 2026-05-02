@@ -1,10 +1,7 @@
 /*
  * footer.css
- * Soy el footer de todas las páginas del landing y sobre-nosotras.
- * Muestro el título grande "CLASH" semitransparente (Unbounded),
- * y debajo la línea de copyright con © Clash 2026, Ana & Anqi
- * y el texto del proyecto final.
- * Se carga en index.php y en sobre-nosotras.php.
+ * footer de la web con titulo CLASH y copyright del proyecto
+ * usado en index y sobre-nosotras
  */
 
 /* footer — fondo rosa */

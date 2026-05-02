@@ -1,10 +1,7 @@
 /*
  * hero.css
- * Soy el panel de inicio del landing — el primero que ve el usuario.
- * Controlo el fondo azul (#277adf), el badge pequeño de arriba,
- * el título gigante "CLASH" en amarillo (#eafa71) con Unbounded 900,
- * la descripción, el botón "Jugar ahora" y el punto verde animado
- * de "jugadores registrados". Solo se carga en index.php.
+ * panel principal del landing (index)
+ * contiene titulo CLASH, boton jugar y estado de jugadores
  */
 
 /* panel hero */

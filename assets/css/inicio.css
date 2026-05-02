@@ -3,9 +3,7 @@
  * CSS de la página de registro de jugadores (pages/inicio.php).
  */
 
-/* ══════════════════════════════
-   FONDO Y HEADER
-══════════════════════════════ */
+/* FONDO Y HEADER*/
 .juego-body {
     background: #FFD6FF !important;
 }
@@ -32,9 +30,7 @@
     color: rgba(26,26,26,0.5);
 }
 
-/* ══════════════════════════════
-   CONTENEDOR PRINCIPAL
-══════════════════════════════ */
+/*CONTENEDOR PRINCIPAL*/
 .juego-main {
     max-width: 640px !important;
     padding: 48px 40px !important;
@@ -43,9 +39,7 @@
     min-height: calc(100vh - 64px);
 }
 
-/* ══════════════════════════════
-   SECCIONES
-══════════════════════════════ */
+/* SECCIONES*/
 .registro-seccion {
     display: flex;
     flex-direction: column;
@@ -64,9 +58,7 @@
     margin-bottom: 0;
 }
 
-/* ══════════════════════════════
-   INPUTS — solo línea inferior, sin caja
-══════════════════════════════ */
+/* INPUTS — solo línea inferior, sin caja*/
 .registro-seccion input[type="text"],
 #input-pin-manual {
     font-family: monospace !important;
@@ -106,9 +98,7 @@
 #input-pin-manual::-webkit-outer-spin-button,
 #input-pin-manual::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-/* ══════════════════════════════
-   AVATARES — grid circular
-══════════════════════════════ */
+/* AVATARES — grid circular*/
 .avatares-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -147,9 +137,7 @@
     outline-offset: 3px;
 }
 
-/* ══════════════════════════════
-   BOTÓN ENTRAR — mismo ancho que inputs
-══════════════════════════════ */
+/* BOTÓN ENTRAR — mismo ancho que inputs*/
 #seccion-entrar {
     margin-top: 8px;
 }
@@ -180,9 +168,7 @@
     box-shadow: none !important;
 }
 
-/* ══════════════════════════════
-   MENSAJES
-══════════════════════════════ */
+/* MENSAJES*/
 #mensaje-error {
     font-family: monospace;
     font-size: 11px;
@@ -208,9 +194,7 @@
     margin-top: 8px;
 }
 
-/* ══════════════════════════════
-   RESPONSIVE — móvil
-══════════════════════════════ */
+/* RESPONSIVE — móvil*/
 @media (max-width: 600px) {
     .juego-main {
         padding: 32px 24px !important;

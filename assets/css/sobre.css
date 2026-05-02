@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-/* ── HERO ── */
+/* HERO */
 .sobre-hero {
     background: #9FA0FF;
     padding: 100px 80px;
@@ -36,7 +36,7 @@
     margin: 0;
 }
 
-/* ── PERSONA ── */
+/* PERSONA */
 .sobre-persona {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -56,7 +56,7 @@
 .sobre-persona-ana  .sobre-persona-foto { order: 1; }
 .sobre-persona-ana  .sobre-persona-info { order: 2; }
 
-/* ── Foto genérica ── */
+/* Foto genérica */
 .sobre-persona-foto {
     display: flex;
     align-items: center;
@@ -73,7 +73,7 @@
     transition: opacity 0.4s ease;
 }
 
-/* ── Info genérica ── */
+/* Info genérica */
 .sobre-persona-info {
     padding: 64px;
     display: flex;
@@ -82,7 +82,7 @@
     gap: 16px;
 }
 
-/* ── Anqi — centrado ── */
+/* Anqi — centrado */
 .sobre-persona-anqi .sobre-persona-foto {
     align-items: center;
 }
@@ -91,7 +91,7 @@
     justify-content: center;
 }
 
-/* ── Ana — alineado desde arriba con padding propio ── */
+/* Ana — alineado desde arriba con padding propio */
 .sobre-persona-ana .sobre-persona-foto {
     align-items: center;
 }
@@ -135,7 +135,7 @@
     margin: 0;
 }
 
-/* ── ONDA ── */
+/* ONDA */
 .sobre-onda {
     display: block;
     line-height: 0;
@@ -148,7 +148,7 @@
     height: 230px;
 }
 
-/* ── LA IDEA ── */
+/* LA IDEA */
 .sobre-idea {
     background: #DAFFEF;
     padding: 80px;
@@ -200,7 +200,7 @@
     color: #fff;
 }
 
-/* ── BOTÓN CONÓCEME MÁS — Ana ── */
+/* BOTÓN CONÓCEME MÁS — Ana */
 .sobre-btn-perfil {
     display: inline-block;
     background: #ffffff;
@@ -224,7 +224,7 @@
     color: #ffffff;
 }
 
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .sobre-hero   { padding: 60px 24px; }
     .sobre-idea   { padding: 60px 24px; }

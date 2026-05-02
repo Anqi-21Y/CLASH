@@ -112,9 +112,7 @@ p {
 #input-pin-manual::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 #input-pin-manual { -moz-appearance: textfield; }
 
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
+/* RESPONSIVE*/
 @media (max-width: 768px) {
     .panel-fill { padding: 48px 24px; }
     h1 { font-size: 32px; }

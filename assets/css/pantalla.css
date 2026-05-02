@@ -13,7 +13,7 @@
     flex-direction: column;
 }
 
-/* ── HEADER ─────────────────────────────────────── */
+/* HEADER */
 .pantalla-header {
     display: flex;
     align-items: center;
@@ -31,7 +31,7 @@
     letter-spacing: 4px;
 }
 
-/* ── MAIN ─────────────────────────────────────── */
+/* MAIN */
 #pantalla-main {
     flex: 1;
     min-height: 0;
@@ -50,7 +50,7 @@
 
 .oculto { display: none !important; }
 
-/* ── LOBBY LAYOUT ─────────────────────────────── */
+/* LOBBY LAYOUT─ */
 .lobby-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -58,7 +58,7 @@
     height: 100%;
 }
 
-/* ── LADO IZQUIERDO: QR ───────────────────────── */
+/* LADO IZQUIERDO: QR─ */
 .qr-zone {
     background:  #FFD6FF;
     display: flex;
@@ -96,7 +96,7 @@
     letter-spacing: 4px;
 }
 
-/* ── LADO DERECHO: JUGADORES ──────────────────── */
+/* LADO DERECHO: JUGADORES */
 .players-zone {
     background: #c8b4f9;
     display: flex;
@@ -185,7 +185,7 @@
     margin: 0;
 }
 
-/* ── SECCIÓN RETO ─────────────────────────────── */
+/* SECCIÓN RETO─ */
 #pantalla-reto {
     flex-direction: column;
     gap: 32px;
@@ -270,7 +270,7 @@
     color: rgba(253, 248, 242, 0.4);
 }
 
-/* ── SECCIÓN INTERMEDIA ───────────────────────── */
+/* SECCIÓN INTERMEDIA─ */
 #pantalla-intermedia {
     flex-direction: column;
     gap: 16px;
@@ -294,7 +294,7 @@
     margin: 0;
 }
 
-/* ── RESPONSIVE ───────────────────────────────── */
+/* RESPONSIVE─ */
 @media (max-width: 1024px) {
     .pantalla-header { padding: 14px 32px; }
     .pantalla-header .logo { font-size: 18px; }

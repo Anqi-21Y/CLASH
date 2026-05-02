@@ -1,60 +1,41 @@
 #!/usr/bin/env python3
 """
--generar_retos.py — Un generador por lotes para desafíos de emojis del juego Clash.
-----------------------------------------------------------------------------------------
-
-La API de IA de Groq genera automáticamente preguntas de rompecabezas con emojis y 
-las inserta directamente en la base de datos SQLite del proyecto (clash.db) para que el backend PHP del juego pueda leerlas y utilizarlas.
-
-
-Cómo usarlo (ejecutarlo en la terminal):
-    python generar_retos.py                                 # Genera 4 preguntas para cada una de las 4 categorías (16 preguntas en total).
-    python generar_retos.py --categoria 1                   # Genera solo 4 preguntas para la categoría "Películas".
-    python generar_retos.py --categoria 2                   # Generar 4 preguntas únicamente para la categoría "Canción".
-    python generar_retos.py --categoria 3                   # Genera solo 4 preguntas para la categoría "Celebridad".
-    python generar_retos.py --categoria 4                   # Genera solo 4 preguntas para la categoría "sorpresa".
-    python generar_retos.py --cantidad 8                    # Genera 8 preguntas para cada categoría.
-    python generar_retos.py --categoria 1 --cantidad 10     # Genera 10 preguntas para la categoría de películas.
--------------------------------------------------------------------------------------------------------------------------------------------
+generar_retos.py — genera preguntas de emojis para el juego Clash
+usa la API de Groq y las guarda en la base de datos
 """
 
 #!/usr/bin/env python3
 """
-generar_reto.py — Generador de preguntas emoji para Clash usando Groq AI
+generar_reto.py — genera retos emoji con IA (Groq)
 
-Uso:
-    python generar_reto.py                          # Genera 4 preguntas para cada categoría (16 en total)
-    python generar_reto.py --categoria 1            # Solo películas
-    python generar_reto.py --categoria 2            # Solo canciones
-    python generar_reto.py --categoria 3            # Solo famosos
-    python generar_reto.py --categoria 4            # Solo modo sorpresa
-    python generar_reto.py --cantidad 8             # 8 preguntas por categoría
-    python generar_reto.py --categoria 1 --cantidad 10
+uso:
+    python generar_reto.py
+    python generar_reto.py --categoria 1
+    python generar_reto.py --cantidad 8
 """
 
-# Librerías estándar de Python — no hace falta instalar nada con pip
-import sqlite3        # Para conectar con la base de datos
-import json           # Para leer y escribir datos en formato JSON
-import urllib.request # Para hacer peticiones HTTP a la API de Groq
-import urllib.error   # Para capturar errores de conexión
-import os             # Para leer variables de entorno y construir rutas
+# librerías
+import sqlite3
+import json
+import urllib.request
+import urllib.error
+import os
 from dotenv import load_dotenv
-
 load_dotenv()
 
-import argparse       # Para leer los argumentos del terminal (--categoria, --cantidad)
-import time           # Para pausar entre peticiones y no saturar la API
+import argparse
+import time
 
 
-# ── Configuración ─────────────────────────────────────────────────────────────
+# Configuración
 
-# Reemplaza el valor por defecto con tu API Key real de Groq (empieza por gsk_...)
+# Reemplaza el valor por defecto con tu API Key real de Groq
 API_KEY = os.environ.get('GROQ_API_KEY')
 
-# Ruta a la base de datos — sube un nivel desde /ia hasta /clash, luego entra en /database
+# Ruta a la base de datos
 DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'database', 'clash.db')
 
-# Categorías del juego — los IDs deben coincidir con la tabla 'categorias' de la BD
+# Categorías del juego
 CATEGORIAS = {
     1: 'peliculas',
     2: 'canciones',
@@ -65,27 +46,24 @@ CATEGORIAS = {
 CANTIDAD_DEFAULT = 4
 
 
-# ── Base de datos ─────────────────────────────────────────────────────────────
+# Base de datos
 
 def conectar_db():
-    # Abre la conexión con clash.db
-    # row_factory permite acceder a los datos por nombre de columna: row['emojis']
+    # conectar clash.db
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
 
 def obtener_emojis_existentes(conn, categoria_id):
-    # Devuelve todos los emojis ya guardados en esta categoría
-    # Se usa para evitar insertar preguntas duplicadas
+    # emojis ya usados
     cursor = conn.cursor()
     cursor.execute("SELECT emojis FROM retos WHERE categoria_id = ?", (categoria_id,))
     return {row['emojis'] for row in cursor.fetchall()}
 
 
 def obtener_opciones_existentes(conn, categoria_id):
-    # Devuelve todas las respuestas correctas (en español) que ya existen
-    # Se le pasan a la IA para que no las repita
+    # respuestas correctas ya usadas
     cursor = conn.cursor()
     cursor.execute(
         "SELECT op1_es, op2_es, op3_es, op4_es, opcion_correcta FROM retos WHERE categoria_id = ?",
@@ -93,7 +71,7 @@ def obtener_opciones_existentes(conn, categoria_id):
     )
     respuestas = set()
     for row in cursor.fetchall():
-        idx = row['opcion_correcta']  # Número del 1 al 4 que indica la opción correcta
+        idx = row['opcion_correcta']
         opciones = [row['op1_es'], row['op2_es'], row['op3_es'], row['op4_es']]
         correcta = opciones[idx - 1]
         if correcta:
@@ -125,7 +103,7 @@ def insertar_reto(conn, categoria_id, reto):
     conn.commit()  # Guarda los cambios en el archivo .db
 
 
-# ── Generación con IA ─────────────────────────────────────────────────────────
+# Generación con IA─
 
 def generar_reto_ia(categoria_nombre, emojis_existentes, opciones_existentes):
     # Prepara la lista de respuestas existentes para incluirla en el prompt
@@ -137,12 +115,12 @@ def generar_reto_ia(categoria_nombre, emojis_existentes, opciones_existentes):
     # Mensaje que se envía a la IA — le pedimos solo JSON, sin texto extra
     prompt = f"""Genera un reto para un juego de emojis sobre la categoría: {categoria_nombre}.
 {existentes_texto}
-El reto debe tener:
-- emojis: entre 2 y 4 emojis que representen la respuesta correcta
-- una respuesta correcta y 3 opciones incorrectas pero creíbles
-- las 4 opciones traducidas al español, catalán y chino
+debe incluir:
+- emojis (2 a 4)
+- 1 correcta + 3 falsas
+- traducciones (es, ca, zh)
 
-Responde SOLO con un JSON con este formato exacto, sin texto adicional:
+responde SOLO json:
 {{
     "emojis": "🎬🦁👑",
     "opcion_correcta": 1,
@@ -160,7 +138,6 @@ Responde SOLO con un JSON con este formato exacto, sin texto adicional:
     "op4_zh": "木偶奇遇记"
 }}"""
 
-    # Cuerpo de la petición — Groq usa el mismo formato que OpenAI
     datos = {
         "model": "llama-3.3-70b-versatile",  # Modelo gratuito disponible en Groq
         "max_tokens": 1000,
@@ -216,7 +193,7 @@ Responde SOLO con un JSON con este formato exacto, sin texto adicional:
         return None
 
 
-# ── Comprobación de duplicados ────────────────────────────────────────────────
+# Comprobación de duplicados
 
 def es_duplicado(reto, emojis_existentes, opciones_existentes):
     # Comprobación 1: ¿los emojis ya existen en la BD?
@@ -232,7 +209,7 @@ def es_duplicado(reto, emojis_existentes, opciones_existentes):
     return False, None
 
 
-# ── Generación por categoría ──────────────────────────────────────────────────
+# Generación por categoría
 
 def generar_para_categoria(conn, categoria_id, categoria_nombre, cantidad):
     print(f"\n{'─'*50}")
@@ -286,7 +263,7 @@ def generar_para_categoria(conn, categoria_id, categoria_nombre, cantidad):
     return generados
 
 
-# ── Función principal ─────────────────────────────────────────────────────────
+# Función principal─
 
 def main():
     # Configuramos los argumentos que acepta el script desde el terminal

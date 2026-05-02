@@ -194,9 +194,7 @@
     .menu-izquierda { padding: 80px 32px; }
 }
 
-/* ══════════════════════════════
-   OVERLAY QR CENTRADO
-══════════════════════════════ */
+/*OVERLAY QR CENTRADO */
 
 .qr-overlay {
     display: none;
@@ -270,9 +268,7 @@
     height: 100% !important;
 }
 
-/* ══════════════════════════════
-   WIDGET ESQUINA — contenedor único
-══════════════════════════════ */
+/* WIDGET ESQUINA — contenedor único */
 
 .qr-widget {
     position: fixed;

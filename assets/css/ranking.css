@@ -11,14 +11,13 @@
     color: rgba(253,248,242,0.55);
 }
 
-/* ══════════════════════════════
-   MARCO GENERAL — centrado
-   Para bajar los cuadros del nav: aumenta el primer valor de margin (ahora 32px)
-══════════════════════════════ */
+/*  MARCO GENERAL — centrado
+Para bajar los cuadros del nav: aumenta el primer valor de margin (ahora 32px)
+*/
 .ranking-marco {
     max-width: 520px;
     width: calc(100% - 40px);
-    margin: 32px auto 26px;   /* ← sube este 32px para bajar más del nav */
+    margin: 32px auto 26px;
     background: #ebebeb;
     border: 2px solid #1A1A1A;
     border-radius: 16px;
@@ -30,9 +29,7 @@
     margin-top: 12px;
 }
 
-/* ══════════════════════════════
-   CARGANDO
-══════════════════════════════ */
+/* CARGANDO*/
 .ranking-cargando-txt {
     font-size: 11px;
     font-weight: 800;
@@ -43,9 +40,7 @@
     padding: 40px 20px;
 }
 
-/* ══════════════════════════════
-   FELICITACIONES
-══════════════════════════════ */
+/* FELICITACIONES*/
 .ranking-felicitaciones {
     text-align: center;
     padding: 20px 16px 16px;
@@ -69,15 +64,13 @@
     margin-bottom: 0;
 }
 
-/* ══════════════════════════════
-   PODIO — con padding para no tocar bordes
-══════════════════════════════ */
+/* PODIO — con padding para no tocar bordes*/
 #podio {
     display: flex;
     align-items: flex-end;
     justify-content: center;
     gap: 8px;
-    padding: 0 20px 24px;   /* ← padding lateral y abajo para no tocar bordes */
+    padding: 0 20px 24px;
 }
 
 .podio-puesto {
@@ -144,9 +137,7 @@
     color: #1A1A1A;
 }
 
-/* ══════════════════════════════
-   LISTA RESTO (4º en adelante)
-══════════════════════════════ */
+/* LISTA RESTO (4º en adelante)*/
 .ranking-marco-lista {
     margin-top: 12px;
 }
@@ -213,16 +204,12 @@
     color: #1A1A1A;
 }
 
-/* ══════════════════════════════
-   RANKING GLOBAL HISTÓRICO
-══════════════════════════════ */
+/* RANKING GLOBAL HISTÓRICO*/
 .ranking-global-header {
     padding: 4px 0 0;
 }
 
-/* ══════════════════════════════
-   BOTÓN VOLVER
-══════════════════════════════ */
+/* BOTÓN VOLVER*/
 .btn-volver {
     display: block;
     margin: 16px;

@@ -4,9 +4,7 @@
  * sala de espera (pages/waiting.php)
  */
 
-/* ══════════════════════════════
-   TIPOGRAFÍA GLOBAL
-══════════════════════════════ */
+/* TIPOGRAFÍA GLOBAL*/
 .juego-body,
 .juego-body *,
 .waiting-body,
@@ -18,9 +16,7 @@
     font-family: 'Unbounded', sans-serif;
 }
 
-/* ══════════════════════════════
-   BASE
-══════════════════════════════ */
+/* BASE*/
 .juego-body {
     min-height: 100vh;
     display: flex;
@@ -31,9 +27,7 @@
     background: #9FA0FF;
 }
 
-/* ══════════════════════════════
-   CABECERA
-══════════════════════════════ */
+/*CABECERA*/
 .juego-header {
     background: #1A1A1A;
     padding: 12px 20px;
@@ -60,9 +54,7 @@
     color: #FDF8F2;
 }
 
-/* ══════════════════════════════
-   MAIN — width:100% y flex:1 críticos para inicio.php
-══════════════════════════════ */
+/*MAIN — width:100% y flex:1 críticos para inicio.php*/
 .juego-main {
     flex: 1;
     width: 100%;
@@ -71,9 +63,7 @@
     gap: 16px;
 }
 
-/* ══════════════════════════════
-   NOMBRE CATEGORÍA
-══════════════════════════════ */
+/* NOMBRE CATEGORÍA*/
 .juego-categoria-nombre {
     max-width: 520px;
     width: 100%;
@@ -86,9 +76,7 @@
     color: #1A1A1A;
 }
 
-/* ══════════════════════════════
-   MARCO MÓVIL — centrado
-══════════════════════════════ */
+/*MARCO MÓVIL — centrado*/
 .juego-marco {
     max-width: 520px;
     width: calc(100% - 40px);
@@ -104,9 +92,7 @@
     flex-direction: column;
 }
 
-/* ══════════════════════════════
-   REGISTRO (base — inicio.css sobreescribe)
-══════════════════════════════ */
+/*REGISTRO (base — inicio.css sobreescribe)*/
 .registro-seccion {
     display: flex;
     flex-direction: column;
@@ -204,9 +190,7 @@
     margin-bottom: 0;
 }
 
-/* ══════════════════════════════
-   BARRA DE PROGRESO
-══════════════════════════════ */
+/*BARRA DE PROGRESO*/
 .juego-progreso {
     padding: 14px 16px 6px;
 }
@@ -253,9 +237,7 @@
     color: #1A1A1A;
 }
 
-/* ══════════════════════════════
-   CUADRO BLANCO — hint + emojis
-══════════════════════════════ */
+/* CUADRO BLANCO — hint + emojis*/
 #emojis {
     margin: 10px 16px;
     background: #ffffff;
@@ -281,9 +263,7 @@
     margin-bottom: 0;
 }
 
-/* ══════════════════════════════
-   OPCIONES A B C D
-══════════════════════════════ */
+/* OPCIONES A B C D*/
 #opciones {
     display: flex;
     flex-direction: column;
@@ -335,9 +315,7 @@
 .btn-opcion.incorrecta .btn-opcion-texto { color: #ffffff; }
 .btn-opcion.incorrecta .btn-opcion-letra { background: rgba(255,255,255,0.3); color: #fff; }
 
-/* ══════════════════════════════
-   ESPERA INICIAL
-══════════════════════════════ */
+/* ESPERA INICIAL*/
 #seccion-espera {
     text-align: center;
     padding: 48px 20px;
@@ -352,9 +330,7 @@
     margin-bottom: 8px;
 }
 
-/* ══════════════════════════════
-   RESULTADO
-══════════════════════════════ */
+/* RESULTADO*/
 #seccion-resultado {
     text-align: center;
     padding: 48px 20px;
@@ -393,9 +369,7 @@
     margin-bottom: 0;
 }
 
-/* ══════════════════════════════
-   FIN DE PARTIDA
-══════════════════════════════ */
+/*FIN DE PARTIDA*/
 #seccion-fin {
     text-align: center;
     padding: 48px 20px;
@@ -410,9 +384,7 @@
     margin-bottom: 12px;
 }
 
-/* ══════════════════════════════
-   MEDIOS
-══════════════════════════════ */
+/* MEDIOS*/
 #contenedor-imagen {
     border: 2px solid #1A1A1A;
     border-radius: 4px;
@@ -485,9 +457,7 @@
     line-height: 1.4;
 }
 
-/* ══════════════════════════════
-   SALA DE ESPERA — waiting.php
-══════════════════════════════ */
+/* SALA DE ESPERA — waiting.php*/
 .waiting-body {
     background: #d6a7ffc1 !important;
     min-height: 100vh;
@@ -576,9 +546,7 @@
     margin: 0;
 }
 
-/* ══════════════════════════════
-   RESPONSIVE — TABLET (max 768px)
-══════════════════════════════ */
+/* RESPONSIVE — TABLET (max 768px)*/
 @media (max-width: 768px) {
     .juego-marco {
         width: calc(100% - 24px);
@@ -604,9 +572,7 @@
     }
 }
 
-/* ══════════════════════════════
-   RESPONSIVE — MÓVIL (max 480px)
-══════════════════════════════ */
+/* RESPONSIVE — MÓVIL (max 480px)*/
 @media (max-width: 480px) {
     .juego-header {
         padding: 10px 16px;
@@ -704,9 +670,7 @@
     }
 }
 
-/* ══════════════════════════════
-   RESPONSIVE — MÓVIL PEQUEÑO (max 360px)
-══════════════════════════════ */
+/* RESPONSIVE — MÓVIL PEQUEÑO (max 360px)*/
 @media (max-width: 360px) {
     .juego-header h1 { font-size: 16px; }
 
