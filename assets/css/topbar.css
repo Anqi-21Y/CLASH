@@ -280,6 +280,8 @@
     right: 32px;
     z-index: 1000;
     cursor: pointer;
+        transition: right .7s ease;
+
 }
 
 .qr-widget-inner {

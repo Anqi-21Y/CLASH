@@ -204,3 +204,14 @@ if (btnUnirse) {
     });
 }
 
+// Widget — se oculta al hacer scroll
+var widget = document.getElementById('qr-widget-btn');
+if (widget) {
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 100) {
+            widget.style.right = '-200px';
+        } else {
+            widget.style.right = '32px';
+        }
+    });
+}
