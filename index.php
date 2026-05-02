@@ -22,7 +22,7 @@ include 'includes/header.php';
         </div>
     </div>
 </div>
-<div class="spacer"></div>
+
 
 <!-- panel 2 — como jugar -->
 <div class="panel" id="como-jugar">

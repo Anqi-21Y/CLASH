@@ -88,8 +88,15 @@
 @media (max-width: 768px) {
     .hero-panel {
         flex-direction: column;
-        padding: 0 24px;
-        gap: 40px;
+        padding: 48px 24px;
+        gap: 24px;
     }
-    .hero-titulo { font-size: 100px; }
+    .hero-titulo { font-size: 22vw; }
+}
+
+@media (max-width: 480px) {
+    .hero-panel {
+        padding: 36px 20px;
+    }
+    .hero-titulo { font-size: 20vw; }
 }
