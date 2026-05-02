@@ -1,20 +1,22 @@
 <?php
 session_start();
+// Mostrar la lista de todos los jugadores y sus sesiones
+
+// solo admin
 if (!isset($_SESSION['admin_id'])) {
     header('Location: /CLASH/admin/login.php');
     exit;
 }
+
+// conectar BBDD
 require_once __DIR__ . '/../config/conexion_admin.php';
 $titulo_admin = 'Jugadores';
+
+// header
 require_once __DIR__ . '/../includes/header_admin.php';
 
-$jugadores = $db->query("
-    SELECT j.*, s.pin, c.nombre_es AS categoria
-    FROM jugadores j
-    LEFT JOIN sesiones s ON s.id = j.sesion_id
-    LEFT JOIN categorias c ON c.id = s.categoria_id
-    ORDER BY j.created_at DESC
-");
+// consultar jugadores con su pin y cate
+$jugadores = $db->query("SELECT j.*, s.pin, c.nombre_es AS categoria FROM jugadores j LEFT JOIN sesiones s ON s.id = j.sesion_id LEFT JOIN categorias c ON c.id = s.categoria_id ORDER BY j.created_at DESC");
 ?>
 
 <div class="admin-topbar">

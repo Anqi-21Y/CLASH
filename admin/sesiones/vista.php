@@ -1,19 +1,22 @@
 <?php
 session_start();
+
+// Panel de control de la sesión
+
+// admin
 if (!isset($_SESSION['admin_id'])) {
     header('Location: /CLASH/admin/login.php');
     exit;
 }
+
+// bbdd
 require_once __DIR__ . '/../config/conexion_admin.php';
 
 $id = intval($_GET['id'] ?? 0);
 
-$stmt = $db->prepare("
-    SELECT s.*, c.nombre_es AS categoria
-    FROM sesiones s
-    JOIN categorias c ON c.id = s.categoria_id
-    WHERE s.id = :id
-");
+// Obtener informacion de la sesion y su categoria
+$stmt = $db->prepare("SELECT s.*, c.nombre_es AS categoria FROM sesiones s JOIN categorias c ON c.id = s.categoria_id WHERE s.id = :id");
+
 $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 $sesion = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
 
@@ -22,19 +25,12 @@ if (!$sesion) {
     exit;
 }
 
+// Si la sesion terminar, calcular el ranking de jugadores
 $resultados = [];
 if ($sesion['estado'] === 'terminada') {
-    $res = $db->query("
-        SELECT j.id as jugador_id, j.nombre, j.avatar,
-               SUM(r.puntos) as puntos_total,
-               SUM(CASE WHEN r.es_correcta = 1 THEN 1 ELSE 0 END) as aciertos
-        FROM respuestas r
-        JOIN jugadores j ON j.id = r.jugador_id
-        WHERE r.sesion_id = $id
-        GROUP BY r.jugador_id
-        ORDER BY puntos_total DESC
-        LIMIT 10
-    ");
+    $res = $db->query("SELECT j.id as jugador_id, j.nombre, j.avatar, SUM(r.puntos) as puntos_total, SUM(CASE WHEN r.es_correcta = 1 THEN 1 ELSE 0 END) as aciertos
+        FROM respuestas r JOIN jugadores j ON j.id = r.jugador_id
+        WHERE r.sesion_id = $id GROUP BY r.jugador_id ORDER BY puntos_total DESC LIMIT 10");
     $pos = 1;
     while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
         $row['posicion'] = $pos++;

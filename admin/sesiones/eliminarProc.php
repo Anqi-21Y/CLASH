@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+// eliminar unsession
+
 if (!isset($_SESSION['admin_id'])) {
     header('Location: /CLASH/admin/login.php');
     exit;

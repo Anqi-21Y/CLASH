@@ -1,11 +1,17 @@
 <?php
 session_start();
+// crear un reto
+
+// solo admin
 if (!isset($_SESSION['admin_id'])) {
     header('Location: /CLASH/admin/login.php');
     exit;
 }
+
+// bbdd
 require_once __DIR__ . '/../config/conexion_admin.php';
 
+// Obtener categorias para el selector
 $cat_preseleccionada = intval($_GET['cat'] ?? 0);
 $categorias = $db->query("SELECT * FROM categorias ORDER BY nombre_es ASC");
 $titulo_admin = 'Nuevo reto';

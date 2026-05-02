@@ -1,15 +1,23 @@
 <?php
 session_start();
+// Gestionar categorias y retos (ver, editar y eliminar)
+
+// solo admin
 if (!isset($_SESSION['admin_id'])) {
     header('Location: /CLASH/admin/login.php');
     exit;
 }
+
+// bbdd
 require_once __DIR__ . '/../config/conexion_admin.php';
 $titulo_admin = 'Categorías';
+// headeer
 require_once __DIR__ . '/../includes/header_admin.php';
 
+// Obtener todas las categorías
 $categorias = $db->query("SELECT * FROM categorias ORDER BY id ASC");
 
+// Agrupar los retos por su categoria
 $retos_por_cat = [];
 $retos = $db->query("SELECT * FROM retos ORDER BY categoria_id, id ASC");
 while ($r = $retos->fetchArray(SQLITE3_ASSOC)) {
@@ -98,6 +106,7 @@ while ($r = $retos->fetchArray(SQLITE3_ASSOC)) {
 </div>
 
 <script>
+// Mostrar u ocultar el panel de edición
 function toggleEditar(id) {
     const panel = document.getElementById('edit-' + id);
     const btn   = document.querySelector('#reto-' + id + ' .cat-btn-editar');
@@ -107,14 +116,15 @@ function toggleEditar(id) {
     btn.textContent = abierto ? 'editar' : 'editar ▲';
 }
 
+// Guardar los cambios del reto mediante Fetch API (JSON)
 function guardarReto(id) {
     const datos = {
-        id:              id,
-        emojis:          document.getElementById('emojis-' + id).value,
-        op1_es:          document.getElementById('op1-' + id).value,
-        op2_es:          document.getElementById('op2-' + id).value,
-        op3_es:          document.getElementById('op3-' + id).value,
-        op4_es:          document.getElementById('op4-' + id).value,
+        id: id,
+        emojis: document.getElementById('emojis-' + id).value,
+        op1_es: document.getElementById('op1-' + id).value,
+        op2_es: document.getElementById('op2-' + id).value,
+        op3_es: document.getElementById('op3-' + id).value,
+        op4_es: document.getElementById('op4-' + id).value,
         opcion_correcta: document.getElementById('correcta-' + id).value,
     };
 

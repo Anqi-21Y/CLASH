@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+// login para admin 
+
 if (isset($_SESSION['admin_id'])) {
     header('Location: /CLASH/admin/dashboard.php');
     exit;

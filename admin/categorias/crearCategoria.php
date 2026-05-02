@@ -1,11 +1,19 @@
 <?php
 session_start();
+
+// Backend : crear una nueva pagina de categoria
+
+// asegurar  ser admin
 if (!isset($_SESSION['admin_id'])) {
     header('Location: /CLASH/admin/login.php');
     exit;
 }
+
+// conectar a bbdd
 require_once __DIR__ . '/../config/conexion_admin.php';
 $titulo_admin = 'Nueva categoría';
+
+// header
 require_once __DIR__ . '/../includes/header_admin.php';
 ?>
 
@@ -36,4 +44,5 @@ require_once __DIR__ . '/../includes/header_admin.php';
     </form>
 </div>
 
+<!--Footer-->
 <?php require_once __DIR__ . '/../includes/footer_admin.php'; ?>

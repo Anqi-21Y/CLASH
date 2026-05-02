@@ -1,17 +1,14 @@
 <?php
 session_start();
+// listo de gestion 
+
 if (!isset($_SESSION['admin_id'])) {
     header('Location: /CLASH/admin/login.php');
     exit;
 }
 require_once __DIR__ . '/../config/conexion_admin.php';
 
-$sesiones = $db->query("
-    SELECT s.*, c.nombre_es AS categoria
-    FROM sesiones s
-    JOIN categorias c ON c.id = s.categoria_id
-    ORDER BY s.created_at DESC
-");
+$sesiones = $db->query("SELECT s.*, c.nombre_es AS categoria FROM sesiones s JOIN categorias c ON c.id = s.categoria_id ORDER BY s.created_at DESC");
 
 $titulo_admin = 'Sesiones';
 require_once __DIR__ . '/../includes/header_admin.php';

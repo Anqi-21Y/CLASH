@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+// procesamiendo de login
+
 require_once __DIR__ . '/config/conexion_admin.php';
 
 $usuario  = trim($_POST['usuario']  ?? '');
