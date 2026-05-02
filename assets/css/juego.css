@@ -508,7 +508,7 @@
 }
 
 .waiting-label {
-    font-family: 'Unbounded', sans-serif;
+    font-family: monospace;
     font-weight: 900;
     font-size: 13px;
     letter-spacing: 4px;

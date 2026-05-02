@@ -1,56 +1,37 @@
 /*
- * pantalla.css — Pantalla de proyección del profe (pantalla/pantalla.php)
- * Tipografía: monospace global, Unbounded solo para CLASH
+ * pantalla.css — Pantalla de proyección (pantalla/pantalla.php)
+ * Tipografía: monospace global, Unbounded solo para CLASH y PIN
  */
 
 .pantalla-body {
     font-family: monospace;
     background: #1A1A1A;
-    color: #FDF8F2;
+    color: #1A1A1A;
     height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-/* HEADER */
+/* ── HEADER ─────────────────────────────────────── */
 .pantalla-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px 48px;
-    border-bottom: 2px solid rgba(253,248,242,0.08);
+    justify-content: center;
+    padding: 16px 48px;
+    background: #1A1A1A;
     flex-shrink: 0;
 }
 
-/* CLASH = Unbounded */
 .pantalla-header .logo {
     font-family: 'Unbounded', sans-serif;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 900;
     color: #FDF8F2;
+    letter-spacing: 4px;
 }
 
-.pin-info {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(253,248,242,0.4);
-}
-
-.pin-code {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: #ff91d5;
-    letter-spacing: 6px;
-}
-
-/* MAIN */
+/* ── MAIN ─────────────────────────────────────── */
 #pantalla-main {
     flex: 1;
     min-height: 0;
@@ -69,95 +50,149 @@
 
 .oculto { display: none !important; }
 
-/* LOBBY */
+/* ── LOBBY LAYOUT ─────────────────────────────── */
 .lobby-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
     width: 100%;
     height: 100%;
 }
 
+/* ── LADO IZQUIERDO: QR ───────────────────────── */
 .qr-zone {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #FDF8F2;
-    padding: 48px;
-}
-
-#qr-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.players-zone {
+    background:  #FFD6FF;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 48px;
-    gap: 24px;
-    background: #1A1A1A;
+    gap: 1.5rem;
+    padding: 2.5rem;
 }
 
-.players-zone h1 {
+.qr-label {
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+}
+
+.qr-box {
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 0px;
+}
+
+.qr-box img {
+    display: block;
+}
+
+.qr-pin {
     font-family: 'Unbounded', sans-serif;
-    font-size: 48px;
+    font-size: 42px;
     font-weight: 900;
-    color: #eafa71;
-    text-align: center;
-    line-height: 1.1;
+    color: #000000; 
+    letter-spacing: 4px;
+}
+
+/* ── LADO DERECHO: JUGADORES ──────────────────── */
+.players-zone {
+    background: #c8b4f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 2rem;
+    gap: 1rem;
+}
+
+.players-sala-label {
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #1A1A1A;
     margin: 0;
 }
 
 #contador-jugadores {
     font-size: 11px;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(253,248,242,0.45);
+    color: rgba(26, 26, 26, 0.5);
+    margin: 0;
 }
 
 #lista-jugadores-nombres {
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 1.5rem;
     justify-content: center;
-    max-width: 480px;
+    align-items: center;
+    padding: 1rem 0;
 }
 
+/* Cada jugador flotante */
 #lista-jugadores-nombres .jugador-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    background: rgba(255,255,255,0.07);
-    padding: 8px 16px;
-    border-radius: 8px;
+    gap: 6px;
+    animation: flotar 3s ease-in-out infinite;
 }
 
-.jugador-item-nombre {
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #FDF8F2;
+#lista-jugadores-nombres .jugador-item:nth-child(2) { animation-delay: 0.5s; }
+#lista-jugadores-nombres .jugador-item:nth-child(3) { animation-delay: 1s; }
+#lista-jugadores-nombres .jugador-item:nth-child(4) { animation-delay: 1.5s; }
+#lista-jugadores-nombres .jugador-item:nth-child(5) { animation-delay: 2s; }
+#lista-jugadores-nombres .jugador-item:nth-child(6) { animation-delay: 2.5s; }
+
+@keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
 }
 
-.jugador-item-avatar {
-    width: 32px;
-    height: 32px;
+.jugador-avatar {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     object-fit: cover;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
-/* RETO */
+.jugador-item span {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1A1A1A;
+}
+
+.players-espera-label {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(26, 26, 26, 0.55);
+    text-align: center;
+    margin: 0;
+}
+
+/* ── SECCIÓN RETO ─────────────────────────────── */
 #pantalla-reto {
     flex-direction: column;
     gap: 32px;
     padding: 48px;
     text-align: center;
+    background: #1A1A1A;
+    color: #FDF8F2;
 }
 
 #pantalla-temporizador {
@@ -200,6 +235,7 @@
     color: #FDF8F2;
     max-width: 800px;
     line-height: 1.4;
+    margin: 0;
 }
 
 #pantalla-contenido-multimedia {
@@ -219,7 +255,7 @@
     font-family: monospace;
     font-size: 20px;
     color: #FFAAEA;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     padding: 24px;
     border-radius: 8px;
     text-align: left;
@@ -231,13 +267,14 @@
     font-weight: 800;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(253,248,242,0.4);
+    color: rgba(253, 248, 242, 0.4);
 }
 
-/* INTERMEDIA */
+/* ── SECCIÓN INTERMEDIA ───────────────────────── */
 #pantalla-intermedia {
     flex-direction: column;
     gap: 16px;
+    background: #1A1A1A;
 }
 
 #pantalla-intermedia h2 {
@@ -245,6 +282,7 @@
     font-size: 48px;
     font-weight: 900;
     color: #eafa71;
+    margin: 0;
 }
 
 #pantalla-intermedia p {
@@ -252,18 +290,58 @@
     font-weight: 800;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(253,248,242,0.5);
+    color: rgba(253, 248, 242, 0.5);
+    margin: 0;
 }
 
-/* RESPONSIVE — pantalla proyector, principalmente desktop */
+/* ── RESPONSIVE ───────────────────────────────── */
 @media (max-width: 1024px) {
-    .pantalla-header { padding: 16px 32px; }
-    .players-zone h1 { font-size: 36px; }
+    .pantalla-header { padding: 14px 32px; }
+    .pantalla-header .logo { font-size: 18px; }
+    .qr-frame { width: 200px; height: 200px; }
+    .qr-pin { font-size: 26px; }
     #pantalla-pregunta-texto { font-size: 22px; }
+    #pantalla-intermedia h2 { font-size: 36px; }
 }
 
 @media (max-width: 768px) {
-    .lobby-layout { grid-template-columns: 1fr; }
-    .qr-zone { display: none; }
-    .players-zone { padding: 32px 24px; }
+    .pantalla-body { overflow-y: auto; height: auto; min-height: 100vh; }
+
+    .lobby-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        height: auto;
+    }
+
+    .qr-zone {
+        padding: 2rem 1.5rem;
+        min-height: 50vh;
+    }
+
+    .qr-frame { width: 180px; height: 180px; }
+    .qr-pin { font-size: 22px; }
+
+    .players-zone {
+        padding: 2rem 1.5rem;
+        min-height: 50vh;
+    }
+
+    .jugador-item-avatar { width: 44px; height: 44px; }
+
+    #pantalla-reto { padding: 32px 24px; gap: 20px; }
+    #pantalla-pregunta-texto { font-size: 18px; }
+    #pantalla-contenido-multimedia { font-size: 56px; }
+    #pantalla-intermedia h2 { font-size: 28px; }
+}
+
+@media (max-width: 480px) {
+    .pantalla-header .logo { font-size: 16px; letter-spacing: 3px; }
+    .qr-label { font-size: 10px; }
+    .qr-frame { width: 150px; height: 150px; }
+    .qr-pin { font-size: 18px; letter-spacing: 2px; }
+    .players-sala-label { font-size: 10px; }
+    .players-espera-label { font-size: 10px; }
+    .jugador-item-avatar { width: 36px; height: 36px; }
+    .jugador-item-nombre { font-size: 10px; }
+    #pantalla-pregunta-texto { font-size: 15px; }
 }
