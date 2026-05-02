@@ -1,9 +1,6 @@
 <?php
-/**
- * ARCHIVO: pages/qr_display.php
- * ACCIÓN: Generador visual de acceso para los jugadores.
- * FUNCIONALIDAD: Muestra el QR dinámico vinculado a la sesión actual.
- */
+// pagina para mostrar el QR de acceso al juego
+// usa la sesion actual y muestra el pin
 
 require '../config/config.php';
 require '../config/conexion.php';
@@ -19,7 +16,7 @@ if ($sesion_id === 0) {
     }
 }
 
-// CAMBIO: ahora buscamos también el PIN real de esta sesión
+// CAMBIO: ahora buscamos también el PIN real de esta sesion
 $stmt = $db->prepare("SELECT pin FROM sesiones WHERE id = :id");
 $stmt->bindValue(':id', $sesion_id, SQLITE3_INTEGER);
 $res2 = $stmt->execute();

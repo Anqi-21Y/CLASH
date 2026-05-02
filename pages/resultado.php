@@ -1,14 +1,12 @@
 <?php
-/**
- * ARCHIVO: api/juego/resultado.php
- * ACCIÓN: Procesa y devuelve el feedback inmediato tras responder una pregunta.
- * FUNCIONALIDAD: Calcula puntos ganados, total acumulado y posición en el ranking tiempo real.
- */
+// archivo para devolver el resultado despues de responder
+// calcula puntos, total y posicion del jugador
+
 
 // Incluyo la conexión como indica el profe en D05
 require __DIR__ . '/../../config/conexion.php';
 
-// Indico respuesta JSON como indica el profe en D11
+// devolver en formato json
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {

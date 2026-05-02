@@ -1,12 +1,6 @@
 <?php
-/**
- * ARCHIVO: api/admin/limpiar_session.php
- * ACCIÓN: Reinicio de sesión activa sin pérdida de datos históricos.
- * FUNCIONALIDAD: 
- * 1. Cambia el estado de la sesión a 'esperando'.
- * 2. Desvincula a los jugadores actuales para que el lobby empiece de cero.
- * 3. NO elimina las respuestas (para permitir el Ranking Global por categoría).
- */
+// reiniciar la sesion sin borrar datos antiguos
+// sirve para empezar una nueva partida
 
 require __DIR__ . '/../config/conexion.php';
 
@@ -22,33 +16,19 @@ if ($sesion_id === 0) {
 }
 
 try {
-    // Iniciamos transacción para asegurar integridad
+    // empezar transaccion
     $db->exec('BEGIN TRANSACTION');
 
-    /**
-     * LOGICA: 
-     * Para que el Ranking Global funcione, no podemos borrar los registros de 'respuestas'.
-     * Pero para que la pantalla vuelva al Lobby (0 personas), vamos a:
-     * 1. Marcar a los jugadores de esta sesión como "inactivos" o simplemente
-     * cambiar el estado de la sesión para que nadie pueda usar el PIN antiguo.
-     */
+    // resetear estado de la sesion (vuelve al lobby)
+    $stmt = $db->prepare("UPDATE sesiones SET estado = 'esperando', reto_actual = 0 WHERE id = :sid");
 
-    // 1. Resetear el estado de la sesión
-    // Esto hace que pantalla.php vuelva a mostrar el QR y el Lobby vacío
-    $stmt = $db->prepare("
-        UPDATE sesiones 
-        SET estado = 'esperando', 
-            reto_actual = 0 
-        WHERE id = :sid
-    ");
     $stmt->bindValue(':sid', $sesion_id, SQLITE3_INTEGER);
     $stmt->execute();
 
-    // 2. (Opcional) Si quieres que la lista de nombres del Lobby se vacíe:
-    // Desvinculamos a los jugadores de esta sesión (ponemos su sesion_id a NULL o 0)
-    // Así sus puntos anteriores se guardan pero ya no aparecen en el "ahora"
+    // quitar jugadores de la sesion (para que no aparezcan)
     $db->exec("UPDATE jugadores SET sesion_id = 0 WHERE sesion_id = $sesion_id");
 
+    // guardar cambios
     $db->exec('COMMIT');
 
     echo json_encode([
