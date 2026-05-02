@@ -1,13 +1,10 @@
-/**
- * ARCHIVO: assets/js/pantalla.js
- * ACCIÓN: Controlador lógico de la pantalla de proyección.
- * FUNCIONALIDAD: Sincronización en tiempo real mediante polling (Radar).
- */
+// implementar logica de proyección de pantalla con sincronizacion de jugadores y multimedia
 
 let currentRetoId = 0;
 let estadoJuego   = 'esperando';
 let timerInterval = null;
 
+// Consulta el estado del juego y sincroniza la pantalla
 async function radarPantalla() {
     try {
         const res = await fetch(`../api/session/estado.php?sesion_id=${SESION_ID}`);
@@ -40,6 +37,7 @@ async function radarPantalla() {
     }
 }
 
+// Cambia la vista según el estado del juego
 function gestionarCambioEstado(data) {
     const secLobby  = document.getElementById('pantalla-lobby');
     const secReto   = document.getElementById('pantalla-reto');
@@ -52,6 +50,7 @@ function gestionarCambioEstado(data) {
     else if (estadoJuego === 'terminada' && secFin)   secFin.classList.remove('oculto');
 }
 
+// Carga la pregunta y el contenido multimedia
 async function cargarRetoEnPantalla(retoId) {
     try {
         const res = await fetch(`../api/juego/obtener_pregunta.php?sesion_id=${SESION_ID}&idioma=es`);
@@ -98,6 +97,7 @@ function iniciarContadorPantalla(segundos) {
     }, 1000);
 }
 
+//Actualiza la lista de jugadores en lobby
 async function actualizarListaJugadores() {
     try {
         const res = await fetch(`../api/jugador/listar.php?sesion_id=${SESION_ID}`);

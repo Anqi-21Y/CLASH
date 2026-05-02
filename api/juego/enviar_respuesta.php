@@ -1,5 +1,5 @@
 <?php
-// enviar_respuesta.php
+// enviar_respuesta.php : Procesar la respuesta del jugador, calcular puntos y verificar el fin de la partida
 
 set_error_handler(function($errno, $errstr) {
     http_response_code(500);
@@ -26,11 +26,11 @@ if (!isset($input['jugador_id'], $input['reto_id'], $input['opcion_elegida'], $i
     exit;
 }
 
-$jugador_id     = intval($input['jugador_id']);
-$reto_id        = intval($input['reto_id']);
+$jugador_id= intval($input['jugador_id']);
+$reto_id   = intval($input['reto_id']);
 $opcion_elegida = intval($input['opcion_elegida']); // 0 = timeout, 1-4 = opción elegida
-$tiempo_ms      = intval($input['tiempo_ms']);
-$sesion_id      = intval($input['sesion_id'] ?? 0);
+$tiempo_ms = intval($input['tiempo_ms']);
+$sesion_id = intval($input['sesion_id'] ?? 0);
 
 // Validación: permitimos 0 (timeout) y 1-4 (opciones válidas)
 if ($opcion_elegida < 0 || $opcion_elegida > 4) {
@@ -67,44 +67,41 @@ if (!$reto) {
 // Calculo puntos
 if ($opcion_elegida === 0) {
     // Timeout: no eligió nada
-    $es_correcta    = 0;
-    $puntos         = 0;
+    $es_correcta = 0;
+    $puntos = 0;
     $opcion_guardar = null; // guardaremos NULL en BD para no violar el CHECK(1,2,3,4)
 } else {
     $es_correcta    = ($opcion_elegida == $reto['opcion_correcta']) ? 1 : 0;
     $opcion_guardar = $opcion_elegida;
 
     if ($es_correcta) {
-        $segundos = $tiempo_ms / 1000;
-        if ($segundos <= 3)     $puntos = PUNTOS_RAPIDO;
-        elseif ($segundos <= 6) $puntos = PUNTOS_MEDIO;
-        else                    $puntos = PUNTOS_LENTO;
+   $segundos = $tiempo_ms / 1000;
+   if ($segundos <= 3) $puntos = PUNTOS_RAPIDO;
+   elseif ($segundos <= 6) $puntos = PUNTOS_MEDIO;
+   else $puntos = PUNTOS_LENTO;
     } else {
-        $puntos = PUNTOS_FALLO;
+   $puntos = PUNTOS_FALLO;
     }
 }
 
 // Guardo la respuesta
 
 if ($opcion_guardar === null) {
-    $stmt = $db->prepare("
-        INSERT INTO respuestas (jugador_id, reto_id, opcion_elegida, es_correcta, tiempo_ms, puntos, sesion_id)
-        VALUES (:jugador_id, :reto_id, NULL, :es_correcta, :tiempo_ms, :puntos, :sesion_id)
-    ");
+    $stmt = $db->prepare("INSERT INTO respuestas (jugador_id, reto_id, opcion_elegida, es_correcta, tiempo_ms, puntos, sesion_id)
+    VALUES (:jugador_id, :reto_id, NULL, :es_correcta, :tiempo_ms, :puntos, :sesion_id)");
+
 } else {
-    $stmt = $db->prepare("
-        INSERT INTO respuestas (jugador_id, reto_id, opcion_elegida, es_correcta, tiempo_ms, puntos, sesion_id)
-        VALUES (:jugador_id, :reto_id, :opcion_elegida, :es_correcta, :tiempo_ms, :puntos, :sesion_id)
-    ");
+    $stmt = $db->prepare("INSERT INTO respuestas (jugador_id, reto_id, opcion_elegida, es_correcta, tiempo_ms, puntos, sesion_id)
+    VALUES (:jugador_id, :reto_id, :opcion_elegida, :es_correcta, :tiempo_ms, :puntos, :sesion_id)");
     $stmt->bindValue(':opcion_elegida', $opcion_guardar, SQLITE3_INTEGER);
 }
 
-$stmt->bindValue(':jugador_id',  $jugador_id,  SQLITE3_INTEGER);
-$stmt->bindValue(':reto_id',     $reto_id,     SQLITE3_INTEGER);
+$stmt->bindValue(':jugador_id', $jugador_id,  SQLITE3_INTEGER);
+$stmt->bindValue(':reto_id', $reto_id,SQLITE3_INTEGER);
 $stmt->bindValue(':es_correcta', $es_correcta, SQLITE3_INTEGER);
-$stmt->bindValue(':tiempo_ms',   $tiempo_ms,   SQLITE3_INTEGER);
-$stmt->bindValue(':puntos',      $puntos,      SQLITE3_INTEGER);
-$stmt->bindValue(':sesion_id',   $sesion_id,   SQLITE3_INTEGER);
+$stmt->bindValue(':tiempo_ms', $tiempo_ms, SQLITE3_INTEGER);
+$stmt->bindValue(':puntos', $puntos, SQLITE3_INTEGER);
+$stmt->bindValue(':sesion_id', $sesion_id, SQLITE3_INTEGER);
 
 if (!$stmt->execute()) {
     http_response_code(500);
@@ -115,28 +112,13 @@ if (!$stmt->execute()) {
 
 // compruebo si todos los jugadores han respondido todas las preguntas
 // si es así, termino la partida automáticamente
-$total_jugadores = $db->querySingle("
-    SELECT COUNT(*) FROM jugadores WHERE sesion_id = $sesion_id
-");
+$total_jugadores = $db->querySingle("SELECT COUNT(*) FROM jugadores WHERE sesion_id = $sesion_id");
 
-$total_respuestas = $db->querySingle("
-    SELECT COUNT(DISTINCT jugador_id) FROM respuestas
-    WHERE sesion_id = $sesion_id
-    AND jugador_id IN (
-        SELECT id FROM jugadores WHERE sesion_id = $sesion_id
-    )
-    GROUP BY jugador_id HAVING COUNT(DISTINCT reto_id) >= " . NUM_PREGUNTAS . "
-");
+$total_respuestas = $db->querySingle("SELECT COUNT(DISTINCT jugador_id) FROM respuestas WHERE sesion_id = $sesion_id 
+    AND jugador_id IN (SELECT id FROM jugadores WHERE sesion_id = $sesion_id) GROUP BY jugador_id HAVING COUNT(DISTINCT reto_id) >= " . NUM_PREGUNTAS . "");
 
 // si todos los jugadores han respondido NUM_PREGUNTAS preguntas → termino
-$jugadores_terminados = $db->querySingle("
-    SELECT COUNT(*) FROM (
-        SELECT jugador_id FROM respuestas
-        WHERE sesion_id = $sesion_id
-        GROUP BY jugador_id
-        HAVING COUNT(DISTINCT reto_id) >= " . NUM_PREGUNTAS . "
-    )
-");
+$jugadores_terminados = $db->querySingle("SELECT COUNT(*) FROM (SELECT jugador_id FROM respuestas WHERE sesion_id = $sesion_id GROUP BY jugador_id HAVING COUNT(DISTINCT reto_id) >= " . NUM_PREGUNTAS . ")");
 
 $partida_terminada = false;
 if ($jugadores_terminados >= $total_jugadores && $total_jugadores > 0) {
@@ -148,8 +130,8 @@ $db->close();
 
 http_response_code(201);
 echo json_encode([
-    'success'           => true,
-    'es_correcta'       => $es_correcta,
-    'puntos'            => $puntos,
+    'success' => true,
+    'es_correcta'  => $es_correcta,
+    'puntos'  => $puntos,
     'partida_terminada' => $partida_terminada,
 ]);

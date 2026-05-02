@@ -1,5 +1,5 @@
 <?php
-
+// Gestionar el ranking final de una sesion y el ranking global por categoria.
 require __DIR__ . '/../../config/conexion.php';
 require __DIR__ . '/../../config/config.php';
 
@@ -11,22 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sesion_id = isset($_GET['sesion_id']) ? intval($_GET['sesion_id']) : 0;
     $categoria_id = isset($_GET['categoria_id']) ? intval($_GET['categoria_id']) : 0;
 
-    // --- RANKING GLOBAL POR CATEGORÍA ---
+    // --- RANKING GLOBAL POR CATEGORIA ---
     if ($sesion_id === 0 && $categoria_id > 0) {
-        $stmt = $db->prepare("
-            SELECT 
-                j.nombre, 
-                j.avatar, 
-                SUM(r.puntos) AS puntos_total, 
-                SUM(r.es_correcta) AS aciertos
-            FROM jugadores j
-            JOIN respuestas r ON j.id = r.jugador_id
-            JOIN sesiones s ON r.sesion_id = s.id
-            WHERE s.categoria_id = :cat_id
-            GROUP BY j.nombre, j.avatar
-            ORDER BY puntos_total DESC 
-            LIMIT 10
-        ");
+        $stmt = $db->prepare("SELECT j.nombre, j.avatar, SUM(r.puntos) AS puntos_total, SUM(r.es_correcta) AS aciertos
+            FROM jugadores j JOIN respuestas r ON j.id = r.jugador_id JOIN sesiones s ON r.sesion_id = s.id
+            WHERE s.categoria_id = :cat_id GROUP BY j.nombre, j.avatar ORDER BY puntos_total DESC LIMIT 10");
+
         $stmt->bindValue(':cat_id', $categoria_id, SQLITE3_INTEGER);
         $res = $stmt->execute();
         
@@ -43,36 +33,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         exit; 
     }
 
-    // 2. Lógica principal: Calcular e insertar solo cuando la tabla de resultados esté vacía.
+    // --- RANKING DE SESION ---
 
-    // Esto evita el problema de las inserciones duplicadas.
+    // Esto evita el problema de las inserciones duplicadas
     $check = $db->querySingle("SELECT COUNT(*) FROM resultados WHERE sesion_id = $sesion_id");
 
     if ($check == 0) {
-        // Calcular la clasificación para este partido
-        $stmt = $db->prepare("
-            SELECT
-                j.id,
-                j.nombre,
-                j.avatar,
-                SUM(r.puntos) AS puntos_total,
-                SUM(r.es_correcta) AS aciertos
-            FROM jugadores j
-            JOIN respuestas r ON j.id = r.jugador_id
-            WHERE r.sesion_id = :sesion_id
-            GROUP BY j.id
-            ORDER BY puntos_total DESC
-        ");
+        // Calcular e insertar los resultados finales
+        $stmt = $db->prepare("SELECT j.id, j.nombre, j.avatar, SUM(r.puntos) AS puntos_total, SUM(r.es_correcta) AS aciertos FROM jugadores j
+            JOIN respuestas r ON j.id = r.jugador_id WHERE r.sesion_id = :sesion_id GROUP BY j.id ORDER BY puntos_total DESC");
+
         $stmt->bindValue(':sesion_id', $sesion_id, SQLITE3_INTEGER);
         $resultats = $stmt->execute();
 
         $posicion = 1;
         while ($fila = $resultats->fetchArray(SQLITE3_ASSOC)) {
             // Guardar en la tabla de resultados
-            $ins = $db->prepare("
-                INSERT INTO resultados (jugador_id, sesion_id, puntos_total, aciertos, posicion)
-                VALUES (:jid, :sid, :pts, :act, :pos)
-            ");
+            $ins = $db->prepare("INSERT INTO resultados (jugador_id, sesion_id, puntos_total, aciertos, posicion) VALUES (:jid, :sid, :pts, :act, :pos)");
+
             $ins->bindValue(':jid', $fila['id'], SQLITE3_INTEGER);
             $ins->bindValue(':sid', $sesion_id, SQLITE3_INTEGER);
             $ins->bindValue(':pts', $fila['puntos_total'], SQLITE3_INTEGER);
@@ -85,13 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     // 3. Lee los datos de la tabla de resultados y devuélvelos a la interfaz de usuario.
     $final_ranking = [];
-    $stmt = $db->prepare("
-        SELECT r.*, j.nombre, j.avatar 
-        FROM resultados r
-        JOIN jugadores j ON r.jugador_id = j.id
-        WHERE r.sesion_id = :sid
-        ORDER BY r.posicion ASC
-    ");
+    $stmt = $db->prepare("SELECT r.*, j.nombre, j.avatar FROM resultados r JOIN jugadores j ON r.jugador_id = j.id WHERE r.sesion_id = :sid ORDER BY r.posicion ASC");
+    
     $stmt->bindValue(':sid', $sesion_id, SQLITE3_INTEGER);
     $res = $stmt->execute();
 

@@ -1,9 +1,6 @@
 <?php
-/*
- * api/session/jugadores.php
- * Devuelve la lista de jugadores conectados a una sesión.
- * Es pública — la usan los móviles de los jugadores en la sala de espera.
- */
+// Listar los jugadores en la sala de espera para que todos vean quién se ha unido
+
 require __DIR__ . '/../../config/conexion.php';
 header('Content-Type: application/json');
 
@@ -15,20 +12,18 @@ if ($sesion_id <= 0) {
     exit;
 }
 
-$result = $db->query("
-    SELECT nombre, avatar FROM jugadores
-    WHERE sesion_id = $sesion_id
-    ORDER BY created_at ASC
-");
+// Consultar jugadores ordenados por tiempo de llegada
+$result = $db->query("SELECT nombre, avatar FROM jugadores WHERE sesion_id = $sesion_id ORDER BY created_at ASC");
 
 $jugadores = [];
 while ($j = $result->fetchArray(SQLITE3_ASSOC)) {
     $jugadores[] = $j;
 }
 
+// Devolver el total y la lista
 echo json_encode([
-    'success'   => true,
-    'total'     => count($jugadores),
+    'success'=> true,
+    'total' => count($jugadores),
     'jugadores' => $jugadores,
 ]);
 

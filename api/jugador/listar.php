@@ -1,4 +1,5 @@
 <?php
+// Listar los jugadores unidos a una sesion
 require __DIR__ . '/../../config/conexion.php';
 
 header('Content-Type: application/json');

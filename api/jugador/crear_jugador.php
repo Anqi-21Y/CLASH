@@ -1,12 +1,11 @@
 <?php
 
-// Aquí va api/registrar_jugador.php. 
-// Este es el primer endpoint real del juego — cuando el jugador rellena su nombre, avatar e idioma y pulsa entrar, JavaScript hace un POST a este archivo:
+// Registrar un nuevo jugador en la base de datos tras unirse a una sesión
 
-// incluyo la conexion a la base de datos
+// BBDD
 require __DIR__ . '/../../config/conexion.php';
 
-// incluyo la configuracion general del juego
+// la configuracion general del juego
 require __DIR__ . '/../../config/config.php';
 
 // indico que la respuesta sera siempre json como indica el profe en d11
@@ -83,11 +82,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 // cierro la conexion con la base de datos como indica el profe en d05
 $db->close();
-
-
-// Todo está basado en los PDFs del profe. 
-// file_get_contents('php://input') y json_decode vienen de D12. 
-// prepare y bindValue con SQLITE3_TEXT vienen de D06. 
-// http_response_code vienen de D12. $_SERVER['REQUEST_METHOD'] viene de D11. 
-// header('Content-Type: application/json') viene de D11.
-// $db->close() viene de D05.

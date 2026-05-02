@@ -1,4 +1,5 @@
 <?php
+// Consultar el estado de la sesion y el progreso individual del jugador en tiempo real
 require __DIR__ . '/../../config/conexion.php';
 
 header('Content-Type: application/json');
@@ -14,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         exit;
     }
 
+    // Obtener estado general de la sesion
     $stmt = $db->prepare("SELECT estado, reto_actual, categoria_id FROM sesiones WHERE id = :sid");
     $stmt->bindValue(':sid', $sesion_id, SQLITE3_INTEGER);
     $data = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
@@ -30,10 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Si viene jugador_id, calculamos su siguiente pregunta personal
     if ($jugador_id > 0 && $data['estado'] === 'en_juego') {
         $stmt2 = $db->prepare("SELECT id FROM retos WHERE categoria_id = :cat
-            AND id NOT IN (
-                SELECT reto_id FROM respuestas
-                WHERE sesion_id = :sid AND jugador_id = :jid
-            ) ORDER BY id ASC LIMIT 1");
+            AND id NOT IN (SELECT reto_id FROM respuestas WHERE sesion_id = :sid 
+            AND jugador_id = :jid ) ORDER BY id ASC LIMIT 1");
 
         $stmt2->bindValue(':cat', intval($data['categoria_id']), SQLITE3_INTEGER);
         $stmt2->bindValue(':sid', $sesion_id, SQLITE3_INTEGER);
@@ -44,10 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $reto_para_jugador = $row ? $row['id'] : null;
     }
 
+    // Respuesta final
     echo json_encode([
         'success' => true,
         'estado' => $data['estado'],
-        'reto_actual' => $reto_para_jugador  // ahora es personal por jugador
+        'reto_actual' => $reto_para_jugador
     ]);
 
 } else {

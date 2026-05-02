@@ -17,10 +17,10 @@ var cj_animando = false;
     if (prev) prev.disabled = true;
 })();
 
-/* ── wipe horizontal de color ──────────────────────────────────────────────
-   dir > 0 → nuevo paso viene de la derecha (wipe derecha→izquierda)
-   dir < 0 → nuevo paso viene de la izquierda (wipe izquierda→derecha)
-   ──────────────────────────────────────────────────────────────────────── */
+// animacion de cambio de color (wipe)
+// dir > 0 va hacia la izquierda
+// dir < 0 va hacia la derecha
+
 function _wipeColor(nuevoPaso, dir) {
     var base  = document.getElementById('cj-bg-base');
     var wipe  = document.getElementById('cj-bg-wipe');
@@ -47,7 +47,7 @@ function _wipeColor(nuevoPaso, dir) {
     }, durMs);
 }
 
-/* ── actualiza texto con fade ────────────────────────────────────────────── */
+// cambia el texto con pequeño fade
 function _actualizarTexto(nuevoPaso) {
     var contenido = document.getElementById('cj-contenido');
     contenido.style.opacity   = '0';
@@ -62,14 +62,14 @@ function _actualizarTexto(nuevoPaso) {
     }, 200);
 }
 
-/* ── actualiza dots ─────────────────────────────────────────────────────── */
+// actualizar los puntos (dots)
 function _actualizarDots(idx) {
     document.querySelectorAll('.cj-dot').forEach(function (d, i) {
         d.classList.toggle('activo', i === idx);
     });
 }
 
-/* ── API pública ─────────────────────────────────────────────────────────── */
+// cambiar paso con botones
 function cambiarPaso(dir) {
     var nuevo = pasoActual + dir;
     if (nuevo < 0 || nuevo >= pasos.length || cj_animando) return;
@@ -89,7 +89,7 @@ function irPaso(indice) {
     cambiarPaso(indice > pasoActual ? 1 : -1);
 }
 
-// ── Categorias — slider infinito ─────────────────────────────────────────────
+// slider infinito de categorias
 
 (function () {
     var track   = document.getElementById('cat-track');
@@ -121,6 +121,7 @@ function irPaso(indice) {
         return track.children[0].offsetWidth + 20; /* 20px = gap */
     }
 
+    // // mover el slider
     function mover(conAnimacion) {
         track.style.transition = conAnimacion
             ? 'transform 0.5s cubic-bezier(0.65, 0, 0.35, 1)'
@@ -161,7 +162,7 @@ function irPaso(indice) {
     btnNext.disabled = false;
 })();
 
-// ── Estadisticas en vivo ──────────────────────────────────────────────────────
+// cargar estadisticas del juego
 
 async function cargarEstadisticas() {
     try {
@@ -180,6 +181,7 @@ async function cargarEstadisticas() {
     }
 }
 
+// animar numero (contador)
 function animarNumero(id, valorFinal) {
     var elemento = document.getElementById(id);
     if (!elemento) return;
@@ -194,7 +196,7 @@ function animarNumero(id, valorFinal) {
 
 cargarEstadisticas();
 
-// ── Boton jugar ahora ─────────────────────────────────────────────────────────
+// boton para ir a jugar
 
 var btnUnirse = document.getElementById('btn-unirse');
 if (btnUnirse) {
@@ -204,7 +206,7 @@ if (btnUnirse) {
     });
 }
 
-// Widget — se oculta al hacer scroll
+// ocultar widget cuando haces scroll
 var widget = document.getElementById('qr-widget-btn');
 if (widget) {
     window.addEventListener('scroll', function () {

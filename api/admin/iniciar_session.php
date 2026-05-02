@@ -1,24 +1,18 @@
 <?php
-//El pistoletazo de salida. 
-// Una vez que todos los jugadores estén listos en la sala de espera, 
-// el administrador pulsa este botón para cambiar el estado a en_juego, 
-// y solo entonces los teléfonos de los jugadores empezarán a mostrar la primera pregunta.
+
+//Cambia el estado de la sesion a 'en_juego' via API
 
 require __DIR__ . '/../../config/conexion.php';
 header('Content-Type: application/json');
 
+// Verificar que la petición sea de tipo POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     $sesion_id = isset($input['sesion_id']) ? intval($input['sesion_id']) : 0;
 
     if ($sesion_id > 0) {
-        // Actualiza el estado y establece la pregunta actual como la primera pregunta
-        //  (suponiendo que el ID comienza desde 1, o puedes realizar consultas dinámicas).
-        $stmt = $db->prepare("
-            UPDATE sesiones 
-            SET estado = 'en_juego', reto_actual = 1 
-            WHERE id = :id
-        ");
+        // Actualizar el estado de la sesion
+        $stmt = $db->prepare("UPDATE sesiones SET estado = 'en_juego', reto_actual = 1 WHERE id = :id");
         $stmt->bindValue(':id', $sesion_id, SQLITE3_INTEGER);
 
         if ($stmt->execute()) {

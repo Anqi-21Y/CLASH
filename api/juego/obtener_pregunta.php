@@ -1,5 +1,6 @@
 <?php
-// fix: soporte para progreso individual por jugador en modo libre (cada uno a su ritmo)
+// Obtener el siguiente reto disponible para un jugador especifico en su idioma
+
 set_error_handler(function($errno, $errstr) {
     http_response_code(500);
     echo json_encode(['error' => $errstr]);
@@ -20,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 $sesion_id  = isset($_GET['sesion_id'])  ? intval($_GET['sesion_id'])  : 0;
 $jugador_id = isset($_GET['jugador_id']) ? intval($_GET['jugador_id']) : 0;
 
-// validación de idioma contra lista permitida — evita inyección en nombre de columna
+// Validar el idioma del jugador
 $idioma_raw = isset($_GET['idioma']) ? trim($_GET['idioma']) : 'es';
 $idioma = in_array($idioma_raw, ['es', 'ca', 'zh']) ? $idioma_raw : 'es';
 
@@ -30,9 +31,7 @@ if ($sesion_id <= 0) {
     exit;
 }
 
-// --- Lógica de selección de reto ---
-// Si viene jugador_id, buscamos la siguiente pregunta personal que NO haya respondido aún.
-// Si no viene jugador_id (compatibilidad hacia atrás), usamos el reto_actual global de la sesión.
+// Encuentra la primera pregunta que el jugador aún no ha respondido en la categoria actual
 if ($jugador_id > 0) {
 
     // obtengo la categoría de esta sesión
@@ -46,29 +45,20 @@ if ($jugador_id > 0) {
         exit;
     }
 
-    // busco el primer reto de la categoría que este jugador NO haya respondido aún
-    $stmt = $db->prepare("
-        SELECT id FROM retos
-        WHERE categoria_id = :cat
-          AND id NOT IN (
-              SELECT reto_id FROM respuestas
-              WHERE sesion_id  = :sid
-                AND jugador_id = :jid
-          )
-        ORDER BY id ASC
-        LIMIT 1
-    ");
+    // Buscar el primer reto NO respondido por este jugador
+    $stmt = $db->prepare("SELECT id FROM retos WHERE categoria_id = :cat AND id NOT IN ( SELECT reto_id FROM respuestas WHERE sesion_id  = :sid AND jugador_id = :jid )ORDER BY id ASC LIMIT 1");
+
     $stmt->bindValue(':cat', intval($sesion['categoria_id']), SQLITE3_INTEGER);
-    $stmt->bindValue(':sid', $sesion_id,                      SQLITE3_INTEGER);
-    $stmt->bindValue(':jid', $jugador_id,                     SQLITE3_INTEGER);
-    $row     = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
+    $stmt->bindValue(':sid', $sesion_id, SQLITE3_INTEGER);
+    $stmt->bindValue(':jid', $jugador_id, SQLITE3_INTEGER);
+    $row = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
     $reto_id = $row ? $row['id'] : null;
 
 } else {
-    // modo compatibilidad: usa el reto_actual global de la sesión
+    // modo compatibilidad
     $stmt = $db->prepare("SELECT reto_actual FROM sesiones WHERE id = :sesion_id");
     $stmt->bindValue(':sesion_id', $sesion_id, SQLITE3_INTEGER);
-    $row     = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
+    $row = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
     $reto_id = $row ? $row['reto_actual'] : null;
 }
 
@@ -79,21 +69,13 @@ if (!$reto_id) {
 }
 
 // cargo los detalles del reto en el idioma del jugador
-$stmt = $db->prepare("
-    SELECT
-        id,
-        tipo,
-        emojis,
-        media_url,
-        pregunta_{$idioma} AS pregunta,
+$stmt = $db->prepare("SELECT id, tipo, emojis, media_url, pregunta_{$idioma} AS pregunta,
         op1_{$idioma} AS opcion1,
         op2_{$idioma} AS opcion2,
-        op3_{$idioma} AS opcion3,
-        op4_{$idioma} AS opcion4,
-        dificultad
-    FROM retos
-    WHERE id = :reto_id
-");
+        op3_{$idioma} AS opcion3, 
+        op4_{$idioma} AS opcion4, 
+        dificultad FROM retos WHERE id = :reto_id");
+
 $stmt->bindValue(':reto_id', $reto_id, SQLITE3_INTEGER);
 $reto = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
 
@@ -112,14 +94,15 @@ $opciones = [
 ];
 shuffle($opciones);
 
+// Enviar respuesta JSON
 echo json_encode([
-    'success'    => true,
-    'reto_id'    => $reto['id'],
-    'tipo'       => $reto['tipo'],
-    'emojis'     => $reto['emojis'],
-    'media_url'  => $reto['media_url'],
-    'pregunta'   => $reto['pregunta'],
-    'opciones'   => $opciones,
+    'success' => true,
+    'reto_id' => $reto['id'],
+    'tipo' => $reto['tipo'],
+    'emojis' => $reto['emojis'],
+    'media_url' => $reto['media_url'],
+    'pregunta' => $reto['pregunta'],
+    'opciones' => $opciones,
     'dificultad' => $reto['dificultad'],
 ]);
 

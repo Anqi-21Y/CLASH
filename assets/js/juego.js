@@ -1,8 +1,8 @@
-// juego.js — lógica de juego multijugador en modo libre
+// juego.js — implementar logica principal del juego multijugador en modo libre
 
-// ══════════════════════════════
+
 // HINTS POR CATEGORÍA
-// ══════════════════════════════
+
 const CATEGORIA_HINTS = {
     1: 'Adivina la peli sin una sola letra.',
     2: 'Adivina la canción sin escucharla.',
@@ -10,9 +10,9 @@ const CATEGORIA_HINTS = {
     4: '¿Eres capaz de adivinar lo que ocultan estas pistas?'
 };
 
-// ══════════════════════════════
-// 1. DATOS DEL JUGADOR
-// ══════════════════════════════
+
+// DATOS DEL JUGADOR
+
 const jugadorId     = parseInt(localStorage.getItem('jugador_id'));
 const jugadorNombre = localStorage.getItem('jugador_nombre');
 const jugadorAvatar = (localStorage.getItem('jugador_avatar') || '').trim();
@@ -22,9 +22,9 @@ const sesionId      = typeof SESION_ID !== 'undefined'
     : parseInt(localStorage.getItem('sesion_id'));
 
 let numeroPreguntaActual = 0;
-let cargandoPregunta     = false;
-let intentosFallidos     = 0;
-const MAX_INTENTOS       = 5;
+let cargandoPregunta = false;
+let intentosFallidos = 0;
+const MAX_INTENTOS = 5;
 
 if (!sesionId || !jugadorId) {
     console.error('ERROR: sesion_id o jugador_id no encontrado en localStorage.');
@@ -40,20 +40,20 @@ if (jugadorAvatar && jugadorAvatar.startsWith('avatar')) {
 }
 document.getElementById('jugador-nombre').textContent = jugadorNombre;
 
-// ══════════════════════════════
-// 2. ESTADO GLOBAL
-// ══════════════════════════════
-let retoId              = null;
-let tiempoInicio        = null;
-let respondido          = false;
-let estadoActual        = 'esperando';
+
+// ESTADO GLOBAL
+
+let retoId = null;
+let tiempoInicio = null;
+let respondido = false;
+let estadoActual = 'esperando';
 let radarArranqueActivo = true;
 
 mostrarSeccion('seccion-espera');
 
-// ══════════════════════════════
-// 3. RADAR DE ARRANQUE
-// ══════════════════════════════
+
+// RADAR DE ARRANQUE
+
 const radarArranque = setInterval(async () => {
     if (!radarArranqueActivo) return;
     try {
@@ -78,9 +78,9 @@ const radarArranque = setInterval(async () => {
     }
 }, 2000);
 
-// ══════════════════════════════
-// 4. CARGAR PREGUNTA
-// ══════════════════════════════
+
+// CARGAR PREGUNTA
+
 async function cargarPregunta() {
     if (cargandoPregunta) return;
 
@@ -116,7 +116,7 @@ async function cargarPregunta() {
         numeroPreguntaActual++;
         intentosFallidos = 0;
 
-        // Mostrar número — nunca supera NUM_PREGUNTAS
+        // Mostrar numero — nunca supera NUM_PREGUNTAS
         const numMostrar = Math.min(numeroPreguntaActual, NUM_PREGUNTAS);
         document.getElementById('numero-pregunta').textContent = numMostrar;
 
@@ -134,9 +134,9 @@ async function cargarPregunta() {
 
         // Rellenar texto de cada opción en su span interior
         datos.opciones.forEach((opcion, i) => {
-            const btn     = document.getElementById(`opcion-${i + 1}`);
+            const btn = document.getElementById(`opcion-${i + 1}`);
             const textoEl = document.getElementById(`texto-opcion-${i + 1}`);
-            if (btn)     btn.dataset.opcion  = opcion.id;
+            if (btn) btn.dataset.opcion  = opcion.id;
             if (textoEl) textoEl.textContent = opcion.texto;
         });
 
@@ -167,9 +167,9 @@ async function cargarPregunta() {
     cargandoPregunta = false;
 }
 
-// ══════════════════════════════
+
 // 5. LISTENERS OPCIONES
-// ══════════════════════════════
+
 document.querySelectorAll('.btn-opcion').forEach(btn => {
     btn.addEventListener('click', () => {
         if (respondido || btn.disabled) return;
@@ -178,9 +178,9 @@ document.querySelectorAll('.btn-opcion').forEach(btn => {
     });
 });
 
-// ══════════════════════════════
+
 // 6. ENVIAR RESPUESTA
-// ══════════════════════════════
+
 async function enviarRespuesta(opcion) {
     if (respondido) return;
     respondido = true;
@@ -192,11 +192,11 @@ async function enviarRespuesta(opcion) {
         : (TIEMPO_PREGUNTA * 1000);
 
     const payload = {
-        jugador_id:     jugadorId,
-        sesion_id:      sesionId,
-        reto_id:        parseInt(retoId),
+        jugador_id: jugadorId,
+        sesion_id: sesionId,
+        reto_id: parseInt(retoId),
         opcion_elegida: opcion,
-        tiempo_ms:      tiempoMs,
+        tiempo_ms: tiempoMs,
     };
 
     try {
@@ -227,9 +227,9 @@ async function enviarRespuesta(opcion) {
     }
 }
 
-// ══════════════════════════════
+
 // 7. PANTALLA DE RESULTADO
-// ══════════════════════════════
+
 function mostrarResultadoLocal(opcion, resultado, ranking) {
     mostrarSeccion('seccion-resultado');
 
@@ -247,14 +247,14 @@ function mostrarResultadoLocal(opcion, resultado, ranking) {
         texto.textContent = 'Incorrecto';
     }
 
-    const elGanados    = document.getElementById('puntos-ganados');
+    const elGanados = document.getElementById('puntos-ganados');
     const elAcumulados = document.getElementById('puntos-acumulados');
-    const elPosicion   = document.getElementById('posicion-actual');
-    const elEspera     = document.getElementById('resultado-espera');
+    const elPosicion = document.getElementById('posicion-actual');
+    const elEspera = document.getElementById('resultado-espera');
 
-    if (elGanados)    elGanados.textContent    = `+${ranking?.puntos_ganados    ?? resultado?.puntos ?? 0} pts`;
+    if (elGanados) elGanados.textContent    = `+${ranking?.puntos_ganados    ?? resultado?.puntos ?? 0} pts`;
     if (elAcumulados) elAcumulados.textContent = `Total: ${ranking?.puntos_acumulados ?? 0} pts`;
-    if (elPosicion)   elPosicion.textContent   = `Ranking: #${ranking?.posicion_actual ?? '-'}`;
+    if (elPosicion) elPosicion.textContent   = `Ranking: #${ranking?.posicion_actual ?? '-'}`;
 
     let cuenta = 3;
     if (elEspera) elEspera.textContent = `Siguiente pregunta en ${cuenta}s...`;
@@ -272,17 +272,17 @@ function mostrarResultadoLocal(opcion, resultado, ranking) {
     }, 1000);
 }
 
-// ══════════════════════════════
+
 // 8. AVANZAR AL SIGUIENTE
-// ══════════════════════════════
+
 async function avanzarAlSiguiente() {
     try {
         const res = await fetch('../api/session/avanzar_reto.php', {
-            method:  'POST',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify({
-                sesion_id:      sesionId,
-                jugador_id:     jugadorId,
+            body: JSON.stringify({
+                sesion_id: sesionId,
+                jugador_id: jugadorId,
                 reto_id_actual: parseInt(retoId),
             }),
         });
@@ -304,27 +304,27 @@ async function avanzarAlSiguiente() {
     }
 }
 
-// ══════════════════════════════
+
 // 9. JUGADOR TERMINÓ — espera fin global
-// ══════════════════════════════
+
 function finalizarJugador() {
     mostrarSeccion('seccion-resultado');
 
     const els = {
-        espera:     document.getElementById('resultado-espera'),
-        ganados:    document.getElementById('puntos-ganados'),
+        espera: document.getElementById('resultado-espera'),
+        ganados: document.getElementById('puntos-ganados'),
         acumulados: document.getElementById('puntos-acumulados'),
-        posicion:   document.getElementById('posicion-actual'),
-        icono:      document.getElementById('resultado-icono'),
-        texto:      document.getElementById('resultado-texto'),
+        posicion: document.getElementById('posicion-actual'),
+        icono: document.getElementById('resultado-icono'),
+        texto: document.getElementById('resultado-texto'),
     };
 
-    if (els.icono)      els.icono.textContent      = '🏁';
-    if (els.texto)      els.texto.textContent      = '¡Todas respondidas!';
-    if (els.ganados)    els.ganados.textContent    = '';
+    if (els.icono) els.icono.textContent = '🏁';
+    if (els.texto) els.texto.textContent = '¡Todas respondidas!';
+    if (els.ganados) els.ganados.textContent = '';
     if (els.acumulados) els.acumulados.textContent = '';
-    if (els.posicion)   els.posicion.textContent   = '';
-    if (els.espera)     els.espera.textContent     = 'Esperando a los demás...';
+    if (els.posicion) els.posicion.textContent = '';
+    if (els.espera) els.espera.textContent = 'Esperando a los demás...';
 
     const radarFin = setInterval(async () => {
         try {
@@ -339,9 +339,9 @@ function finalizarJugador() {
     }, 2000);
 }
 
-// ══════════════════════════════
+
 // 10. PANTALLA FINAL → redirige a ranking.php
-// ══════════════════════════════
+
 function mostrarGranFinal() {
     clearInterval(radarArranque);
     mostrarSeccion('seccion-fin');
@@ -350,9 +350,9 @@ function mostrarGranFinal() {
     }, 2000);
 }
 
-// ══════════════════════════════
+
 // 11. RENDERIZAR TIPO DE PREGUNTA
-// ══════════════════════════════
+
 function mostrarTipo(datos) {
     ['emoji','imagen','video','audio','codigo','pregunta'].forEach(b => {
         document.getElementById(`bloque-${b}`)?.classList.add('oculto');
@@ -392,9 +392,9 @@ function mostrarTipo(datos) {
     }
 }
 
-// ══════════════════════════════
+
 // 12. UTILIDADES
-// ══════════════════════════════
+
 function mostrarSeccion(id) {
     ['seccion-espera','seccion-pregunta','seccion-resultado','seccion-fin'].forEach(s => {
         document.getElementById(s)?.classList.add('oculto');
