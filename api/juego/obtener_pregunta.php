@@ -1,5 +1,5 @@
 <?php
-// Obtener el siguiente reto disponible para un jugador especifico en su idioma
+// obtener el siguiente reto disponible para un jugador especifico en su idioma
 
 set_error_handler(function($errno, $errstr) {
     http_response_code(500);
@@ -8,7 +8,7 @@ set_error_handler(function($errno, $errstr) {
 });
 
 require __DIR__ . '/../../config/conexion.php';
-require __DIR__ . '/../../config/config.php';
+require __DIR__ . '/../../config/config.php'; // cargamos la sesion de PHP 
 
 header('Content-Type: application/json');
 
@@ -21,9 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 $sesion_id  = isset($_GET['sesion_id'])  ? intval($_GET['sesion_id'])  : 0;
 $jugador_id = isset($_GET['jugador_id']) ? intval($_GET['jugador_id']) : 0;
 
-// Validar el idioma del jugador
-$idioma_raw = isset($_GET['idioma']) ? trim($_GET['idioma']) : 'es';
-$idioma = in_array($idioma_raw, ['es', 'ca', 'zh']) ? $idioma_raw : 'es';
+// priorizamos el idioma guardado en la sesion de PHP 
+$idioma = $_SESSION['lang'] ?? 'es';
 
 if ($sesion_id <= 0) {
     http_response_code(400);
@@ -31,10 +30,10 @@ if ($sesion_id <= 0) {
     exit;
 }
 
-// Encuentra la primera pregunta que el jugador aún no ha respondido en la categoria actual
+// logica de busqueda de reto encuentra la primera pregunta que el jugador aun no ha respondido
 if ($jugador_id > 0) {
 
-    // obtengo la categoría de esta sesión
+    // obtengo la categoria de esta sesion
     $stmt = $db->prepare("SELECT categoria_id FROM sesiones WHERE id = :sesion_id");
     $stmt->bindValue(':sesion_id', $sesion_id, SQLITE3_INTEGER);
     $sesion = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
@@ -45,8 +44,10 @@ if ($jugador_id > 0) {
         exit;
     }
 
-    // Buscar el primer reto NO respondido por este jugador
-    $stmt = $db->prepare("SELECT id FROM retos WHERE categoria_id = :cat AND id NOT IN ( SELECT reto_id FROM respuestas WHERE sesion_id  = :sid AND jugador_id = :jid )ORDER BY id ASC LIMIT 1");
+    // busco el primer reto NO respondido por este jugador en esta sesion
+    $stmt = $db->prepare("SELECT id FROM retos WHERE categoria_id = :cat AND id NOT IN ( 
+        SELECT reto_id FROM respuestas WHERE sesion_id = :sid AND jugador_id = :jid 
+    ) ORDER BY id ASC LIMIT 1");
 
     $stmt->bindValue(':cat', intval($sesion['categoria_id']), SQLITE3_INTEGER);
     $stmt->bindValue(':sid', $sesion_id, SQLITE3_INTEGER);
@@ -55,7 +56,7 @@ if ($jugador_id > 0) {
     $reto_id = $row ? $row['id'] : null;
 
 } else {
-    // modo compatibilidad
+    // modo compatibilidad: usa el reto_actual de la sesion
     $stmt = $db->prepare("SELECT reto_actual FROM sesiones WHERE id = :sesion_id");
     $stmt->bindValue(':sesion_id', $sesion_id, SQLITE3_INTEGER);
     $row = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
@@ -68,8 +69,9 @@ if (!$reto_id) {
     exit;
 }
 
-// cargo los detalles del reto en el idioma del jugador
-$stmt = $db->prepare("SELECT id, tipo, emojis, media_url, pregunta_{$idioma} AS pregunta,
+// CARGAMOS EL RETO USANDO LA COLUMNA DINAMICA SEGUN EL IDIOMA
+$stmt = $db->prepare("SELECT id, tipo, emojis, media_url, 
+        pregunta_{$idioma} AS pregunta,
         op1_{$idioma} AS opcion1,
         op2_{$idioma} AS opcion2,
         op3_{$idioma} AS opcion3, 
@@ -85,7 +87,7 @@ if (!$reto) {
     exit;
 }
 
-// barajo las opciones para que no siempre salga en el mismo orden
+// barajamos las opciones para que no siempre salgan en el mismo orden
 $opciones = [
     ['id' => 1, 'texto' => $reto['opcion1']],
     ['id' => 2, 'texto' => $reto['opcion2']],
@@ -94,7 +96,7 @@ $opciones = [
 ];
 shuffle($opciones);
 
-// Enviar respuesta JSON
+// enviar respuesta JSON final
 echo json_encode([
     'success' => true,
     'reto_id' => $reto['id'],

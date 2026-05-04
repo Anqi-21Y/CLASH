@@ -21,7 +21,6 @@ include '../includes/header.php';
             En este proyecto fui responsable del backend — diseñé la base de datos, desarrollé las APIs y me aseguré de que toda la lógica del juego funcionara correctamente. 
             También realicé pruebas para garantizar que el sistema fuera estable y fluido para los jugadores.
             Trabajo con Java, PHP, JavaScript, Python, HTML, CSS, MySQL y SQLite. Me gusta trabajar con orden y resolver problemas con cabeza fría. Fuera del código, me encanta hacer postres y los animales me apasionan </p>
-            <a href="https://share.google/0wXX0QFudaNnXtvVe" target="_blank" class="sobre-btn-perfil">Conóceme más →</a>
         </div>
         <div class="sobre-persona-foto">
             <img class="sobre-img-rotativa" id="img-anqi"
@@ -56,7 +55,6 @@ include '../includes/header.php';
                 Clash nació de cero, con muchísimas horas, muchísimas dudas y muchísimas ganas. 
                 Y ahora que estas aquí, solo espero que lo disfrutes tanto como yo disfruté construyéndolo. Aún me queda mucho por aprender, y no puedo esperar a hacerlo.
             </p>
-            <a href="https://share.google/0wXX0QFudaNnXtvVe" target="_blank" class="sobre-btn-perfil">Conóceme más →</a>
         </div>
     </div>
 

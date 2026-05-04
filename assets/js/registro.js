@@ -2,15 +2,6 @@
 let idiomaSeleccionado = 'es';
 let avatarSeleccionado = 'avatar1';
 
-// gestiono la seleccion de idioma
-document.querySelectorAll('.btn-idioma').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.btn-idioma').forEach(b => b.classList.remove('activo'));
-        btn.classList.add('activo');
-        idiomaSeleccionado = btn.dataset.idioma;
-    });
-});
-
 // gestiono la seleccion de avatar
 document.querySelectorAll('.btn-avatar').forEach(btn => {
     btn.addEventListener('click', () => {
