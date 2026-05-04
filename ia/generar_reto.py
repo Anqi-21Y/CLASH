@@ -29,7 +29,7 @@ import time
 
 # Configuración
 
-# Reemplaza el valor por defecto con tu API Key real de Groq
+# API Key real de Groq
 API_KEY = os.environ.get('GROQ_API_KEY')
 
 # Ruta a la base de datos
