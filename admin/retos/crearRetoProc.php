@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     categoria_id, tipo, emojis,
     op1_es, op1_ca, op1_zh,
     op2_es, op2_ca, op2_zh,
-    op_es, op3_ca, op3_zh,
+    op3_es, op3_ca, op3_zh,
     op4_es, op4_ca, op4_zh,
     opcion_correcta, dificultad
         ) VALUES (

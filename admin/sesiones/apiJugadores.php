@@ -23,4 +23,4 @@ while ($j = $result->fetchArray(SQLITE3_ASSOC)) {
 }
 
 // Devolver los datos en formato JSON
-echo json_encode(['total' => count($jugadores), 'jugadores' => $jugadores]);
+echo json_encode(['success' => true, 'total' => count($jugadores), 'jugadores' => $jugadores]);

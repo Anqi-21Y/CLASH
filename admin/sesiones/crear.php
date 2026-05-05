@@ -18,6 +18,15 @@ do {
     $existe = $db->querySingle("SELECT id FROM sesiones WHERE pin = '$pin'");
 } while ($existe);
 
+$idioma = $_SESSION['lang'] ?? 'es';
+$idiomas_validos = ['es', 'ca', 'zh'];
+
+if (!in_array($idioma, $idiomas_validos)) {
+    $idioma = 'es';
+}
+
+$campo_categoria = "nombre_" . $idioma;
+
 // Obtener categorías y el numero de retos que tiene cada una
 $categorias = [];
 $res = $db->query("SELECT c.*, COUNT(r.id) as num_retos FROM categorias c LEFT JOIN retos r ON r.categoria_id = c.id GROUP BY c.id ORDER BY c.id");
@@ -28,6 +37,7 @@ while ($cat = $res->fetchArray(SQLITE3_ASSOC)) {
 
 $titulo_admin = 'Nueva partida';
 require_once __DIR__ . '/../includes/header_admin.php';
+
 ?>
 
 <div class="admin-topbar">
@@ -50,7 +60,7 @@ require_once __DIR__ . '/../includes/header_admin.php';
         <?php foreach ($categorias as $i => $cat): ?>
         <div class="crear-cat-option <?= $i === 0 ? 'seleccionada' : '' ?>"
              onclick="seleccionarCat(this, <?= $cat['id'] ?>)">
-            <div class="crear-cat-nombre"><?= htmlspecialchars($cat['nombre_es']) ?></div>
+            <div class="crear-cat-nombre"><?= htmlspecialchars($cat[$campo_categoria]) ?></div>
             <div class="crear-cat-count"><?= $cat['num_retos'] ?> retos</div>
         </div>
         <?php endforeach; ?>

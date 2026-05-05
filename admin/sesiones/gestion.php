@@ -8,7 +8,17 @@ if (!isset($_SESSION['admin_id'])) {
 }
 require_once __DIR__ . '/../config/conexion_admin.php';
 
-$sesiones = $db->query("SELECT s.*, c.nombre_es AS categoria FROM sesiones s JOIN categorias c ON c.id = s.categoria_id ORDER BY s.created_at DESC");
+// derterminar 
+$idioma = $_SESSION['lang'] ?? 'es';
+$idiomas_validos = ['es', 'ca', 'zh'];
+
+if (!in_array($idioma, $idiomas_validos)) {
+    $idioma = 'es';
+}
+
+$campo_categoria = "c.nombre_" . $idioma;
+
+$sesiones = $db->query("SELECT s.*, $campo_categoria AS categoria FROM sesiones s JOIN categorias c ON c.id = s.categoria_id ORDER BY s.created_at DESC");
 
 $titulo_admin = 'Sesiones';
 require_once __DIR__ . '/../includes/header_admin.php';

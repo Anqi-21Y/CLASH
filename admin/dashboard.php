@@ -14,9 +14,12 @@ require_once __DIR__ . '/config/conexion_admin.php';
 $titulo_admin = 'Dashboard';
 require_once __DIR__ . '/includes/header_admin.php';
 
+// determina a que idioma mostrar 
+$idioma = $_SESSION['lang'] ?? 'es';
+$campo_categoria = "c.nombre_" . $idioma;
+
 // Consultar si hay alguna sesión activa (esperando o en juego)
-$sesionActiva = $db->query("SELECT s.*, c.nombre_es AS categoria FROM sesiones s 
-    JOIN categorias c ON c.id = s.categoria_id
+$sesionActiva = $db->query("SELECT s.*, $campo_categoria AS categoria FROM sesiones s JOIN categorias c ON c.id = s.categoria_id
     WHERE s.estado IN ('esperando','en_juego') ORDER BY s.created_at DESC LIMIT 1")->fetchArray(SQLITE3_ASSOC);
 ?>
 

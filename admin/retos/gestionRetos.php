@@ -14,6 +14,12 @@ $titulo_admin = 'Categorías';
 // headeer
 require_once __DIR__ . '/../includes/header_admin.php';
 
+// determinar
+$idioma = $_SESSION['lang'] ?? 'es';
+$idiomas_validos = ['es', 'ca', 'zh'];
+if (!in_array($idioma, $idiomas_validos)) { $idioma = 'es'; }
+$campo_categoria = 'nombre_' . $idioma;
+
 // Obtener todas las categorías
 $categorias = $db->query("SELECT * FROM categorias ORDER BY id ASC");
 
@@ -36,7 +42,7 @@ while ($r = $retos->fetchArray(SQLITE3_ASSOC)) {
     <div class="cat-card">
         <div class="cat-card-header">
             <div>
-                <div class="cat-card-nombre"><?= htmlspecialchars($cat['nombre_es']) ?></div>
+                <div class="cat-card-nombre"><?= htmlspecialchars($cat[$campo_categoria]) ?></div>
                 <div class="cat-card-count"><?= count($retos_cat) ?> retos</div>
             </div>
             <div class="admin-actions-row">

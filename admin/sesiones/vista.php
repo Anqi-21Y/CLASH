@@ -14,8 +14,18 @@ require_once __DIR__ . '/../config/conexion_admin.php';
 
 $id = intval($_GET['id'] ?? 0);
 
+// derterminar
+$idioma = $_SESSION['lang'] ?? 'es';
+$idiomas_validos = ['es', 'ca', 'zh'];
+
+if (!in_array($idioma, $idiomas_validos)) {
+    $idioma = 'es';
+}
+
+$campo_categoria = "c.nombre_" . $idioma;
+
 // Obtener informacion de la sesion y su categoria
-$stmt = $db->prepare("SELECT s.*, c.nombre_es AS categoria FROM sesiones s JOIN categorias c ON c.id = s.categoria_id WHERE s.id = :id");
+$stmt = $db->prepare("SELECT s.*, $campo_categoria AS categoria FROM sesiones s JOIN categorias c ON c.id = s.categoria_id WHERE s.id = :id");
 
 $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 $sesion = $stmt->execute()->fetchArray(SQLITE3_ASSOC);

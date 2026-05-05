@@ -13,7 +13,18 @@ require_once __DIR__ . '/../config/conexion_admin.php';
 
 // Obtener categorias para el selector
 $cat_preseleccionada = intval($_GET['cat'] ?? 0);
-$categorias = $db->query("SELECT * FROM categorias ORDER BY nombre_es ASC");
+
+$idioma = $_SESSION['lang'] ?? 'es';
+$idiomas_validos = ['es', 'ca', 'zh'];
+
+if (!in_array($idioma, $idiomas_validos)) {
+    $idioma = 'es';
+}
+
+$campo_categoria = "nombre_" . $idioma;
+
+$categorias = $db->query("SELECT * FROM categorias ORDER BY $campo_categoria ASC");
+
 $titulo_admin = 'Nuevo reto';
 require_once __DIR__ . '/../includes/header_admin.php';
 ?>
@@ -32,7 +43,7 @@ require_once __DIR__ . '/../includes/header_admin.php';
                 <select name="categoria_id" required>
                     <?php while ($cat = $categorias->fetchArray(SQLITE3_ASSOC)): ?>
                         <option value="<?= $cat['id'] ?>" <?= $cat['id'] === $cat_preseleccionada ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($cat['nombre_es']) ?>
+                            <?= htmlspecialchars($cat[$campo_categoria]) ?>
                         </option>
                     <?php endwhile; ?>
                 </select>

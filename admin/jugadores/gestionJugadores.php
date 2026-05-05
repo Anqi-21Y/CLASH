@@ -15,8 +15,19 @@ $titulo_admin = 'Jugadores';
 // header
 require_once __DIR__ . '/../includes/header_admin.php';
 
+// determinar 
+$idioma = $_SESSION['lang'] ?? 'es';
+$idiomas_validos = ['es', 'ca', 'zh'];
+
+if (!in_array($idioma, $idiomas_validos)) {
+    $idioma = 'es';
+}
+
+$campo_categoria = "c.nombre_" . $idioma;
+
 // consultar jugadores con su pin y cate
-$jugadores = $db->query("SELECT j.*, s.pin, c.nombre_es AS categoria FROM jugadores j LEFT JOIN sesiones s ON s.id = j.sesion_id LEFT JOIN categorias c ON c.id = s.categoria_id ORDER BY j.created_at DESC");
+$jugadores = $db->query("SELECT j.*, s.pin, $campo_categoria AS categoria FROM jugadores j 
+    LEFT JOIN sesiones s ON s.id = j.sesion_id LEFT JOIN categorias c ON c.id = s.categoria_id ORDER BY j.created_at DESC");
 ?>
 
 <div class="admin-topbar">
