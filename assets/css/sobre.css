@@ -200,29 +200,6 @@
     color: #fff;
 }
 
-/* BOTÓN CONÓCEME MÁS — Ana */
-.sobre-btn-perfil {
-    display: inline-block;
-    background: #ffffff;
-    color: #000000;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: 12px 24px;
-    border: 2px solid #1A1A1A;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: background .2s, color .2s;
-    text-decoration: none;
-    align-self: flex-start;
-}
-
-.sobre-btn-perfil:hover {
-    background: #000000;
-    color: #ffffff;
-}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {

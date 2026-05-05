@@ -95,13 +95,12 @@ nav {
     color: #1A1A1A;
     background: #fff;
     border: 1.5px solid #1A1A1A;
-    border-radius: 5px;
-    padding: 6px 12px;
+    padding: 8px 17px;
     cursor: pointer;
     transition: background .2s, color .2s;
 }
 
-.nav-lang-btn:hover { background: #1A1A1A; color: #fff; }
+.nav-lang-btn:hover { background: #09ea89; color: #000000; }
 
 .nav-lang-btn.activo {
     background: #FFAAEA;

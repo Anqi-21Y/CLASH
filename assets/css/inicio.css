@@ -9,15 +9,14 @@
 }
 
 .juego-header {
-    background: #FFD6FF !important;
-    border-bottom: 1.5px solid rgba(26,26,26,0.1) !important;
+    background: #000000 !important;
 }
 
 .header-logo {
     font-family: 'Unbounded', sans-serif;
     font-size: 24px;
     font-weight: 900;
-    color: #1A1A1A;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -50,7 +49,7 @@
 
 .registro-seccion h2 {
     font-family: monospace !important;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 800;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -67,7 +66,7 @@
     border: none !important;
     border-bottom: 1.5px solid rgba(26,26,26,0.4) !important;
     border-radius: 0 !important;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 500;
     color: #1A1A1A;
     background: transparent !important;
