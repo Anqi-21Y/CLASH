@@ -1,34 +1,36 @@
 <?php
 session_start();
 require '../config/config.php';
+require_once '../config/idiomas.php';
 
 $categoria_id = isset($_GET['categoria_id']) ? intval($_GET['categoria_id']) : 4;
 if ($categoria_id < 1 || $categoria_id > 4) $categoria_id = 4;
 
+// nombres de categoría desde el diccionario ya estan traducidos
 $categoria_nombres = [
-    1 => 'Películas',
-    2 => 'Canciones',
-    3 => 'Famosos',
-    4 => 'Modo Sorpresa',
+    1 => $t['cat1_tit'],
+    2 => $t['cat2_tit'],
+    3 => $t['cat3_tit'],
+    4 => $t['cat4_tit'],
 ];
 $categoria_nombre = $categoria_nombres[$categoria_id] ?? 'Clash';
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="<?= $idioma_actual ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/CLASH/assets/img/favicon.png" type="image/png">
-    <title>Clash - Juego</title>
+    <title>Clash — <?= htmlspecialchars($categoria_nombre) ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/juego.css">
 </head>
-<!-- juego-game da el fondo #9FA0FF solo a esta página, no afecta inicio.php -->
+<!-- juego-game da el fondo solo a esta pagina no afecta inicio.php -->
 <body class="juego-body juego-game">
 
-    <!-- NAV — full width, fuera del marco -->
+    <!-- NAV  -->
     <header class="juego-header">
         <h1>CLASH</h1>
         <div class="jugador-info">
@@ -37,7 +39,7 @@ $categoria_nombre = $categoria_nombres[$categoria_id] ?? 'Clash';
         </div>
     </header>
 
-    <!-- CATEGORÍA — full width, sin fondo -->
+    <!-- CATEGORÍA -->
     <div class="juego-categoria-nombre"><?= htmlspecialchars($categoria_nombre) ?></div>
 
     <!-- MARCO MÓVIL — centrado, no full width -->
@@ -46,8 +48,8 @@ $categoria_nombre = $categoria_nombres[$categoria_id] ?? 'Clash';
 
             <!-- ESPERA INICIAL -->
             <section id="seccion-espera">
-                <h2>Esperando la siguiente pregunta...</h2>
-                <p>¡Prepárate!</p>
+                <h2><?= $t['esperando_pregunta'] ?></h2>
+                <p><?= $t['preparate'] ?></p>
             </section>
 
             <!-- PREGUNTA -->
@@ -59,7 +61,7 @@ $categoria_nombre = $categoria_nombres[$categoria_id] ?? 'Clash';
                         <div class="progreso-barra-fill" id="progreso-fill"></div>
                     </div>
                     <div class="progreso-info">
-                        <span class="progreso-label">Pregunta <span id="numero-pregunta">1</span> de <?= NUM_PREGUNTAS ?></span>
+                        <span class="progreso-label"><?= $t['pregunta_label'] ?> <span id="numero-pregunta">1</span> <?= $t['de'] ?> <?= NUM_PREGUNTAS ?></span>
                         <span class="progreso-timer">⏱ <span id="tiempo-restante"><?= TIEMPO_PREGUNTA ?></span>s</span>
                     </div>
                 </div>
@@ -91,7 +93,7 @@ $categoria_nombre = $categoria_nombres[$categoria_id] ?? 'Clash';
                 <!-- tipo audio -->
                 <div id="bloque-audio" class="oculto">
                     <div id="contenedor-audio">
-                        <p id="audio-label">Escucha y adivina</p>
+                        <p id="audio-label"><?= $t['escucha_adivina'] ?></p>
                         <audio id="audio-reto" controls autoplay>
                             <source id="audio-source" src="" type="audio/mp3">
                         </audio>
@@ -139,13 +141,13 @@ $categoria_nombre = $categoria_nombres[$categoria_id] ?? 'Clash';
                 <p id="puntos-ganados"></p>
                 <p id="puntos-acumulados"></p>
                 <p id="posicion-actual"></p>
-                <p id="resultado-espera">Esperando la siguiente pregunta...</p>
+                <p id="resultado-espera"><?= $t['esperando_pregunta'] ?></p>
             </section>
 
             <!-- FIN -->
             <section id="seccion-fin" class="oculto">
-                <h2>¡Partida terminada!</h2>
-                <p id="fin-espera" style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(26,26,26,0.55);">Cargando ranking...</p>
+                <h2><?= $t['partida_terminada'] ?></h2>
+                <p id="fin-espera" style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(26,26,26,0.55);"><?= $t['cargando_ranking'] ?></p>
             </section>
 
         </main>

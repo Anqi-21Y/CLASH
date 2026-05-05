@@ -35,15 +35,15 @@ $textos = [
         'unete_burbuja'    => '¿Te unes al juego?<br>¡Haz click!',
 
         // pagina inicio (registro)
-        'inicio_unirse'    => 'Unirse',
-        'elige_perfil'     => 'Elige tu perfil',
-        'tu_nombre'        => 'Tu nombre',
+        'inicio_unirse'      => 'Unirse',
+        'elige_perfil'       => 'Elige tu perfil',
+        'tu_nombre'          => 'Tu nombre',
         'placeholder_nombre' => 'Como quieres que te llamen...',
-        'elige_avatar'     => 'Elige tu avatar',
-        'codigo_pin'       => 'Código del PIN',
-        'placeholder_pin'  => 'Escribe el PIN aquí',
-        'btn_entrar'       => 'Entrar al juego',
-        'mensaje_espera'   => 'Registrado. Espera a que empiece la partida...',
+        'elige_avatar'       => 'Elige tu avatar',
+        'codigo_pin'         => 'Código del PIN',
+        'placeholder_pin'    => 'Escribe el PIN aquí',
+        'btn_entrar'         => 'Entrar al juego',
+        'mensaje_espera'     => 'Registrado. Espera a que empiece la partida...',
 
         // pagina ranking
         'ranking_tit'            => 'Ranking',
@@ -53,6 +53,26 @@ $textos = [
         'clasificacion_completa' => 'Clasificación completa',
         'ranking_historico'      => 'Ranking histórico de la categoría',
         'volver_inicio'          => 'Volver al inicio',
+
+        // pagina waiting
+        'sala_espera'  => 'Sala de espera',
+        'admin_inicio' => 'El admin dará el inicio cuando todos estén listos',
+
+        // pagina juego
+        'esperando_pregunta' => 'Esperando la siguiente pregunta...',
+        'preparate'          => '¡Prepárate!',
+        'pregunta_label'     => 'Pregunta',
+        'de'                 => 'de',
+        'escucha_adivina'    => 'Escucha y adivina',
+        'partida_terminada'  => '¡Partida terminada!',
+        'cargando_ranking'   => 'Cargando ranking...',
+
+        // admin login
+        'acceso_admin'       => 'Acceso admin',
+        'error_credenciales' => 'Usuario o contraseña incorrectos',
+        'label_usuario'      => 'Usuario',
+        'label_contrasena'   => 'Contraseña',
+        'btn_entrar_admin'   => 'Entrar',
 
         // sobre-nosotras
         'conocenos'    => 'CONÓCENOS',
@@ -103,15 +123,15 @@ $textos = [
         'unete_burbuja'    => 'T\'uneixes al joc?<br>Fes clic!',
 
         // pàgina inici (registre)
-        'inicio_unirse'    => 'Unir-se',
-        'elige_perfil'     => 'Tria el teu perfil',
-        'tu_nombre'        => 'El teu nom',
+        'inicio_unirse'      => 'Unir-se',
+        'elige_perfil'       => 'Tria el teu perfil',
+        'tu_nombre'          => 'El teu nom',
         'placeholder_nombre' => 'Com vols que et diguin...',
-        'elige_avatar'     => 'Tria el teu avatar',
-        'codigo_pin'       => 'Codi del PIN',
-        'placeholder_pin'  => 'Escriu el PIN aquí',
-        'btn_entrar'       => 'Entrar al joc',
-        'mensaje_espera'   => 'Registrat. Espera que comenci la partida...',
+        'elige_avatar'       => 'Tria el teu avatar',
+        'codigo_pin'         => 'Codi del PIN',
+        'placeholder_pin'    => 'Escriu el PIN aquí',
+        'btn_entrar'         => 'Entrar al joc',
+        'mensaje_espera'     => 'Registrat. Espera que comenci la partida...',
 
         // pàgina rànquing
         'ranking_tit'            => 'Rànquing',
@@ -121,6 +141,26 @@ $textos = [
         'clasificacion_completa' => 'Classificació completa',
         'ranking_historico'      => 'Rànquing històric de la categoria',
         'volver_inicio'          => 'Tornar a l\'inici',
+
+        // pàgina waiting
+        'sala_espera'  => 'Sala d\'espera',
+        'admin_inicio' => 'L\'admin donarà l\'inici quan tothom estigui llest',
+
+        // pàgina joc
+        'esperando_pregunta' => 'Esperant la següent pregunta...',
+        'preparate'          => 'Prepara\'t!',
+        'pregunta_label'     => 'Pregunta',
+        'de'                 => 'de',
+        'escucha_adivina'    => 'Escolta i endevina',
+        'partida_terminada'  => 'Partida acabada!',
+        'cargando_ranking'   => 'Carregant rànquing...',
+
+        // admin login
+        'acceso_admin'       => 'Accés admin',
+        'error_credenciales' => 'Usuari o contrasenya incorrectes',
+        'label_usuario'      => 'Usuari',
+        'label_contrasena'   => 'Contrasenya',
+        'btn_entrar_admin'   => 'Entrar',
 
         // sobre-nosaltres
         'conocenos'    => 'CONEIX-NOS',
@@ -171,15 +211,15 @@ $textos = [
         'unete_burbuja'    => '加入游戏？<br>点这里！',
 
         // 注册页面
-        'inicio_unirse'    => '加入',
-        'elige_perfil'     => '选择你的个人资料',
-        'tu_nombre'        => '你的名字',
+        'inicio_unirse'      => '加入',
+        'elige_perfil'       => '选择你的个人资料',
+        'tu_nombre'          => '你的名字',
         'placeholder_nombre' => '你想让我们怎么称呼你...',
-        'elige_avatar'     => '选择你的头像',
-        'codigo_pin'       => 'PIN码',
-        'placeholder_pin'  => '在此输入PIN码',
-        'btn_entrar'       => '进入游戏',
-        'mensaje_espera'   => '已注册。请等待比赛开始...',
+        'elige_avatar'       => '选择你的头像',
+        'codigo_pin'         => 'PIN码',
+        'placeholder_pin'    => '在此输入PIN码',
+        'btn_entrar'         => '进入游戏',
+        'mensaje_espera'     => '已注册。请等待比赛开始...',
 
         // 排行榜页面
         'ranking_tit'            => '排行榜',
@@ -189,6 +229,26 @@ $textos = [
         'clasificacion_completa' => '完整排名',
         'ranking_historico'      => '该类别的历史排名',
         'volver_inicio'          => '回到首页',
+
+        // 等待页面
+        'sala_espera'  => '等待室',
+        'admin_inicio' => '管理员将在所有人准备好后开始游戏',
+
+        // 游戏页面
+        'esperando_pregunta' => '等待下一个问题...',
+        'preparate'          => '准备好！',
+        'pregunta_label'     => '问题',
+        'de'                 => '/',
+        'escucha_adivina'    => '听一听，猜一猜',
+        'partida_terminada'  => '游戏结束！',
+        'cargando_ranking'   => '正在加载排名...',
+
+        // admin登录
+        'acceso_admin'       => '管理员登录',
+        'error_credenciales' => '用户名或密码错误',
+        'label_usuario'      => '用户名',
+        'label_contrasena'   => '密码',
+        'btn_entrar_admin'   => '登录',
 
         // 关于我们
         'conocenos'    => '了解我们',
@@ -210,4 +270,3 @@ $textos = [
 $idioma_actual = $_SESSION['lang'] ?? 'es';
 $t = $textos[$idioma_actual] ?? $textos['es'];
 ?>
-<!-- diccionario actualizado y listo -->

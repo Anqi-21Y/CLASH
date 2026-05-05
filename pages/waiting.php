@@ -1,13 +1,15 @@
 <?php
+session_start();
 require '../config/config.php';
+require_once '../config/idiomas.php';
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="<?= $idioma_actual ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/CLASH/assets/img/favicon.png" type="image/png">
-    <title>Clash - Sala de Espera</title>
+    <title>Clash — <?= $t['sala_espera'] ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/main.css">
@@ -21,11 +23,11 @@ require '../config/config.php';
 
     <main class="waiting-main">
 
-        <p class="waiting-label">Sala de espera</p>
+        <p class="waiting-label"><?= $t['sala_espera'] ?></p>
 
         <div id="waiting-avatares" class="waiting-avatares-grid"></div>
 
-        <p class="waiting-sub">El admin dará el inicio cuando todos estén listos</p>
+        <p class="waiting-sub"><?= $t['admin_inicio'] ?></p>
 
     </main>
 
