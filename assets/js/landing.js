@@ -1,15 +1,19 @@
-// ── Como se juega — slider con wipe horizontal ───────────────────────────────
+//  Como se juega — slider con wipe horizontal 
+// Los textos de los 4 pasos vienen de CLASH_T_JS definido en idiomas.js
 
-var pasos = [
-    { num: '01', titulo: 'Escanea y regístrate',    texto: 'Escanea el QR con tu móvil, escribe tu nombre, elige tu avatar y escribe el PIN que el presentador mostrará en pantalla.',                             color: '#FFAAEA' },
-    { num: '02', titulo: 'Espera en sala',  texto: 'Verás a los demás jugadores conectarse en tiempo real. Cuando el presentador lo decida, la partida arranca sola.',                                             color: '#acadff' }, 
-    { num: '03', titulo: '¡Responde rápido!', texto: 'Tienes menos de 30 segundos para adivinar la respuesta correcta. Cuanto antes respondas, más puntos consigues.',                                             color: '#fff4a3' },
-    { num: '04', titulo: 'Sube al podio',  texto: 'Al terminar todas las rondas verás el ranking final en tu móvil. ¿Serás el más rápido y certero?',                                                              color: '#d2ffeb' } 
-];
+var pasos = (typeof CLASH_T_JS !== 'undefined' && CLASH_T_JS.pasos)
+    ? CLASH_T_JS.pasos
+    : [
+        { num: '01', titulo: 'Escanea y regístrate',  texto: 'Escanea el QR con tu móvil, escribe tu nombre, elige tu avatar y escribe el PIN que el presentador mostrará en pantalla.',  color: '#FFAAEA' },
+        { num: '02', titulo: 'Espera en sala',         texto: 'Verás a los demás jugadores conectarse en tiempo real. Cuando el presentador lo decida, la partida arranca sola.',            color: '#acadff' },
+        { num: '03', titulo: '¡Responde rápido!',      texto: 'Tienes menos de 30 segundos para adivinar la respuesta correcta. Cuanto antes respondas, más puntos consigues.',             color: '#fff4a3' },
+        { num: '04', titulo: 'Sube al podio',          texto: 'Al terminar todas las rondas verás el ranking final en tu móvil. ¿Serás el más rápido y certero?',                          color: '#d2ffeb' },
+    ];
+
 var pasoActual  = 0;
 var cj_animando = false;
 
-// Init: aplica color base al primer paso
+// init: aplica color base al primer paso
 (function () {
     var base = document.getElementById('cj-bg-base');
     if (base) base.style.background = pasos[0].color;
@@ -26,7 +30,7 @@ function _wipeColor(nuevoPaso, dir) {
     var wipe  = document.getElementById('cj-bg-wipe');
     var durMs = 420;
 
-    // 1. posiciona el wipe fuera de pantalla en la dirección correcta
+    // 1. posiciona el wipe fuera de pantalla en la direccion correcta
     wipe.style.transition  = 'none';
     wipe.style.background  = pasos[nuevoPaso].color;
     wipe.style.transform   = dir > 0 ? 'translateX(100%)' : 'translateX(-100%)';
@@ -34,7 +38,7 @@ function _wipeColor(nuevoPaso, dir) {
     // 2. fuerza reflow para que la GPU registre el estado inicial
     void wipe.offsetWidth;
 
-    // 3. lanza la transición hacia el centro (cubre toda la card)
+    // 3. lanza la transicion hacia el centro (cubre toda la card)
     wipe.style.transition = 'transform ' + durMs + 'ms cubic-bezier(0.65, 0, 0.35, 1)';
     wipe.style.transform  = 'translateX(0)';
 
@@ -100,20 +104,19 @@ function irPaso(indice) {
     var origCards = Array.from(track.querySelectorAll('.categoria-card'));
     var total     = origCards.length;
 
-    // Clonar tarjetas al final (para ir hacia delante en loop)
+    // clonar tarjetas al final (para ir hacia delante en loop)
     origCards.forEach(function (card) {
         track.appendChild(card.cloneNode(true));
     });
 
-    // Clonar tarjetas al inicio (para ir hacia atrás en loop)
+    // clonar tarjetas al inicio (para ir hacia atras en loop)
     var fragmento = document.createDocumentFragment();
     origCards.forEach(function (card) {
         fragmento.appendChild(card.cloneNode(true));
     });
     track.insertBefore(fragmento, track.firstChild);
 
-    // Track ahora: [clones_inicio | originales | clones_final]
-    // Empezamos en el primer card original
+    // empezamos en el primer card original
     var catIdx  = total;
     var animando = false;
 
@@ -121,7 +124,7 @@ function irPaso(indice) {
         return track.children[0].offsetWidth + 20; /* 20px = gap */
     }
 
-    // // mover el slider
+    // mover el slider
     function mover(conAnimacion) {
         track.style.transition = conAnimacion
             ? 'transform 0.5s cubic-bezier(0.65, 0, 0.35, 1)'
@@ -129,16 +132,16 @@ function irPaso(indice) {
         track.style.transform = 'translateX(-' + (catIdx * getCardWidth()) + 'px)';
     }
 
-    // Posición inicial sin animación
+    // posicion inicial sin animacion
     mover(false);
 
     track.addEventListener('transitionend', function () {
-        // Llegamos a los clones del final → saltar silenciosamente a los originales
+        // llegamos a los clones del final saltar silenciosamente a los originales
         if (catIdx >= total * 2) {
             catIdx -= total;
             mover(false);
         }
-        // Llegamos a los clones del inicio → saltar silenciosamente al final de los originales
+        // llegamos a los clones del inicio  saltar silenciosamente al final de los originales
         if (catIdx < total) {
             catIdx += total;
             mover(false);
@@ -157,7 +160,7 @@ function irPaso(indice) {
         mover(false);
     });
 
-    // Sin disabled — el loop es infinito en ambas direcciones
+    // sin disabled — el loop es infinito en ambas direcciones
     btnPrev.disabled = false;
     btnNext.disabled = false;
 })();

@@ -11,6 +11,10 @@
     </div>
 </footer>
 
+
+<!-- idiomas.js primero: define CLASH_T_JS para que main.js y landing.js lo usen -->
+<script src="/CLASH/assets/js/idiomas.js"></script>
+
 <!-- js principal — siempre se carga -->
 <script src="/CLASH/assets/js/main.js"></script>
 

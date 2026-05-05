@@ -26,12 +26,15 @@ define('TIEMPO_PREGUNTA', 17);
 // # de preguntas por partida
 define('NUM_PREGUNTAS', 4);
 
-// puntos segun velocidad de respuesta
+// puntos segun velocidad de respuesta - si responde entre el segundo 1 y 3 gana 100 puntos
 define('PUNTOS_RAPIDO', 100);
+// si responde entre el segundo 4 y 6 gana 70 puntos
 define('PUNTOS_MEDIO', 70);
+// si responde entre el segundo 7 y 9 gana 40 puntos
 define('PUNTOS_LENTO', 40);
+// si falla o no responde gana 0 puntos
 define('PUNTOS_FALLO', 0);
 
-// idiomas disponibles en el juego[
+// idiomas disponibles en el juego
 define('IDIOMAS', ['es', 'ca', 'zh']);
 ?>

@@ -9,47 +9,35 @@ function toggleMenu() {
     }
 }
 
-// gestiono la barra animada superior con los mensajes
-const mensajes = [
-    'Adivina emojis y gana el premio',
-    'Disponible en español, catalan y chino',
-    'Responde en 9 segundos',
-    'El mas rápido gana mas puntos',
-    'Peliculas, canciones, famosos y modo sorpresa',
-    'Haz click aqui para unirte a la partida',
-    'Adivina emojis y gana el premio',
-    'Disponible en español, catalan y chino',
-    'Responde en 9 segundos',
-    'El mas rápido gana mas puntos',
-    'Peliculas, canciones, famosos y modo sorpresa',
-];
+//  barra animada superior 
+// lee los msjs de CLASH_T_JS definido en idiomas.js
+// si por algun motivo idiomas.js no carga usamos el fallback en español
+var _msgs = (typeof CLASH_T_JS !== 'undefined' && CLASH_T_JS.topbar_msgs)
+    ? CLASH_T_JS.topbar_msgs
+    : [
+        'Adivina emojis y gana el premio',
+        'Disponible en español, catalán y chino',
+        'Responde en menos de 30 segundos',
+        'El más rápido gana más puntos',
+        'Películas, canciones, famosos y modo sorpresa',
+        'Haz click aquí para unirte a la partida',
+    ];
 
-// creo el track de la barra animada
-const track = document.getElementById('top-bar-track');
-mensajes.forEach(msg => {
-    const span = document.createElement('span');
+// duplicamos para que el scroll sea continuo sin saltos
+var mensajes = _msgs.concat(_msgs);
+
+// creo los spans del track
+var track = document.getElementById('top-bar-track');
+mensajes.forEach(function (msg) {
+    var span = document.createElement('span');
     span.className = 'top-bar-item';
     span.textContent = msg;
     track.appendChild(span);
 });
 
-// abro el modal del qr al hacer click en la zona de texto de la barra
-document.getElementById('top-bar-track').addEventListener('click', (e) => {
+// click en la barra abre el overlay del QR
+document.getElementById('top-bar-track').addEventListener('click', function (e) {
     e.stopPropagation();
-    document.getElementById('qr-modal').classList.add('abierto');
+    document.getElementById('qr-overlay').classList.add('abierto');
     document.body.classList.add('sin-scroll');
-});
-
-// cierro el modal del qr al hacer click en el boton de cerrar
-document.getElementById('qr-modal-cerrar').addEventListener('click', () => {
-    document.getElementById('qr-modal').classList.remove('abierto');
-    document.body.classList.remove('sin-scroll');
-});
-
-// cierro el modal del qr al hacer click fuera del contenido
-document.getElementById('qr-modal').addEventListener('click', e => {
-    if (e.target === document.getElementById('qr-modal')) {
-        document.getElementById('qr-modal').classList.remove('abierto');
-        document.body.classList.remove('sin-scroll');
-    }
 });
