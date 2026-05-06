@@ -28,6 +28,16 @@ var CLASH_TEXTOS_JS = {
             2: 'Adivina la canción sin escucharla.',
             3: 'Adivina quién es el famoso sin que te digan su nombre.',
             4: '¿Eres capaz de adivinar lo que ocultan estas pistas?'
+        },
+
+        resultados: {
+            tiempo_agotado: 'Tiempo agotado',
+            correcto: '¡Correcto!',
+            incorrecto: 'Incorrecto',
+            siguiente: 'Siguiente pregunta en {s}s...',
+            cargando: 'Cargando...',
+            total: 'Total',
+            ranking: 'Ranking'
         }
     },
     ca: {
@@ -51,6 +61,16 @@ var CLASH_TEXTOS_JS = {
             2: 'Endevina la cançó sense escoltar-la.',
             3: 'Endevina quin famós és sense dir-te el nom.',
             4: 'Ets capaç d’endevinar què amaguen aquestes pistes?'
+        },
+
+        resultados: {
+            tiempo_agotado: 'Temps esgotat',
+            correcto: 'Correcte!',
+            incorrecto: 'Incorrecte',
+            siguiente: 'Següent pregunta en {s}s...',
+            cargando: 'Carregant...',
+            total: 'Total',
+            ranking: 'Rànquing'
         }
     },
     zh: {
@@ -74,6 +94,16 @@ var CLASH_TEXTOS_JS = {
             2: '不用听声音猜歌曲',
             3: '不说名字猜名人',
             4: '你能猜出这些线索隐藏的内容吗？'
+        },
+
+        resultados: {
+            tiempo_agotado: '时间到',
+            correcto: '回答正确！',
+            incorrecto: '回答错误',
+            siguiente: '下一题将在 {s} 秒后开始...',
+            cargando: '加载中...',
+            total: '总分',
+            ranking: '排名'
         }
     }
 };

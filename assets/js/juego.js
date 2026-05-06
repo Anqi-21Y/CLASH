@@ -1,7 +1,7 @@
 // juego.js — implementar logica principal del juego multijugador en modo libre
 
 const CATEGORIA_HINTS = CLASH_T_JS.hints || {};
-
+const TXT_RES = CLASH_T_JS.resultados || {};
 // DATOS DEL JUGADOR
 
 const jugadorId     = parseInt(localStorage.getItem('jugador_id'));
@@ -229,13 +229,13 @@ function mostrarResultadoLocal(opcion, resultado, ranking) {
 
     if (opcion === 0) {
         icono.textContent = '⏰';
-        texto.textContent = 'Tiempo agotado';
+        texto.textContent = TXT_RES.tiempo_agotado || 'Tiempo agotado';
     } else if (resultado && resultado.es_correcta) {
         icono.textContent = '✅';
-        texto.textContent = '¡Correcto!';
+        texto.textContent = TXT_RES.correcto || '¡Correcto!';
     } else {
         icono.textContent = '❌';
-        texto.textContent = 'Incorrecto';
+        texto.textContent = TXT_RES.incorrecto || 'Incorrecto';
     }
 
     const elGanados = document.getElementById('puntos-ganados');
@@ -243,23 +243,40 @@ function mostrarResultadoLocal(opcion, resultado, ranking) {
     const elPosicion = document.getElementById('posicion-actual');
     const elEspera = document.getElementById('resultado-espera');
 
-    if (elGanados) elGanados.textContent    = `+${ranking?.puntos_ganados    ?? resultado?.puntos ?? 0} pts`;
-    if (elAcumulados) elAcumulados.textContent = `Total: ${ranking?.puntos_acumulados ?? 0} pts`;
-    if (elPosicion) elPosicion.textContent   = `Ranking: #${ranking?.posicion_actual ?? '-'}`;
+    if (elGanados) elGanados.textContent =
+        `+${ranking?.puntos_ganados ?? resultado?.puntos ?? 0} pts`;
+
+    if (elAcumulados) elAcumulados.textContent =
+        `${TXT_RES.total || 'Total'}: ${ranking?.puntos_acumulados ?? 0} pts`;
+
+    if (elPosicion) elPosicion.textContent =
+        `${TXT_RES.ranking || 'Ranking'}: #${ranking?.posicion_actual ?? '-'}`;
 
     let cuenta = 3;
-    if (elEspera) elEspera.textContent = `Siguiente pregunta en ${cuenta}s...`;
+
+    if (elEspera) {
+        elEspera.textContent =
+            (TXT_RES.siguiente || 'Siguiente pregunta en {s}s...')
+            .replace('{s}', cuenta);
+    }
 
     if (window._timerResumen) clearInterval(window._timerResumen);
+
     window._timerResumen = setInterval(() => {
         cuenta--;
-        if (elEspera) elEspera.textContent = cuenta > 0
-            ? `Siguiente pregunta en ${cuenta}s...`
-            : 'Cargando...';
+
+        if (elEspera) {
+            elEspera.textContent = cuenta > 0
+                ? (TXT_RES.siguiente || 'Siguiente pregunta en {s}s...')
+                    .replace('{s}', cuenta)
+                : (TXT_RES.cargando || 'Cargando...');
+        }
+
         if (cuenta <= 0) {
             clearInterval(window._timerResumen);
             avanzarAlSiguiente();
         }
+
     }, 1000);
 }
 
