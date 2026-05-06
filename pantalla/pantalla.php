@@ -16,7 +16,10 @@ if ($sesion_id === 0) {
 
 $db->close();
 if ($sesion_id === 0) die("Error: No hay ninguna sesión activa.");
-$qr_url = "http://localhost/CLASH/pages/inicio.php?pin=" . urlencode($pin);
+$PUBLIC_URL = "https://knelt-ramrod-clapped.ngrok-free.dev";
+$base_url = $PUBLIC_URL . "/CLASH";
+
+$qr_url = $base_url . "/pages/inicio.php?pin=" . urlencode($pin);
 ?>
 <!DOCTYPE html>
 <html lang="es">
