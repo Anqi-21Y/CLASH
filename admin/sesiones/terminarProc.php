@@ -10,9 +10,12 @@ if (!isset($_SESSION['admin_id'])) {
 require_once __DIR__ . '/../config/conexion_admin.php';
 
 $id = intval($_GET['id'] ?? 0);
+if ($id <= 0) {
+    die('ID de sesión inválido.');
+}
 
 // marco la sesión como terminada
-$stmt = $db->prepare("UPDATE sesiones SET estado = 'terminada' WHERE id = :id AND estado = 'en_juego'");
+$stmt = $db->prepare("UPDATE sesiones SET estado = 'terminada' WHERE id = :id AND estado != 'terminada'");
 $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
 $stmt->execute();
 
