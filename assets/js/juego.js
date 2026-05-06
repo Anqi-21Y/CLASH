@@ -1,22 +1,13 @@
 // juego.js — implementar logica principal del juego multijugador en modo libre
 
-
-// HINTS POR CATEGORÍA
-
-const CATEGORIA_HINTS = {
-    1: 'Adivina la peli sin una sola letra.',
-    2: 'Adivina la canción sin escucharla.',
-    3: 'Adivina quién es el famoso sin que te digan su nombre.',
-    4: '¿Eres capaz de adivinar lo que ocultan estas pistas?'
-};
-
+const CATEGORIA_HINTS = CLASH_T_JS.hints || {};
 
 // DATOS DEL JUGADOR
 
 const jugadorId     = parseInt(localStorage.getItem('jugador_id'));
 const jugadorNombre = localStorage.getItem('jugador_nombre');
 const jugadorAvatar = (localStorage.getItem('jugador_avatar') || '').trim();
-const jugadorIdioma = localStorage.getItem('jugador_idioma') || 'es';
+const jugadorIdioma = localStorage.getItem('idioma_clash') || 'es';
 const sesionId      = typeof SESION_ID !== 'undefined'
     ? parseInt(SESION_ID)
     : parseInt(localStorage.getItem('sesion_id'));

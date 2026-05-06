@@ -22,6 +22,13 @@ var CLASH_TEXTOS_JS = {
             { num: '03', titulo: '¡Responde rápido!',      texto: 'Tienes menos de 30 segundos para adivinar la respuesta correcta. Cuanto antes respondas, más puntos consigues.',             color: '#fff4a3' },
             { num: '04', titulo: 'Sube al podio',          texto: 'Al terminar todas las rondas verás el ranking final en tu móvil. ¿Serás el más rápido y certero?',                          color: '#d2ffeb' },
         ],
+
+        hints: {
+            1: 'Adivina la peli sin una sola letra.',
+            2: 'Adivina la canción sin escucharla.',
+            3: 'Adivina quién es el famoso sin que te digan su nombre.',
+            4: '¿Eres capaz de adivinar lo que ocultan estas pistas?'
+        }
     },
     ca: {
         topbar_msgs: [
@@ -38,6 +45,13 @@ var CLASH_TEXTOS_JS = {
             { num: '03', titulo: 'Respon ràpid!',           texto: 'Tens menys de 30 segons per endevinar la resposta correcta. Com abans responguis, més punts aconsegueixes.',                     color: '#fff4a3' },
             { num: '04', titulo: 'Puja al podi',            texto: 'En acabar totes les rondes veuràs el rànquing final al teu mòbil. Seràs el més ràpid i encertat?',                              color: '#d2ffeb' },
         ],
+
+        hints: {
+            1: 'Endevina la pel·lícula sense cap lletra.',
+            2: 'Endevina la cançó sense escoltar-la.',
+            3: 'Endevina quin famós és sense dir-te el nom.',
+            4: 'Ets capaç d’endevinar què amaguen aquestes pistes?'
+        }
     },
     zh: {
         topbar_msgs: [
@@ -54,7 +68,14 @@ var CLASH_TEXTOS_JS = {
             { num: '03', titulo: '快速作答！',  texto: '你有不到30秒的时间猜出正确答案。回答得越快，获得的分数越多。',                   color: '#fff4a3' },
             { num: '04', titulo: '登上领奖台',  texto: '所有轮次结束后，你将在手机上看到最终排名。你会是最快、最准确的吗？',              color: '#d2ffeb' },
         ],
-    },
+
+        hints: {
+            1: '不用文字猜电影',
+            2: '不用听声音猜歌曲',
+            3: '不说名字猜名人',
+            4: '你能猜出这些线索隐藏的内容吗？'
+        }
+    }
 };
 
 // idioma activo — lee lo que header.php guarda en localStorage

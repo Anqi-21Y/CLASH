@@ -159,6 +159,7 @@ $categoria_nombre = $categoria_nombres[$categoria_id] ?? 'Clash';
         const CATEGORIA_ID    = <?= $categoria_id ?>;
         const SESION_ID       = localStorage.getItem('sesion_id');
     </script>
+    <script src="../assets/js/idiomas.js"></script>
     <script src="../assets/js/timer.js"></script>
     <script src="../assets/js/juego.js"></script>
 
