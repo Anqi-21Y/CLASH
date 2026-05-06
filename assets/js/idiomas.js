@@ -37,8 +37,12 @@ var CLASH_TEXTOS_JS = {
             siguiente: 'Siguiente pregunta en {s}s...',
             cargando: 'Cargando...',
             total: 'Total',
-            ranking: 'Ranking'
-        }
+            ranking: 'Ranking',
+            fin_partida: '¡Todas respondidas!',
+            esperando_jugadores: 'Esperando a los demás...'
+        },
+
+        
     },
     ca: {
         topbar_msgs: [
@@ -70,8 +74,12 @@ var CLASH_TEXTOS_JS = {
             siguiente: 'Següent pregunta en {s}s...',
             cargando: 'Carregant...',
             total: 'Total',
-            ranking: 'Rànquing'
-        }
+            ranking: 'Rànquing',
+            fin_partida: 'Totes respostes!',
+            esperando_jugadores: 'Esperant els altres jugadors...'
+        },
+
+        
     },
     zh: {
         topbar_msgs: [
@@ -103,7 +111,9 @@ var CLASH_TEXTOS_JS = {
             siguiente: '下一题将在 {s} 秒后开始...',
             cargando: '加载中...',
             total: '总分',
-            ranking: '排名'
+            ranking: '排名',
+            fin_partida: '所有题目已回答！',
+            esperando_jugadores: '正在等待其他玩家...'
         }
     }
 };

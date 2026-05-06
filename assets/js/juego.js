@@ -328,11 +328,18 @@ function finalizarJugador() {
     };
 
     if (els.icono) els.icono.textContent = '🏁';
-    if (els.texto) els.texto.textContent = '¡Todas respondidas!';
+    if (els.texto) {
+        els.texto.textContent =
+            TXT_RES.fin_partida || '¡Todas respondidas!';
+    }
+
     if (els.ganados) els.ganados.textContent = '';
     if (els.acumulados) els.acumulados.textContent = '';
     if (els.posicion) els.posicion.textContent = '';
-    if (els.espera) els.espera.textContent = 'Esperando a los demás...';
+    if (els.espera) {
+        els.espera.textContent =
+            TXT_RES.esperando_jugadores || 'Esperando a los demás...';
+    }
 
     const radarFin = setInterval(async () => {
         try {
