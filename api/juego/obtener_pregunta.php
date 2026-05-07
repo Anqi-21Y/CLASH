@@ -47,7 +47,8 @@ if ($jugador_id > 0) {
     // busco el primer reto NO respondido por este jugador en esta sesion
     $stmt = $db->prepare("SELECT id FROM retos WHERE categoria_id = :cat AND id NOT IN ( 
         SELECT reto_id FROM respuestas WHERE sesion_id = :sid AND jugador_id = :jid 
-    ) ORDER BY id ASC LIMIT 1");
+    ) ORDER BY (id * :seed) % 9999 LIMIT 1");
+    $stmt->bindValue(':seed', $sesion_id, SQLITE3_INTEGER);
 
     $stmt->bindValue(':cat', intval($sesion['categoria_id']), SQLITE3_INTEGER);
     $stmt->bindValue(':sid', $sesion_id, SQLITE3_INTEGER);
