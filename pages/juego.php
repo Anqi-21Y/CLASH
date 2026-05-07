@@ -2,9 +2,15 @@
 session_start();
 require '../config/config.php';
 require_once '../config/idiomas.php';
+require '../config/conexion.php';
 
-$categoria_id = isset($_GET['categoria_id']) ? intval($_GET['categoria_id']) : 4;
-if ($categoria_id < 1 || $categoria_id > 4) $categoria_id = 4;
+$sesion_id = intval($_GET['sesion_id'] ?? $_SESSION['sesion_id'] ?? 0);
+$categoria_id = 4; // fallback
+
+if ($sesion_id > 0) {
+    $row = $db->querySingle("SELECT categoria_id FROM sesiones WHERE id = $sesion_id", true);
+    if ($row) $categoria_id = intval($row['categoria_id']);
+}
 
 // nombres de categoría desde el diccionario ya estan traducidos
 $categoria_nombres = [

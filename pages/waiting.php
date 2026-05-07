@@ -64,7 +64,7 @@ require_once '../config/idiomas.php';
 
                 if (estado.estado === 'en_juego') {
                     clearInterval(radar);
-                    window.location.href = 'juego.php';
+                    window.location.href = `juego.php?sesion_id=${sesionId}`;
                 }
             } catch (error) {
                 console.error("Error al sincronizar:", error);
