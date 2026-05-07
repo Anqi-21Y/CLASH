@@ -118,7 +118,7 @@ async function cargarPregunta() {
         // Hint de categoría
         const catId  = typeof CATEGORIA_ID !== 'undefined' ? CATEGORIA_ID : 4;
         const hintEl = document.getElementById('hint-texto');
-        if (hintEl) hintEl.textContent = CATEGORIA_HINTS[catId] || CATEGORIA_HINTS[4];
+        if (hintEl) hintEl.textContent = CATEGORIA_HINTS[catId] || '';
 
         mostrarSeccion('seccion-pregunta');
         mostrarTipo(datos);
